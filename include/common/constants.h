@@ -7,6 +7,6 @@
 #define SUCCESS 0
 
 #define ERR_ADDRESS 100
-
+#define ERR_NOFILE 101
 
 #endif
