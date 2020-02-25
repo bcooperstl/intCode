@@ -1,4 +1,4 @@
-#include <string>
+#include <cstring>
 
 #include "memory.h"
 #include "constants.h"
@@ -31,7 +31,7 @@ Memory::~Memory()
 // get will return ERR_ADDRESS on invalid address
 int Memory::get(long address, int * result)
 {
-    if (address < 0 || address > size)
+    if (address < 0 || address > m_size)
         return ERR_ADDRESS;
     *result = m_ram[address];
     return SUCCESS;
@@ -41,7 +41,7 @@ int Memory::get(long address, int * result)
 // get will return ERR_ADDRESS on invalid address
 int Memory::put(long address, int value)
 {
-    if (address < 0 || address > size)
+    if (address < 0 || address > m_size)
         return ERR_ADDRESS;
     m_ram[address] = value;
     if (address > m_max_used_address)

@@ -10,7 +10,7 @@ private:
     long m_size;
     long m_max_used_address;
 public:
-    Memory(long size=MEM_SIZE);
+    Memory(long size);
     Memory(const Memory & other);
     ~Memory();
     int get(long address, int * result);
