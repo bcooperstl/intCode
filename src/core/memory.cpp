@@ -1,9 +1,10 @@
 #include <cstring>
+#include <iostream>
 
 #include "memory.h"
 #include "constants.h"
 
-Memory::Memory(long size=MEM_SIZE)
+Memory::Memory(long size)
 {
     m_size = size;
     m_ram = new int[m_size];
@@ -57,4 +58,33 @@ long Memory::getSize()
 long Memory::getMaxUsedAddress()
 {
     return m_max_used_address;
+}
+
+void Memory::reset()
+{
+    if (m_ram != NULL)
+    {
+        delete m_ram;
+    }
+    m_ram = new int[m_size];
+    m_max_used_address = 0;
+    bzero(m_ram, sizeof(int)*m_size);    
+}
+
+void Memory::dump(std::ostream & out)
+{
+    out << "Memory usage: max address " << m_max_used_address << " of size " << m_size << "(0-" << m_size-1 << ")" << std::endl;
+    for (int i=0; i<=m_max_used_address; i++)
+    {
+        if (i%16 == 0)
+        {
+            if (i != 0)
+            {
+                out << std::endl;
+            }
+            out << i << '-' << i+15;
+        }
+        out << "  " << m_ram[i];
+    }
+    out << std::endl;
 }

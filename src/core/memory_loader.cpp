@@ -9,7 +9,26 @@
 
 int MemoryLoader::Load(Memory * m, std::istream * in)
 {
-    return 0;
+    long counter=0;
+    std::string line;
+    if (m==NULL)
+    {
+        std::cerr << "null memory region given" << std::endl;
+        return ERR_NULL;
+    }
+    if (!in->good())
+    {
+        std::cerr << "Error loading memory - bad stream" << std::endl;
+        return ERR_NOFILE;
+    }
+    m->reset();
+    while (std::getline(*in, line, INFILE_DELIM))
+    {
+        int value = atoi(line.c_str());
+        std::cerr << "Loading " << value << " from input [" << line << "] to position " << counter << std::endl;
+        m->put(counter++, value);
+    }
+    return SUCCESS;
 }
 
 int MemoryLoader::LoadFromString(Memory * m, std::string input)
