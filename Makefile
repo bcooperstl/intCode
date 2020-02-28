@@ -1,4 +1,4 @@
-CPPFLAGS=-Iinclude/operations -Iinclude/core -Iinclude/common
+CPPFLAGS=-Iinclude/operations -Iinclude/core -Iinclude/common -Iinclude/programs
 
 build/core/memory.o: src/core/memory.cpp  \
 	include/core/memory.h \
@@ -24,6 +24,14 @@ build/operations/multiplication.o: src/operations/multiplication.cpp  \
 	include/operations/multiplication.h  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/operations/multiplication.o -c src/operations/multiplication.cpp
+
+build/programs/program_runner.o: src/programs/program_runner.cpp \
+	include/core/memory.h \
+	include/common/constants.h \
+	include/operations/addition.h  \
+	include/operations/multiplication.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/programs/program_runner.o -c src/programs/program_runner.cpp
 
 build/test/test_memoryloader.o: src/test/test_memoryloader.cpp  \
 	include/core/memory_loader.h  \
@@ -69,6 +77,7 @@ clean:
 	build/operations/operation.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
+	build/programs/program_runner.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -81,6 +90,7 @@ all: build/core/memory.o  \
 	build/operations/operation.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
+	build/programs/program_runner.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \

@@ -11,5 +11,6 @@
 #define ERR_ADDRESS 100
 #define ERR_NOFILE 101
 #define ERR_NULL 102
+#define ERR_INVALID_OPCODE 103
 
 #endif
