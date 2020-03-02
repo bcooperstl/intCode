@@ -13,6 +13,7 @@ public:
     Operation(std::string name, int opcode);
     ~Operation();
     virtual int performOperation(Memory * m, long ip) = 0;
+    virtual int getIPIncrement() = 0;
     std::string getName();
     int getOpcode();
 };
