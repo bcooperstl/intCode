@@ -10,6 +10,7 @@ public:
     Addition();
     ~Addition();
     int performOperation(Memory * m, long ip);
+    int getIPIncrement();
 };
 
 #endif

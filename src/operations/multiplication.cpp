@@ -6,6 +6,7 @@
 
 static std::string NAME="Multiplication";
 static int OPCODE=2;
+static int IP_INCREMENT=4;
 
 Multiplication::Multiplication() : Operation(NAME, OPCODE)
 {
@@ -13,6 +14,11 @@ Multiplication::Multiplication() : Operation(NAME, OPCODE)
 
 Multiplication::~Multiplication()
 {
+}
+
+int Multiplication::getIPIncrement()
+{
+    return IP_INCREMENT;
 }
 
 int Multiplication::performOperation(Memory * m, long ip)

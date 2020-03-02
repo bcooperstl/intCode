@@ -6,8 +6,8 @@
 #include "addition.h"
 #include "multiplication.h"
 #include "program_runner.h"
+#include "operation.h"
 
-static int OPCODE_OFFSET=4;
 static const int HALT_OPCODE=99;
 
 ProgramRunner::ProgramRunner(Memory * memory)
@@ -30,7 +30,7 @@ int ProgramRunner::run()
     int res = SUCCESS;
     while((!halt_reached) && m_ip <= m_memory->getSize())
     {
-        int opcode;
+        int opcode, ip_increment=0;
         res = m_memory->get(m_ip, &opcode);
 
         if (res != SUCCESS)
@@ -43,10 +43,12 @@ int ProgramRunner::run()
         if (opcode == m_addition->getOpcode())
         {
             res = m_addition->performOperation(m_memory, m_ip);
+            ip_increment=m_addition->getIPIncrement();
         }
         else if (opcode == m_multiplication->getOpcode())
         {
             res = m_multiplication->performOperation(m_memory, m_ip);
+            ip_increment=m_multiplication->getIPIncrement();
         }
         else if (opcode == HALT_OPCODE)
         {
@@ -63,7 +65,7 @@ int ProgramRunner::run()
             std::cerr << "Error reached on opcode " << opcode << " at memory location " << m_ip << std::endl;
             return res;
         }
-        m_ip+=OPCODE_OFFSET;        
+        m_ip+=ip_increment;
     }
     return SUCCESS;
 }

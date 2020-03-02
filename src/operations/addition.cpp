@@ -6,6 +6,7 @@
 
 static std::string NAME="Addition";
 static int OPCODE=1;
+static int IP_INCREMENT=4;
 
 Addition::Addition() : Operation(NAME, OPCODE)
 {
@@ -13,6 +14,11 @@ Addition::Addition() : Operation(NAME, OPCODE)
 
 Addition::~Addition()
 {
+}
+
+int Addition::getIPIncrement()
+{
+    return IP_INCREMENT;
 }
 
 int Addition::performOperation(Memory * m, long ip)
