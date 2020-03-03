@@ -25,11 +25,23 @@ build/operations/multiplication.o: src/operations/multiplication.cpp  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/operations/multiplication.o -c src/operations/multiplication.cpp
 
+build/operations/input.o: src/operations/input.cpp  \
+	include/operations/input.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/input.o -c src/operations/input.cpp
+
+build/operations/output.o: src/operations/output.cpp  \
+	include/operations/output.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/output.o -c src/operations/output.cpp
+
 build/programs/program_runner.o: src/programs/program_runner.cpp \
 	include/core/memory.h \
 	include/common/constants.h \
 	include/operations/addition.h  \
 	include/operations/multiplication.h  \
+	include/operations/input.h  \
+	include/operations/output.h  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/programs/program_runner.o -c src/programs/program_runner.cpp
 
@@ -64,6 +76,14 @@ build/test/test_operation_multiplication.o: src/test/test_operation_multiplicati
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/test/test_operation_multiplication.o -c src/test/test_operation_multiplication.cpp
     
+build/test/test_operation_input_output.o: src/test/test_operation_input_output.cpp  \
+	include/core/memory_loader.h  \
+	include/core/memory.h  \
+	include/operations/input.h  \
+	include/operations/output.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/test/test_operation_input_output.o -c src/test/test_operation_input_output.cpp
+
 build/test/test_day2_examples.o: src/test/test_day2_examples.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
@@ -110,6 +130,14 @@ bin/test/test_operation_multiplication: build/test/test_operation_multiplication
 	build/core/memory.o
 	g++ ${CPPFLAGS} -o bin/test/test_operation_multiplication build/test/test_operation_multiplication.o build/operations/multiplication.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o
 
+bin/test/test_operation_input_output: build/test/test_operation_input_output.o  \
+	build/operations/input.o  \
+	build/operations/output.o  \
+	build/operations/operation.o  \
+	build/core/memory_loader.o  \
+	build/core/memory.o
+	g++ ${CPPFLAGS} -o bin/test/test_operation_input_output build/test/test_operation_input_output.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o
+
 bin/test/test_day2_examples: build/test/test_day2_examples.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
@@ -125,18 +153,22 @@ clean:
 	build/operations/operation.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
+	build/operations/input.o  \
+	build/operations/output.o  \
 	build/programs/program_runner.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
+	build/test/test_operation_input_output.o  \
 	build/test/test_day2_examples.o  \
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
+	bin/test/test_operation_input_output \
 	bin/test/test_day2_examples
 
 all: build/core/memory.o  \
@@ -144,16 +176,20 @@ all: build/core/memory.o  \
 	build/operations/operation.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
+	build/operations/input.o  \
+	build/operations/output.o  \
 	build/programs/program_runner.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
+	build/test/test_operation_input_output.o  \
 	build/test/test_day2_examples.o  \
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
+	bin/test/test_operation_input_output \
 	bin/test/test_day2_examples
