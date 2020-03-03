@@ -37,7 +37,7 @@ int main (int argc, char * argv[])
     }
     
     int pos0;
-    mem->get(0, &pos0);
+    mem->getImmediateMode(0, &pos0);
     std::cout << "********* Position 0 is " << pos0 << std::endl;
     
     delete runner;

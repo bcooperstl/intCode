@@ -44,8 +44,8 @@ void runTest(std::string test, std::string res)
     int testVal, resVal, i;
     for (i=0; i<testMem->getMaxUsedAddress(); i++)
     {
-        testMem->get(i, &testVal);
-        resMem->get(i, &resVal);
+        testMem->getImmediateMode(i, &testVal);
+        resMem->getImmediateMode(i, &resVal);
         if (testVal != resVal)
         {
             std::cerr << "Test failed - mismatch at " << i << "  expected " << resVal << " got " << testVal << std::endl;
