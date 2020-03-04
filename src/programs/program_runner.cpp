@@ -4,6 +4,8 @@
 #include "constants.h"
 #include "memory.h"
 #include "addition.h"
+#include "input.h"
+#include "output.h"
 #include "multiplication.h"
 #include "program_runner.h"
 #include "operation.h"
@@ -16,12 +18,16 @@ ProgramRunner::ProgramRunner(Memory * memory)
     m_ip = 0;
     m_addition = new Addition();
     m_multiplication = new Multiplication();
+    m_input = new Input();
+    m_output = new Output();
 }
 
 ProgramRunner::~ProgramRunner()
 {
     delete m_addition;
     delete m_multiplication;
+    delete m_input;
+    delete m_output;
 }
 
 int ProgramRunner::run()
@@ -40,23 +46,36 @@ int ProgramRunner::run()
         }
 
         res = SUCCESS;
-        if (opcode == m_addition->getOpcode())
+        
+        int modelessOpcode = opcode % 100;
+        
+        if (modelessOpcode == m_addition->getOpcode())
         {
             res = m_addition->performOperation(m_memory, m_ip);
             ip_increment=m_addition->getIPIncrement();
         }
-        else if (opcode == m_multiplication->getOpcode())
+        else if (modelessOpcode == m_multiplication->getOpcode())
         {
             res = m_multiplication->performOperation(m_memory, m_ip);
             ip_increment=m_multiplication->getIPIncrement();
         }
-        else if (opcode == HALT_OPCODE)
+        else if (modelessOpcode == m_input->getOpcode())
+        {
+            res = m_input->performOperation(m_memory, m_ip);
+            ip_increment=m_input->getIPIncrement();
+        }
+        else if (modelessOpcode == m_output->getOpcode())
+        {
+            res = m_output->performOperation(m_memory, m_ip);
+            ip_increment=m_output->getIPIncrement();
+        }
+        else if (modelessOpcode == HALT_OPCODE)
         {
             halt_reached = true;
         }
         else
         {
-            std::cerr << "Invalid opcode " << opcode << " found at memory location " << m_ip << std::endl;
+            std::cerr << "Invalid opcode " << modelessOpcode << " via " << opcode << " found at memory location " << m_ip << std::endl;
             return ERR_INVALID_OPCODE;
         }
         

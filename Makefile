@@ -1,5 +1,7 @@
 CPPFLAGS=-Iinclude/operations -Iinclude/core -Iinclude/common -Iinclude/programs
 
+.DEFAULT_GOAL := all
+
 build/core/memory.o: src/core/memory.cpp  \
 	include/core/memory.h \
 	include/common/constants.h
@@ -93,6 +95,12 @@ build/test/test_day2_examples.o: src/test/test_day2_examples.cpp  \
     include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day2_examples.o -c src/test/test_day2_examples.cpp
     
+build/test/test_day5_examples.o: src/test/test_day5_examples.cpp  \
+	include/core/memory_loader.h  \
+	include/core/memory.h  \
+    include/programs/program_runner.h
+	g++ ${CPPFLAGS} -o build/test/test_day5_examples.o -c src/test/test_day5_examples.cpp
+    
 bin/programs/day2_part1: build/programs/day2_part1.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
@@ -100,7 +108,7 @@ bin/programs/day2_part1: build/programs/day2_part1.o  \
 	build/core/memory_loader.o  \
 	build/core/memory.o  \
 	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/programs/day2_part1 build/programs/day2_part1.o build/operations/addition.o build/operations/multiplication.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/programs/day2_part1 build/programs/day2_part1.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
 
 bin/programs/day2_part2: build/programs/day2_part2.o  \
 	build/operations/addition.o  \
@@ -109,7 +117,7 @@ bin/programs/day2_part2: build/programs/day2_part2.o  \
 	build/core/memory_loader.o  \
 	build/core/memory.o  \
 	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/programs/day2_part2 build/programs/day2_part2.o build/operations/addition.o build/operations/multiplication.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/programs/day2_part2 build/programs/day2_part2.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
 
 bin/test/test_memoryloader: build/test/test_memoryloader.o  \
 	build/core/memory_loader.o  \
@@ -145,7 +153,18 @@ bin/test/test_day2_examples: build/test/test_day2_examples.o  \
 	build/core/memory_loader.o  \
 	build/core/memory.o  \
 	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/test/test_day2_examples build/test/test_day2_examples.o build/operations/addition.o build/operations/multiplication.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/test/test_day2_examples build/test/test_day2_examples.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
+
+bin/test/test_day5_examples: build/test/test_day5_examples.o  \
+	build/operations/addition.o  \
+	build/operations/multiplication.o  \
+	build/operations/input.o  \
+	build/operations/output.o  \
+	build/operations/operation.o  \
+	build/core/memory_loader.o  \
+	build/core/memory.o  \
+	build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/test/test_day5_examples build/test/test_day5_examples.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
 
 clean:
 	rm -f build/core/memory.o  \
@@ -163,13 +182,15 @@ clean:
 	build/test/test_operation_multiplication.o  \
 	build/test/test_operation_input_output.o  \
 	build/test/test_day2_examples.o  \
+	build/test/test_day5_examples.o  \
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
 	bin/test/test_operation_input_output \
-	bin/test/test_day2_examples
+	bin/test/test_day2_examples \
+	bin/test/test_day5_examples
 
 all: build/core/memory.o  \
 	build/core/memory_loader.o  \
@@ -186,10 +207,12 @@ all: build/core/memory.o  \
 	build/test/test_operation_multiplication.o  \
 	build/test/test_operation_input_output.o  \
 	build/test/test_day2_examples.o  \
+	build/test/test_day5_examples.o  \
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
 	bin/test/test_operation_input_output \
-	bin/test/test_day2_examples
+	bin/test/test_day2_examples \
+	bin/test/test_day5_examples
