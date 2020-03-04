@@ -12,11 +12,12 @@ int expected_res=200;
 
 void testMultiplication()
 {
+    long new_ip;
     Memory * mem = new Memory(256);
     Multiplication * multiplication = new Multiplication();
     MemoryLoader::LoadFromString(mem, test1);
     std::cout << "Running " << multiplication->getName() << " with opCode " << multiplication->getOpcode() << std::endl;
-    int res = multiplication->performOperation(mem, 0, multiplication->getOpcode());
+    int res = multiplication->performOperation(mem, 0, multiplication->getOpcode(), &new_ip);
     std::cout << "performOperation Result is " << res << std::endl;
     int actual_res=0;
     mem->getImmediateMode(res_position, &actual_res);
@@ -27,7 +28,11 @@ void testMultiplication()
     else
     {
         std::cout << "******Result mismatch expected " << expected_res << " received " << actual_res << std::endl;   
-    }    
+    }
+    if (new_ip!=4)
+    {
+        std::cout << "******New IP mismatch. expected 4 received " << new_ip << std::endl;
+    }
     mem->dump(std::cout);
     delete multiplication;
     delete mem;

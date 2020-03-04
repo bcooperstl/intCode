@@ -12,11 +12,12 @@ int expected_res=30;
 
 void testAddition()
 {
+    long new_ip;
     Memory * mem = new Memory(256);
     Addition * addition = new Addition();
     MemoryLoader::LoadFromString(mem, test1);
     std::cout << "Running " << addition->getName() << " with opCode " << addition->getOpcode() << std::endl;
-    int res = addition->performOperation(mem, 0, addition->getOpcode());
+    int res = addition->performOperation(mem, 0, addition->getOpcode(), &new_ip);
     std::cout << "performOperation Result is " << res << std::endl;
     int actual_res=0;
     mem->getImmediateMode(res_position, &actual_res);
@@ -27,7 +28,11 @@ void testAddition()
     else
     {
         std::cout << "******Result mismatch expected " << expected_res << " received " << actual_res << std::endl;   
-    }    
+    }
+    if (new_ip!=4)
+    {
+        std::cout << "******New IP mismatch. expected 4 received " << new_ip << std::endl;
+    }
     mem->dump(std::cout);
     delete addition;
     delete mem;
