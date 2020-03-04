@@ -23,23 +23,16 @@ int Output::getIPIncrement()
 
 int Output::performOperation(Memory * m, long ip)
 {
-    int addr, val, res;
-    res = m->get(ip+1, &addr);
+    int val, res;
+    res = m->get(ip+1, getMemoryModeForParameter(ip, 1), &val);
     if (res != SUCCESS)
     {
-        std::cerr << "Error " << res << " received while retreving addr from position " << ip+1 << std::endl;
+        std::cerr << "Error " << res << " received while retreving val from position " << ip+1 << std::endl;
         return res;
     }
     
-    res = m->get((long)addr, &val);
-    if (res != SUCCESS)
-    {
-        std::cerr << "Error " << res << " received while retreving value from position " << addr << std::endl;
-        return res;
-    }
-
     std::cout << "***Output: " << val << std::endl;
 
-    std::cerr << "ip of " << ip << " resulted in parm of " << addr << ". Outputted value value " << val << std::endl;
+    std::cerr << "ip of " << ip << " resulted in output value " << val << std::endl;
     return SUCCESS;
 }

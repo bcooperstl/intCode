@@ -19,7 +19,7 @@ void testMultiplication()
     int res = multiplication->performOperation(mem, 0);
     std::cout << "performOperation Result is " << res << std::endl;
     int actual_res=0;
-    mem->get(res_position, &actual_res);
+    mem->getImmediateMode(res_position, &actual_res);
     if (expected_res == actual_res)
     {
         std::cout << "Result matches " << actual_res << std::endl;

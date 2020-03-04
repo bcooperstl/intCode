@@ -12,5 +12,9 @@
 #define ERR_NOFILE 101
 #define ERR_NULL 102
 #define ERR_INVALID_OPCODE 103
+#define ERR_INVALID_MEM_MODE 104
+
+#define MEM_MODE_POSITION 0
+#define MEM_MODE_IMMEDIATE 1
 
 #endif

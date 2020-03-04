@@ -11,11 +11,14 @@ private:
     int * m_ram; // Pointer to RAM. 
     long m_size;
     long m_max_used_address;
+    int get(long address, int * result);
 public:
     Memory(long size=MEM_SIZE);
     Memory(const Memory & other);
     ~Memory();
-    int get(long address, int * result);
+    int getImmediateMode(long address, int * result);
+    int getPositionMode(long address, int * result);
+    int get(long address, int mode, int * result);
     int put(long address, int value);
     long getSize();
     long getMaxUsedAddress();

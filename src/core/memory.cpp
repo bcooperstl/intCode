@@ -40,6 +40,49 @@ int Memory::get(long address, int * result)
 
 // get will return SUCCESS on success.
 // get will return ERR_ADDRESS on invalid address
+int Memory::getImmediateMode(long address, int * result)
+{
+    return get(address, result);
+}
+
+// get will return SUCCESS on success.
+// get will return ERR_ADDRESS on invalid address
+int Memory::getPositionMode(long address, int * result)
+{
+    int res, position;
+    if (address < 0 || address > m_size)
+        return ERR_ADDRESS;
+    // first get the position stored in memory at address
+    res = get(address, &position);
+    if (res != SUCCESS)
+        return res;
+    
+    // now check to ensrue position is in ram
+    if (position < 0 || position > m_size)
+        return ERR_ADDRESS;
+    
+    // return the value at position
+    return get(position, result);
+}
+
+// get will return SUCCESS on success.
+// get will return ERR_ADDRESS on invalid address
+int Memory::get(long address, int mode, int * result)
+{
+    switch (mode)
+    {
+        case MEM_MODE_POSITION:
+            return getPositionMode(address, result);
+        case MEM_MODE_IMMEDIATE:
+            return getImmediateMode(address, result);
+        default:
+            std::cerr << "Invalid memory mode " << mode << std::endl;
+            return ERR_INVALID_MEM_MODE;
+    }
+}
+
+// get will return SUCCESS on success.
+// get will return ERR_ADDRESS on invalid address
 int Memory::put(long address, int value)
 {
     if (address < 0 || address > m_size)

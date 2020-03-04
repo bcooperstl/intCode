@@ -31,7 +31,7 @@ int ProgramRunner::run()
     while((!halt_reached) && m_ip <= m_memory->getSize())
     {
         int opcode, ip_increment=0;
-        res = m_memory->get(m_ip, &opcode);
+        res = m_memory->getImmediateMode(m_ip, &opcode);
 
         if (res != SUCCESS)
         {

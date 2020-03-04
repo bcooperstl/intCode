@@ -16,6 +16,7 @@ public:
     virtual int getIPIncrement() = 0;
     std::string getName();
     int getOpcode();
+    int getMemoryModeForParameter(int ip, int parmNumber);
 };
 
 #endif

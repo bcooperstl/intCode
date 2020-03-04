@@ -45,7 +45,7 @@ int main (int argc, char * argv[])
             }
     
             int pos0;
-            memCurr->get(0, &pos0);
+            memCurr->getImmediateMode(0, &pos0);
             
             if (pos0==TARGET)
             {

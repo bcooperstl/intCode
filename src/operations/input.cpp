@@ -24,7 +24,7 @@ int Input::getIPIncrement()
 int Input::performOperation(Memory * m, long ip)
 {
     int addr, val, res;
-    res = m->get(ip+1, &addr);
+    res = m->getImmediateMode(ip+1, &addr);
     if (res != SUCCESS)
     {
         std::cerr << "Error " << res << " received while retreving addr from position " << ip+1 << std::endl;
