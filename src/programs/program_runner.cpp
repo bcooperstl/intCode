@@ -51,22 +51,22 @@ int ProgramRunner::run()
         
         if (modelessOpcode == m_addition->getOpcode())
         {
-            res = m_addition->performOperation(m_memory, m_ip);
+            res = m_addition->performOperation(m_memory, m_ip, opcode);
             ip_increment=m_addition->getIPIncrement();
         }
         else if (modelessOpcode == m_multiplication->getOpcode())
         {
-            res = m_multiplication->performOperation(m_memory, m_ip);
+            res = m_multiplication->performOperation(m_memory, m_ip, opcode);
             ip_increment=m_multiplication->getIPIncrement();
         }
         else if (modelessOpcode == m_input->getOpcode())
         {
-            res = m_input->performOperation(m_memory, m_ip);
+            res = m_input->performOperation(m_memory, m_ip, opcode);
             ip_increment=m_input->getIPIncrement();
         }
         else if (modelessOpcode == m_output->getOpcode())
         {
-            res = m_output->performOperation(m_memory, m_ip);
+            res = m_output->performOperation(m_memory, m_ip, opcode);
             ip_increment=m_output->getIPIncrement();
         }
         else if (modelessOpcode == HALT_OPCODE)

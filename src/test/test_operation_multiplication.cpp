@@ -16,7 +16,7 @@ void testMultiplication()
     Multiplication * multiplication = new Multiplication();
     MemoryLoader::LoadFromString(mem, test1);
     std::cout << "Running " << multiplication->getName() << " with opCode " << multiplication->getOpcode() << std::endl;
-    int res = multiplication->performOperation(mem, 0);
+    int res = multiplication->performOperation(mem, 0, multiplication->getOpcode());
     std::cout << "performOperation Result is " << res << std::endl;
     int actual_res=0;
     mem->getImmediateMode(res_position, &actual_res);

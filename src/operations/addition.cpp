@@ -21,16 +21,16 @@ int Addition::getIPIncrement()
     return IP_INCREMENT;
 }
 
-int Addition::performOperation(Memory * m, long ip)
+int Addition::performOperation(Memory * m, long ip, int opcode)
 {
     int val1, val2, addrDest, sum, res;
-    res = m->get(ip+1, getMemoryModeForParameter(ip, 1), &val1);
+    res = m->get(ip+1, getMemoryModeForParameter(opcode, 1), &val1);
     if (res != SUCCESS)
     {
         std::cerr << "Error " << res << " received while retreving val1 from position " << ip+1 << std::endl;
         return res;
     }
-    res = m->get(ip+2, getMemoryModeForParameter(ip, 2), &val2);
+    res = m->get(ip+2, getMemoryModeForParameter(opcode, 2), &val2);
     if (res != SUCCESS)
     {
         std::cerr << "Error " << res << " received while retreving val2 from position " << ip+2 << std::endl;

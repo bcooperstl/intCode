@@ -24,11 +24,15 @@ int Operation::getOpcode()
 
 int Operation::getMemoryModeForParameter(int ip, int parmNumber)
 {
+    int divisor = 1;
     if (parmNumber == 1)
-        return (ip / 100)%10;
+        divisor = 100;
     else if (parmNumber == 2)
-        return (ip / 1000)%10;
+        divisor = 1000;
     else if (parmNumber == 3)
-        return (ip / 10000)%10;
-    return -1;
+        divisor = 10000;
+
+    int mode = (ip / divisor)%10;
+
+    return mode;
 }

@@ -21,7 +21,7 @@ int Input::getIPIncrement()
     return IP_INCREMENT;
 }
 
-int Input::performOperation(Memory * m, long ip)
+int Input::performOperation(Memory * m, long ip, int opcode)
 {
     int addr, val, res;
     res = m->getImmediateMode(ip+1, &addr);

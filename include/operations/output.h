@@ -9,7 +9,7 @@ class Output : public Operation
 public:
     Output();
     ~Output();
-    int performOperation(Memory * m, long ip);
+    int performOperation(Memory * m, long ip, int opcode);
     int getIPIncrement();
 };
 
