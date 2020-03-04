@@ -9,7 +9,7 @@ class Addition : public Operation
 public:
     Addition();
     ~Addition();
-    int performOperation(Memory * m, long ip);
+    int performOperation(Memory * m, long ip, int opcode);
     int getIPIncrement();
 };
 

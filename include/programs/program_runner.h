@@ -11,6 +11,8 @@ private:
     int m_ip;
     Operation * m_addition;
     Operation * m_multiplication;
+    Operation * m_input;
+    Operation * m_output;
 public:
     ProgramRunner(Memory * memory);
     ~ProgramRunner();

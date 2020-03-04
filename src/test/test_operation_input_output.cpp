@@ -17,11 +17,11 @@ void testInputOutput()
     MemoryLoader::LoadFromString(&mem, test1);
 
     std::cout << "Running " << input.getName() << " with opCode " << input.getOpcode() << std::endl;    
-    int res = input.performOperation(&mem, 0);
+    int res = input.performOperation(&mem, 0, input.getOpcode());
     std::cout << "performOperation Result is " << res << std::endl;
 
     std::cout << "Running " << output.getName() << " with opCode " << output.getOpcode() << std::endl;    
-    res = output.performOperation(&mem, 2);
+    res = output.performOperation(&mem, 2, output.getOpcode());
     std::cout << "performOperation Result is " << res << std::endl;
     
     mem.dump(std::cout);
