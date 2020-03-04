@@ -9,8 +9,7 @@ class Input : public Operation
 public:
     Input();
     ~Input();
-    int performOperation(Memory * m, long ip, int opcode);
-    int getIPIncrement();
+    int performOperation(Memory * m, long ip, int opcode, long * new_ip);
 };
 
 #endif

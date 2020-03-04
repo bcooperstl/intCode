@@ -15,15 +15,26 @@ void testInputOutput()
     Input input;
     Output output;
     MemoryLoader::LoadFromString(&mem, test1);
+    long new_ip;
 
     std::cout << "Running " << input.getName() << " with opCode " << input.getOpcode() << std::endl;    
-    int res = input.performOperation(&mem, 0, input.getOpcode());
+    int res = input.performOperation(&mem, 0, input.getOpcode(), &new_ip);
     std::cout << "performOperation Result is " << res << std::endl;
 
+    if (new_ip!=2)
+    {
+        std::cout << "******New IP mismatch. expected 2 received " << new_ip << std::endl;
+    }
+
     std::cout << "Running " << output.getName() << " with opCode " << output.getOpcode() << std::endl;    
-    res = output.performOperation(&mem, 2, output.getOpcode());
+    res = output.performOperation(&mem, 2, output.getOpcode(), &new_ip);
     std::cout << "performOperation Result is " << res << std::endl;
-    
+
+    if (new_ip!=4)
+    {
+        std::cout << "******New IP mismatch. expected 4 received " << new_ip << std::endl;
+    }
+
     mem.dump(std::cout);
 }
 

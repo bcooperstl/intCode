@@ -16,12 +16,7 @@ Output::~Output()
 {
 }
 
-int Output::getIPIncrement()
-{
-    return IP_INCREMENT;
-}
-
-int Output::performOperation(Memory * m, long ip, int opcode)
+int Output::performOperation(Memory * m, long ip, int opcode, long * new_ip)
 {
     int val, res;
     res = m->get(ip+1, getMemoryModeForParameter(opcode, 1), &val);
@@ -33,6 +28,10 @@ int Output::performOperation(Memory * m, long ip, int opcode)
     
     std::cout << "***Output: " << val << std::endl;
 
+    *new_ip = ip+IP_INCREMENT;
+
     std::cerr << "ip of " << ip << " resulted in output value " << val << std::endl;
+    std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
+
     return SUCCESS;
 }
