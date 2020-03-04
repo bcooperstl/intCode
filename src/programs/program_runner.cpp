@@ -36,7 +36,8 @@ int ProgramRunner::run()
     int res = SUCCESS;
     while((!halt_reached) && m_ip <= m_memory->getSize())
     {
-        int opcode, ip_increment=0;
+        int opcode;
+        long new_ip=0;
         res = m_memory->getImmediateMode(m_ip, &opcode);
 
         if (res != SUCCESS)
@@ -51,23 +52,19 @@ int ProgramRunner::run()
         
         if (modelessOpcode == m_addition->getOpcode())
         {
-            res = m_addition->performOperation(m_memory, m_ip, opcode);
-            ip_increment=m_addition->getIPIncrement();
+            res = m_addition->performOperation(m_memory, m_ip, opcode, &new_ip);
         }
         else if (modelessOpcode == m_multiplication->getOpcode())
         {
-            res = m_multiplication->performOperation(m_memory, m_ip, opcode);
-            ip_increment=m_multiplication->getIPIncrement();
+            res = m_multiplication->performOperation(m_memory, m_ip, opcode, &new_ip);
         }
         else if (modelessOpcode == m_input->getOpcode())
         {
-            res = m_input->performOperation(m_memory, m_ip, opcode);
-            ip_increment=m_input->getIPIncrement();
+            res = m_input->performOperation(m_memory, m_ip, opcode, &new_ip);
         }
         else if (modelessOpcode == m_output->getOpcode())
         {
-            res = m_output->performOperation(m_memory, m_ip, opcode);
-            ip_increment=m_output->getIPIncrement();
+            res = m_output->performOperation(m_memory, m_ip, opcode, &new_ip);
         }
         else if (modelessOpcode == HALT_OPCODE)
         {
@@ -84,7 +81,7 @@ int ProgramRunner::run()
             std::cerr << "Error reached on opcode " << opcode << " at memory location " << m_ip << std::endl;
             return res;
         }
-        m_ip+=ip_increment;
+        m_ip=new_ip;
     }
     return SUCCESS;
 }
