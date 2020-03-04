@@ -16,12 +16,7 @@ Input::~Input()
 {
 }
 
-int Input::getIPIncrement()
-{
-    return IP_INCREMENT;
-}
-
-int Input::performOperation(Memory * m, long ip, int opcode)
+int Input::performOperation(Memory * m, long ip, int opcode, long * new_ip)
 {
     int addr, val, res;
     res = m->getImmediateMode(ip+1, &addr);
@@ -40,6 +35,11 @@ int Input::performOperation(Memory * m, long ip, int opcode)
         std::cerr << "Error " << res << " received while storing result into position " << addr << std::endl;
         return res;
     }
+
+    *new_ip = ip+IP_INCREMENT;
+
     std::cerr << "ip of " << ip << " resulted in parm of " << addr << ". Stored input value " << val << std::endl;
+    std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
+
     return SUCCESS;
 }

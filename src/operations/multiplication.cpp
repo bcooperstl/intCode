@@ -16,12 +16,7 @@ Multiplication::~Multiplication()
 {
 }
 
-int Multiplication::getIPIncrement()
-{
-    return IP_INCREMENT;
-}
-
-int Multiplication::performOperation(Memory * m, long ip, int opcode)
+int Multiplication::performOperation(Memory * m, long ip, int opcode, long * new_ip)
 {
     int val1, val2, addrDest, product, res;
     res = m->get(ip+1, getMemoryModeForParameter(opcode, 1), &val1);
@@ -49,7 +44,12 @@ int Multiplication::performOperation(Memory * m, long ip, int opcode)
         std::cerr << "Error " << res << " received while storing result into position " << addrDest << std::endl;
         return res;
     }
+    
+    *new_ip = ip+IP_INCREMENT;
+    
     std::cerr << "ip of " << ip << " resulted in parms of " << val1 << ", " << val2 << ", and " << addrDest << ".  ";
     std::cerr << val1 << "*" << val2 << "=" << product << std::endl;
+    std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
+
     return SUCCESS;
 }
