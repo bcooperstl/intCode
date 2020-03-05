@@ -9,6 +9,8 @@
 #include "input.h"
 #include "output.h"
 
+OperationsManager * OperationsManager::m_instance = NULL;
+
 OperationsManager::OperationsManager()
 {
     clearAllOperations();
@@ -20,13 +22,13 @@ OperationsManager::~OperationsManager()
     clearAllOperations();
 }
 
-OperationsManager * OperationsManager::getOperationsManager()
+OperationsManager * OperationsManager::getInstance()
 {
-    if (m_operations_manager == NULL)
+    if (m_instance == NULL)
     {
-        m_operations_manager = new OperationsManager();
+        m_instance = new OperationsManager();
     }
-    return m_operations_manager;
+    return m_instance;
 }
 
 void OperationsManager::loadAllOperations()

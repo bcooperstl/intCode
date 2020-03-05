@@ -9,13 +9,13 @@ class OperationsManager
 {
 private:
     std::map<int, Operation *> m_operations; // map from opcode to operation
-    OperationsManager * m_operations_manager = NULL;
+    static OperationsManager * m_instance;
     void loadAllOperations();
     void clearAllOperations();
     OperationsManager();
 public:
     ~OperationsManager();
-    OperationsManager * getOperationsManager();
+    static OperationsManager * getInstance();
     Operation * getOperation(int opcode);
     void dump(std::ostream & out);
 };
