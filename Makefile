@@ -37,6 +37,11 @@ build/operations/output.o: src/operations/output.cpp  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/operations/output.o -c src/operations/output.cpp
 
+build/operations/operations_manager.o: src/operations/operations_manager.cpp  \
+	include/operations/operations_manager.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/operations_manager.o -c src/operations/operations_manager.cpp
+
 build/programs/program_runner.o: src/programs/program_runner.cpp \
 	include/core/memory.h \
 	include/common/constants.h \
@@ -185,6 +190,7 @@ clean:
 	rm -f build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/operations/operation.o  \
+	build/operations/operations_manager.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
 	build/operations/input.o  \
@@ -212,6 +218,7 @@ clean:
 all: build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/operations/operation.o  \
+	build/operations/operations_manager.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
 	build/operations/input.o  \
