@@ -3,12 +3,9 @@
 
 #include "constants.h"
 #include "memory.h"
-#include "addition.h"
-#include "input.h"
-#include "output.h"
-#include "multiplication.h"
 #include "program_runner.h"
 #include "operation.h"
+#include "operations_manager.h"
 
 static const int HALT_OPCODE=99;
 
@@ -16,18 +13,11 @@ ProgramRunner::ProgramRunner(Memory * memory)
 {
     m_memory = memory;
     m_ip = 0;
-    m_addition = new Addition();
-    m_multiplication = new Multiplication();
-    m_input = new Input();
-    m_output = new Output();
+    m_operations_manager=OperationsManager::getInstance();
 }
 
 ProgramRunner::~ProgramRunner()
 {
-    delete m_addition;
-    delete m_multiplication;
-    delete m_input;
-    delete m_output;
 }
 
 int ProgramRunner::run()
@@ -49,26 +39,14 @@ int ProgramRunner::run()
         res = SUCCESS;
         
         int modelessOpcode = opcode % 100;
-        
-        if (modelessOpcode == m_addition->getOpcode())
-        {
-            res = m_addition->performOperation(m_memory, m_ip, opcode, &new_ip);
-        }
-        else if (modelessOpcode == m_multiplication->getOpcode())
-        {
-            res = m_multiplication->performOperation(m_memory, m_ip, opcode, &new_ip);
-        }
-        else if (modelessOpcode == m_input->getOpcode())
-        {
-            res = m_input->performOperation(m_memory, m_ip, opcode, &new_ip);
-        }
-        else if (modelessOpcode == m_output->getOpcode())
-        {
-            res = m_output->performOperation(m_memory, m_ip, opcode, &new_ip);
-        }
-        else if (modelessOpcode == HALT_OPCODE)
+        Operation * operation = m_operations_manager->getOperation(modelessOpcode);
+        if (modelessOpcode == HALT_OPCODE)
         {
             halt_reached = true;
+        }
+        else if (operation != NULL)
+        {
+            res = operation->performOperation(m_memory, m_ip, opcode, &new_ip);
         }
         else
         {

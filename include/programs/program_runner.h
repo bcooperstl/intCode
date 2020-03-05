@@ -3,16 +3,14 @@
 
 #include "memory.h"
 #include "operation.h"
+#include "operations_manager.h"
 
 class ProgramRunner
 {
 private:
     Memory * m_memory;
     int m_ip;
-    Operation * m_addition;
-    Operation * m_multiplication;
-    Operation * m_input;
-    Operation * m_output;
+    OperationsManager * m_operations_manager;
 public:
     ProgramRunner(Memory * memory);
     ~ProgramRunner();
