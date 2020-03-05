@@ -112,32 +112,34 @@ build/test/test_day5_examples.o: src/test/test_day5_examples.cpp  \
     include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day5_examples.o -c src/test/test_day5_examples.cpp
     
-bin/programs/day2_part1: build/programs/day2_part1.o  \
+bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
-	build/operations/operation.o  \
+	build/operations/input.o  \
+	build/operations/output.o  \
+	build/operations/operations_manager.o
+	ar rcs bin/lib/liboperations.a build/operations/operation.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operations_manager.o
+
+bin/programs/day2_part1: build/programs/day2_part1.o  \
+	bin/lib/liboperations.a \
 	build/core/memory_loader.o  \
 	build/core/memory.o  \
 	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/programs/day2_part1 build/programs/day2_part1.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/programs/day2_part1 build/programs/day2_part1.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o -Lbin/lib -loperations
 
 bin/programs/day2_part2: build/programs/day2_part2.o  \
-	build/operations/addition.o  \
-	build/operations/multiplication.o  \
-	build/operations/operation.o  \
+	bin/lib/liboperations.a  \
 	build/core/memory_loader.o  \
 	build/core/memory.o  \
 	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/programs/day2_part2 build/programs/day2_part2.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/programs/day2_part2 build/programs/day2_part2.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o -Lbin/lib -loperations
 
 bin/programs/day5_part1: build/programs/day5_part1.o  \
-	build/operations/addition.o  \
-	build/operations/multiplication.o  \
-	build/operations/operation.o  \
+	bin/lib/liboperations.a  \
 	build/core/memory_loader.o  \
 	build/core/memory.o  \
 	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/programs/day5_part1 build/programs/day5_part1.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/programs/day5_part1 build/programs/day5_part1.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o -Lbin/lib -loperations
 
 bin/test/test_memoryloader: build/test/test_memoryloader.o  \
 	build/core/memory_loader.o  \
@@ -167,24 +169,18 @@ bin/test/test_operation_input_output: build/test/test_operation_input_output.o  
 	g++ ${CPPFLAGS} -o bin/test/test_operation_input_output build/test/test_operation_input_output.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o
 
 bin/test/test_day2_examples: build/test/test_day2_examples.o  \
-	build/operations/addition.o  \
-	build/operations/multiplication.o  \
-	build/operations/operation.o  \
+	bin/lib/liboperations.a \
 	build/core/memory_loader.o  \
 	build/core/memory.o  \
 	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/test/test_day2_examples build/test/test_day2_examples.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/test/test_day2_examples build/test/test_day2_examples.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o -Lbin/lib -loperations
 
 bin/test/test_day5_examples: build/test/test_day5_examples.o  \
-	build/operations/addition.o  \
-	build/operations/multiplication.o  \
-	build/operations/input.o  \
-	build/operations/output.o  \
-	build/operations/operation.o  \
+	bin/lib/liboperations.a  \
 	build/core/memory_loader.o  \
 	build/core/memory.o  \
 	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/test/test_day5_examples build/test/test_day5_examples.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operation.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/test/test_day5_examples build/test/test_day5_examples.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o -Lbin/lib -loperations
 
 clean:
 	rm -f build/core/memory.o  \
@@ -205,6 +201,7 @@ clean:
 	build/test/test_operation_input_output.o  \
 	build/test/test_day2_examples.o  \
 	build/test/test_day5_examples.o  \
+	bin/lib/liboperations.a  \
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/programs/day5_part1 \
@@ -233,6 +230,7 @@ all: build/core/memory.o  \
 	build/test/test_operation_input_output.o  \
 	build/test/test_day2_examples.o  \
 	build/test/test_day5_examples.o  \
+	bin/lib/liboperations.a  \
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/programs/day5_part1 \
