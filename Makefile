@@ -37,6 +37,26 @@ build/operations/output.o: src/operations/output.cpp  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/operations/output.o -c src/operations/output.cpp
 
+build/operations/jump_if_true.o: src/operations/jump_if_true.cpp  \
+	include/operations/jump_if_true.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/jump_if_true.o -c src/operations/jump_if_true.cpp
+
+build/operations/jump_if_false.o: src/operations/jump_if_false.cpp  \
+	include/operations/jump_if_false.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/jump_if_false.o -c src/operations/jump_if_false.cpp
+
+build/operations/less_than.o: src/operations/less_than.cpp  \
+	include/operations/less_than.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/less_than.o -c src/operations/less_than.cpp
+
+build/operations/equals.o: src/operations/equals.cpp  \
+	include/operations/equals.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/equals.o -c src/operations/equals.cpp
+
 build/operations/operations_manager.o: src/operations/operations_manager.cpp  \
 	include/operations/operations_manager.h  \
 	include/operations/operation.h
@@ -112,13 +132,23 @@ build/test/test_day5_examples.o: src/test/test_day5_examples.cpp  \
     include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day5_examples.o -c src/test/test_day5_examples.cpp
     
+build/test/test_day5_part2_examples.o: src/test/test_day5_part2_examples.cpp  \
+	include/core/memory_loader.h  \
+	include/core/memory.h  \
+    include/programs/program_runner.h
+	g++ ${CPPFLAGS} -o build/test/test_day5_part2_examples.o -c src/test/test_day5_part2_examples.cpp
+    
 bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/addition.o  \
 	build/operations/multiplication.o  \
 	build/operations/input.o  \
 	build/operations/output.o  \
+	build/operations/jump_if_true.o  \
+	build/operations/jump_if_false.o  \
+	build/operations/less_than.o  \
+	build/operations/equals.o  \
 	build/operations/operations_manager.o
-	ar rcs bin/lib/liboperations.a build/operations/operation.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operations_manager.o
+	ar rcs bin/lib/liboperations.a build/operations/operation.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/jump_if_true.o build/operations/jump_if_false.o build/operations/less_than.o build/operations/equals.o build/operations/operations_manager.o
 
 bin/programs/day2_part1: build/programs/day2_part1.o  \
 	bin/lib/liboperations.a \
@@ -182,6 +212,13 @@ bin/test/test_day5_examples: build/test/test_day5_examples.o  \
 	build/programs/program_runner.o
 	g++ ${CPPFLAGS} -o bin/test/test_day5_examples build/test/test_day5_examples.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o -Lbin/lib -loperations
 
+bin/test/test_day5_part2_examples: build/test/test_day5_part2_examples.o  \
+	bin/lib/liboperations.a  \
+	build/core/memory_loader.o  \
+	build/core/memory.o  \
+	build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/test/test_day5_part2_examples build/test/test_day5_part2_examples.o build/core/memory_loader.o build/core/memory.o build/programs/program_runner.o -Lbin/lib -loperations
+
 clean:
 	rm -f build/core/memory.o  \
 	build/core/memory_loader.o  \
@@ -191,6 +228,10 @@ clean:
 	build/operations/multiplication.o  \
 	build/operations/input.o  \
 	build/operations/output.o  \
+	build/operations/jump_if_true.o  \
+	build/operations/jump_if_false.o  \
+	build/operations/less_than.o  \
+	build/operations/equals.o  \
 	build/programs/program_runner.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
@@ -210,7 +251,8 @@ clean:
 	bin/test/test_operation_multiplication \
 	bin/test/test_operation_input_output \
 	bin/test/test_day2_examples \
-	bin/test/test_day5_examples
+	bin/test/test_day5_examples \
+	bin/test/test_day5_part2_examples
 
 all: build/core/memory.o  \
 	build/core/memory_loader.o  \
@@ -220,6 +262,10 @@ all: build/core/memory.o  \
 	build/operations/multiplication.o  \
 	build/operations/input.o  \
 	build/operations/output.o  \
+	build/operations/jump_if_true.o  \
+	build/operations/jump_if_false.o  \
+	build/operations/less_than.o  \
+	build/operations/equals.o  \
 	build/programs/program_runner.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
@@ -239,4 +285,5 @@ all: build/core/memory.o  \
 	bin/test/test_operation_multiplication \
 	bin/test/test_operation_input_output \
 	bin/test/test_day2_examples \
-	bin/test/test_day5_examples
+	bin/test/test_day5_examples \
+	bin/test/test_day5_part2_examples
