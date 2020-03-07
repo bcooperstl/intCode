@@ -8,6 +8,10 @@
 #include "multiplication.h"
 #include "input.h"
 #include "output.h"
+#include "jump_if_true.h"
+#include "jump_if_false.h"
+#include "less_than.h"
+#include "equals.h"
 
 OperationsManager * OperationsManager::m_instance = NULL;
 
@@ -41,6 +45,14 @@ void OperationsManager::loadAllOperations()
     m_operations.insert(std::pair<int, Operation *>(input->getOpcode(), input));
     Output * output = new Output();
     m_operations.insert(std::pair<int, Operation *>(output->getOpcode(), output));
+    JumpIfTrue * jumpIfTrue = new JumpIfTrue();
+    m_operations.insert(std::pair<int, Operation *>(jumpIfTrue->getOpcode(), jumpIfTrue));
+    JumpIfFalse * jumpIfFalse = new JumpIfFalse();
+    m_operations.insert(std::pair<int, Operation *>(jumpIfFalse->getOpcode(), jumpIfFalse));
+    LessThan * lessThan = new LessThan();
+    m_operations.insert(std::pair<int, Operation *>(lessThan->getOpcode(), lessThan));
+    Equals * equals = new Equals();
+    m_operations.insert(std::pair<int, Operation *>(equals->getOpcode(), equals));
 }
 
 void OperationsManager::clearAllOperations()
