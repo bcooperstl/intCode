@@ -37,6 +37,26 @@ build/operations/output.o: src/operations/output.cpp  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/operations/output.o -c src/operations/output.cpp
 
+build/operations/jump_if_true.o: src/operations/jump_if_true.cpp  \
+	include/operations/jump_if_true.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/jump_if_true.o -c src/operations/jump_if_true.cpp
+
+build/operations/jump_if_false.o: src/operations/jump_if_false.cpp  \
+	include/operations/jump_if_false.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/jump_if_false.o -c src/operations/jump_if_false.cpp
+
+build/operations/less_than.o: src/operations/less_than.cpp  \
+	include/operations/less_than.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/less_than.o -c src/operations/less_than.cpp
+
+build/operations/equals.o: src/operations/equals.cpp  \
+	include/operations/equals.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/equals.o -c src/operations/equals.cpp
+
 build/operations/operations_manager.o: src/operations/operations_manager.cpp  \
 	include/operations/operations_manager.h  \
 	include/operations/operation.h
@@ -117,6 +137,10 @@ bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/multiplication.o  \
 	build/operations/input.o  \
 	build/operations/output.o  \
+	build/operations/jump_if_true.o  \
+	build/operations/jump_if_false.o  \
+	build/operations/less_than.o  \
+	build/operations/equals.o  \
 	build/operations/operations_manager.o
 	ar rcs bin/lib/liboperations.a build/operations/operation.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/operations_manager.o
 
@@ -191,6 +215,10 @@ clean:
 	build/operations/multiplication.o  \
 	build/operations/input.o  \
 	build/operations/output.o  \
+	build/operations/jump_if_true.o  \
+	build/operations/jump_if_false.o  \
+	build/operations/less_than.o  \
+	build/operations/equals.o  \
 	build/programs/program_runner.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
@@ -220,6 +248,10 @@ all: build/core/memory.o  \
 	build/operations/multiplication.o  \
 	build/operations/input.o  \
 	build/operations/output.o  \
+	build/operations/jump_if_true.o  \
+	build/operations/jump_if_false.o  \
+	build/operations/less_than.o  \
+	build/operations/equals.o  \
 	build/programs/program_runner.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
