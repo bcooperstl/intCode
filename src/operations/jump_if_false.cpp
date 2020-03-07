@@ -42,7 +42,7 @@ int JumpIfFalse::performOperation(Memory * m, long ip, int opcode, long * new_ip
     else
     {
         *new_ip = ip+IP_INCREMENT;
-        std::cerr << "ip of " << ip << " resulted in non-zero value of " << compare_val << ", and new ip of " << new_ip_val << ".  ";
+        std::cerr << "ip of " << ip << " resulted in non-zero value of " << compare_val << ".  ";
         std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
     }
  
