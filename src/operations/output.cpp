@@ -16,7 +16,7 @@ Output::~Output()
 {
 }
 
-int Output::performOperation(Memory * m, long ip, int opcode, long * new_ip)
+int Output::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
     int val, res;
     res = m->get(ip+1, getMemoryModeForParameter(opcode, 1), &val);
@@ -27,6 +27,10 @@ int Output::performOperation(Memory * m, long ip, int opcode, long * new_ip)
     }
     
     std::cout << "***Output: " << val << std::endl;
+    if (outputs != NULL)
+    {
+        outputs->add(val);
+    }
 
     *new_ip = ip+IP_INCREMENT;
 

@@ -14,6 +14,8 @@ ProgramRunner::ProgramRunner(Memory * memory)
     m_memory = memory;
     m_ip = 0;
     m_operations_manager=OperationsManager::getInstance();
+    m_inputs = NULL;
+    m_outputs = NULL;
 }
 
 ProgramRunner::~ProgramRunner()
@@ -46,7 +48,7 @@ int ProgramRunner::run()
         }
         else if (operation != NULL)
         {
-            res = operation->performOperation(m_memory, m_ip, opcode, &new_ip);
+            res = operation->performOperation(m_memory, m_ip, opcode, &new_ip, m_inputs, m_outputs);
         }
         else
         {
@@ -63,3 +65,14 @@ int ProgramRunner::run()
     }
     return SUCCESS;
 }
+
+void ProgramRunner::setInputs(InputterOutputter * inputs)
+{
+    m_inputs = inputs;
+}
+
+void ProgramRunner::setOutputs(InputterOutputter * outputs)
+{
+    m_outputs = outputs;
+}
+

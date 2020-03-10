@@ -16,7 +16,7 @@ Equals::~Equals()
 {
 }
 
-int Equals::performOperation(Memory * m, long ip, int opcode, long * new_ip)
+int Equals::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
     int val1, val2, destAddr, destVal, res;
 
