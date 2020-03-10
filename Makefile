@@ -65,12 +65,14 @@ build/operations/operations_manager.o: src/operations/operations_manager.cpp  \
 build/programs/program_runner.o: src/programs/program_runner.cpp \
 	include/core/memory.h \
 	include/common/constants.h \
-	include/operations/addition.h  \
-	include/operations/multiplication.h  \
-	include/operations/input.h  \
-	include/operations/output.h  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/programs/program_runner.o -c src/programs/program_runner.cpp
+
+build/programs/inputter_outputter.o: src/programs/inputter_outputter.cpp \
+	include/core/memory.h \
+	include/common/constants.h \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/programs/inputter_outputter.o -c src/programs/inputter_outputter.cpp
 
 build/programs/day2_part1.o: src/programs/day2_part1.cpp  \
 	include/core/memory_loader.h  \
@@ -233,6 +235,7 @@ clean:
 	build/operations/less_than.o  \
 	build/operations/equals.o  \
 	build/programs/program_runner.o  \
+	build/programs/inputter_outputter.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
 	build/programs/day5_part1.o  \
@@ -267,6 +270,7 @@ all: build/core/memory.o  \
 	build/operations/less_than.o  \
 	build/operations/equals.o  \
 	build/programs/program_runner.o  \
+	build/programs/inputter_outputter.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
 	build/programs/day5_part1.o  \
