@@ -265,6 +265,7 @@ clean:
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/programs/day5_part1 \
+	bin/programs/day7_part1 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
@@ -302,6 +303,7 @@ all: build/core/memory.o  \
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/programs/day5_part1 \
+	bin/programs/day7_part1 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
