@@ -11,10 +11,14 @@ private:
     Memory * m_memory;
     int m_ip;
     OperationsManager * m_operations_manager;
+    InputterOutputter * m_inputs;
+    InputterOutputter * m_outputs;
 public:
     ProgramRunner(Memory * memory);
     ~ProgramRunner();
     int run();
+    void setInputs(InputterOutputter * inputs);
+    void setOutputs(InputterOutputter * outputs);
 };
 
 #endif

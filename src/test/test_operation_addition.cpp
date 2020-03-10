@@ -17,7 +17,7 @@ void testAddition()
     Addition * addition = new Addition();
     MemoryLoader::LoadFromString(mem, test1);
     std::cout << "Running " << addition->getName() << " with opCode " << addition->getOpcode() << std::endl;
-    int res = addition->performOperation(mem, 0, addition->getOpcode(), &new_ip);
+    int res = addition->performOperation(mem, 0, addition->getOpcode(), &new_ip, NULL, NULL);
     std::cout << "performOperation Result is " << res << std::endl;
     int actual_res=0;
     mem->getImmediateMode(res_position, &actual_res);

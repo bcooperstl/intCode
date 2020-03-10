@@ -16,7 +16,7 @@ Addition::~Addition()
 {
 }
 
-int Addition::performOperation(Memory * m, long ip, int opcode, long * new_ip)
+int Addition::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
     int val1, val2, addrDest, sum, res;
     res = m->get(ip+1, getMemoryModeForParameter(opcode, 1), &val1);

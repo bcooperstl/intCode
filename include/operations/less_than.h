@@ -9,7 +9,7 @@ class LessThan : public Operation
 public:
     LessThan();
     ~LessThan();
-    int performOperation(Memory * m, long ip, int opcode, long * new_ip);
+    int performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs);
 };
 
 #endif

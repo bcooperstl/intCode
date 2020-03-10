@@ -16,7 +16,7 @@ Input::~Input()
 {
 }
 
-int Input::performOperation(Memory * m, long ip, int opcode, long * new_ip)
+int Input::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
     int addr, val, res;
     res = m->getImmediateMode(ip+1, &addr);
@@ -26,8 +26,17 @@ int Input::performOperation(Memory * m, long ip, int opcode, long * new_ip)
         return res;
     }
 
-    std::cout << "***Enter an integer >";
-    std::cin >> val;
+    if (inputs!=NULL && inputs->hasAvailableElements())
+    {
+        res=inputs->getNext(&val);
+        if (res != SUCCESS)
+            return res;
+    }
+    else
+    {
+        std::cout << "***Enter an integer >";
+        std::cin >> val;
+    }
     
     res = m->put((long)addr, val);
     if (res != SUCCESS)

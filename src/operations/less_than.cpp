@@ -16,7 +16,7 @@ LessThan::~LessThan()
 {
 }
 
-int LessThan::performOperation(Memory * m, long ip, int opcode, long * new_ip)
+int LessThan::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
     int val1, val2, destAddr, destVal, res;
 
