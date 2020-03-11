@@ -52,8 +52,10 @@ int Equals::performOperation(Memory * m, long ip, int opcode, long * new_ip, Inp
 
     *new_ip = ip+IP_INCREMENT;
 
+#ifdef DEBUG_OPERATIONS
     std::cerr << "ip of " << ip << " resulted in parm of " << val1 << " & " << val2 << ". Stores result of " << val1 << "==" << val2 << "=" << destVal << " in " << destAddr << std::endl;
     std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
+#endif
 
     return SUCCESS;
 }
