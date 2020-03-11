@@ -72,6 +72,11 @@ build/programs/program_runner.o: src/programs/program_runner.cpp \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/programs/program_runner.o -c src/programs/program_runner.cpp
 
+build/programs/program_manager.o: src/programs/program_manager.cpp \
+	include/programs/program_runner.h \
+	include/common/constants.h
+	g++ ${CPPFLAGS} -o build/programs/program_manager.o -c src/programs/program_manager.cpp
+
 build/programs/day2_part1.o: src/programs/day2_part1.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
@@ -250,6 +255,7 @@ clean:
 	build/operations/less_than.o  \
 	build/operations/equals.o  \
 	build/programs/program_runner.o  \
+	build/programs/program_manager.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
 	build/programs/day5_part1.o  \
@@ -288,6 +294,7 @@ all: build/core/memory.o  \
 	build/operations/less_than.o  \
 	build/operations/equals.o  \
 	build/programs/program_runner.o  \
+	build/programs/program_manager.o  \
 	build/programs/day2_part1.o  \
 	build/programs/day2_part2.o  \
 	build/programs/day5_part1.o  \
