@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <sstream>
 
 #include "constants.h"
 #include "memory.h"
@@ -9,7 +10,19 @@
 
 static const int HALT_OPCODE=99;
 
+ProgramRunner::ProgramRunner(Memory * memory, std::string name)
+{
+    init(memory, name);
+}
+
 ProgramRunner::ProgramRunner(Memory * memory)
+{
+    std::stringstream nameStream;
+    nameStream << "noName" << memory;
+    init(memory, nameStream.str());
+}
+
+void ProgramRunner::init(Memory * memory, std::string name)
 {
     m_memory = memory;
     m_ip = 0;
@@ -17,6 +30,7 @@ ProgramRunner::ProgramRunner(Memory * memory)
     m_inputs = NULL;
     m_outputs = NULL;
     m_terminated = false;
+    m_name = name;
 }
 
 ProgramRunner::~ProgramRunner()

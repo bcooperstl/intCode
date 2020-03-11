@@ -1,6 +1,8 @@
 #ifndef __PROGRAM_RUNNER_H__
 #define __PROGRAM_RUNNER_H__
 
+#include <string>
+
 #include "memory.h"
 #include "operation.h"
 #include "operations_manager.h"
@@ -14,7 +16,10 @@ private:
     OperationsManager * m_operations_manager;
     InputterOutputter * m_inputs;
     InputterOutputter * m_outputs;
+    std::string m_name;
+    void init(Memory * memory, std::string name);
 public:
+    ProgramRunner(Memory * memory, std::string name);
     ProgramRunner(Memory * memory);
     ~ProgramRunner();
     int run();
