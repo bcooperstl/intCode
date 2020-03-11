@@ -101,6 +101,13 @@ build/programs/day7_part1.o: src/programs/day7_part1.cpp  \
     include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day7_part1.o -c src/programs/day7_part1.cpp
 
+build/programs/day7_part1_mgr.o: src/programs/day7_part1_mgr.cpp  \
+	include/core/memory_loader.h  \
+	include/core/memory.h  \
+    include/programs/program_runner.h \
+    include/programs/program_manager.h
+	g++ ${CPPFLAGS} -o build/programs/day7_part1_mgr.o -c src/programs/day7_part1_mgr.cpp
+
 build/test/test_memoryloader.o: src/test/test_memoryloader.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h
@@ -192,6 +199,13 @@ bin/programs/day7_part1: build/programs/day7_part1.o  \
 	build/programs/program_runner.o
 	g++ ${CPPFLAGS} -o bin/programs/day7_part1 build/programs/day7_part1.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
 
+bin/programs/day7_part1_mgr: build/programs/day7_part1_mgr.o  \
+	bin/lib/liboperations.a  \
+	bin/lib/libcore.a  \
+	build/programs/program_runner.o  \
+	build/programs/program_manager.o
+	g++ ${CPPFLAGS} -o bin/programs/day7_part1_mgr build/programs/day7_part1_mgr.o build/programs/program_runner.o build/programs/program_manager.o -Lbin/lib -loperations -lcore
+
 bin/test/test_memoryloader: build/test/test_memoryloader.o  \
 	build/core/memory_loader.o  \
 	build/core/memory.o
@@ -260,6 +274,7 @@ clean:
 	build/programs/day2_part2.o  \
 	build/programs/day5_part1.o  \
 	build/programs/day7_part1.o  \
+	build/programs/day7_part1_mgr.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -272,6 +287,7 @@ clean:
 	bin/programs/day2_part2 \
 	bin/programs/day5_part1 \
 	bin/programs/day7_part1 \
+	bin/programs/day7_part1_mgr \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
@@ -299,6 +315,7 @@ all: build/core/memory.o  \
 	build/programs/day2_part2.o  \
 	build/programs/day5_part1.o  \
 	build/programs/day7_part1.o  \
+	build/programs/day7_part1_mgr.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -311,6 +328,7 @@ all: build/core/memory.o  \
 	bin/programs/day2_part2 \
 	bin/programs/day5_part1 \
 	bin/programs/day7_part1 \
+	bin/programs/day7_part1_mgr \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
