@@ -26,16 +26,21 @@ int Output::performOperation(Memory * m, long ip, int opcode, long * new_ip, Inp
         return res;
     }
     
-    std::cout << "***Output: " << val << std::endl;
-    if (outputs != NULL)
+    if (outputs == NULL)
+    {
+        std::cout << "***Output: " << val << std::endl;
+    }
+    else
     {
         outputs->add(val);
     }
 
     *new_ip = ip+IP_INCREMENT;
 
+#ifdef DEBUG_OPERATIONS
     std::cerr << "ip of " << ip << " resulted in output value " << val << std::endl;
     std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
+#endif
 
     return SUCCESS;
 }
