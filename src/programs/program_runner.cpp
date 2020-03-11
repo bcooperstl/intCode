@@ -16,6 +16,7 @@ ProgramRunner::ProgramRunner(Memory * memory)
     m_operations_manager=OperationsManager::getInstance();
     m_inputs = NULL;
     m_outputs = NULL;
+    m_terminated = false;
 }
 
 ProgramRunner::~ProgramRunner()
@@ -25,7 +26,9 @@ ProgramRunner::~ProgramRunner()
 int ProgramRunner::run()
 {
     bool halt_reached = false;
+    bool input_wait = false;
     int res = SUCCESS;
+    int ret_code = SUCCESS;
     while((!halt_reached) && m_ip <= m_memory->getSize())
     {
         int opcode;
@@ -45,25 +48,33 @@ int ProgramRunner::run()
         if (modelessOpcode == HALT_OPCODE)
         {
             halt_reached = true;
+            m_terminated = true;
+            ret_code = SUCCESS;
         }
         else if (operation != NULL)
         {
             res = operation->performOperation(m_memory, m_ip, opcode, &new_ip, m_inputs, m_outputs);
+            if (res == INPUT_WAIT) // if waiting for input, break out of this program
+            {
+                ret_code=INPUT_WAIT;
+                break;
+            }
         }
         else
         {
             std::cerr << "Invalid opcode " << modelessOpcode << " via " << opcode << " found at memory location " << m_ip << std::endl;
-            return ERR_INVALID_OPCODE;
+            ret_code=ERR_INVALID_OPCODE;
+            break;
         }
         
         if (res != SUCCESS)
         {
             std::cerr << "Error reached on opcode " << opcode << " at memory location " << m_ip << std::endl;
-            return res;
+            ret_code=res;
         }
         m_ip=new_ip;
     }
-    return SUCCESS;
+    return ret_code;
 }
 
 void ProgramRunner::setInputs(InputterOutputter * inputs)
@@ -76,3 +87,7 @@ void ProgramRunner::setOutputs(InputterOutputter * outputs)
     m_outputs = outputs;
 }
 
+bool ProgramRunner::isTerminated()
+{
+    return m_terminated;
+}

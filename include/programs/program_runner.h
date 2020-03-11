@@ -10,6 +10,7 @@ class ProgramRunner
 private:
     Memory * m_memory;
     int m_ip;
+    bool m_terminated;
     OperationsManager * m_operations_manager;
     InputterOutputter * m_inputs;
     InputterOutputter * m_outputs;
@@ -19,6 +20,7 @@ public:
     int run();
     void setInputs(InputterOutputter * inputs);
     void setOutputs(InputterOutputter * outputs);
+    bool isTerminated();
 };
 
 #endif

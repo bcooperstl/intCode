@@ -7,6 +7,7 @@
 
 // Error Codes below
 #define SUCCESS 0
+#define INPUT_WAIT 1
 
 #define ERR_ADDRESS 100
 #define ERR_NOFILE 101
