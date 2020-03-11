@@ -105,3 +105,8 @@ bool ProgramRunner::isTerminated()
 {
     return m_terminated;
 }
+
+std::string ProgramRunner::getName()
+{
+    return m_name;
+}

@@ -26,6 +26,7 @@ public:
     void setInputs(InputterOutputter * inputs);
     void setOutputs(InputterOutputter * outputs);
     bool isTerminated();
+    std::string getName();
 };
 
 #endif
