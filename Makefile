@@ -1,4 +1,4 @@
-CPPFLAGS=-Iinclude/core -Iinclude/common -Iinclude/operations -Iinclude/programs
+CPPFLAGS=-g -Iinclude/core -Iinclude/common -Iinclude/operations -Iinclude/programs
 
 .DEFAULT_GOAL := all
 
