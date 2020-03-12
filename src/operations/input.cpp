@@ -26,11 +26,18 @@ int Input::performOperation(Memory * m, long ip, int opcode, long * new_ip, Inpu
         return res;
     }
 
-    if (inputs!=NULL && inputs->hasAvailableElements())
+    if (inputs!=NULL)
     {
-        res=inputs->getNext(&val);
-        if (res != SUCCESS)
-            return res;
+        if (inputs->hasAvailableElements())
+        {
+            res=inputs->getNext(&val);
+            if (res != SUCCESS)
+                return res;
+        }
+        else
+        {
+            return INPUT_WAIT;
+        }
     }
     else
     {
