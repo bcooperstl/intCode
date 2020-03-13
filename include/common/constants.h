@@ -1,7 +1,7 @@
 #ifndef __CONSTANTS_H__
 #define __CONSTANTS_H__
 
-#define MEM_SIZE 1024*1024
+#define MEM_PAGE_SIZE 1024*4 // 4 pages
 
 #define INFILE_DELIM ','
 
