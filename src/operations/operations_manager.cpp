@@ -12,6 +12,7 @@
 #include "jump_if_false.h"
 #include "less_than.h"
 #include "equals.h"
+#include "adjust_relative_base.h"
 
 OperationsManager * OperationsManager::m_instance = NULL;
 
@@ -53,6 +54,8 @@ void OperationsManager::loadAllOperations()
     m_operations.insert(std::pair<int, Operation *>(lessThan->getOpcode(), lessThan));
     Equals * equals = new Equals();
     m_operations.insert(std::pair<int, Operation *>(equals->getOpcode(), equals));
+    AdjustRelativeBase * adjustRelativeBase = new AdjustRelativeBase();
+    m_operations.insert(std::pair<int, Operation *>(adjustRelativeBase->getOpcode(), adjustRelativeBase));
 }
 
 void OperationsManager::clearAllOperations()
