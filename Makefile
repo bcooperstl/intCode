@@ -172,7 +172,7 @@ bin/lib/libcore.a: build/core/memory_page.o  \
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o
-	ar rcs bin/lib/libcore.a build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o
+	ar rcs bin/lib/libcore.a build/core/memory_page.o build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o
 
 bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/addition.o  \
