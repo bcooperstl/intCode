@@ -130,7 +130,9 @@ int Memory::get(long address, int mode, long * result)
 // get will return ERR_ADDRESS on invalid address
 int Memory::put(long address, long value)
 {
+#ifdef DEBUG_MEMORY
     std::cerr << "Putting " << value << " at " << address << std::endl;
+#endif
     long pageNumber;
     int offset;
     MemoryPage * page = NULL;
@@ -138,13 +140,16 @@ int Memory::put(long address, long value)
         return ERR_ADDRESS;
 
     calculatePageNumberOffset(address, pageNumber, offset);
+#ifdef DEBUG_MEMORY
     std::cerr << "address " << address << " is pageNumber " << pageNumber << " offset " << offset << std::endl;
-    
+#endif
     int rc = getPage(pageNumber, &page);
     
     if (rc != SUCCESS)
     {
+#ifdef DEBUG_MEMORY
         std::cerr << "Creating memory page " << pageNumber << std::endl;
+#endif
         page = createBlankPage();
         rc = storePage(pageNumber, page);
         if (rc != SUCCESS)
