@@ -47,7 +47,7 @@ int Memory::storePage(long pageNumber, MemoryPage * page)
     return SUCCESS;
 }
 
-int Memory::getPage(long pageNumber, MemoryPage * page)
+int Memory::getPage(long pageNumber, MemoryPage ** page)
 {
     std::map<long, MemoryPage *>::iterator mapPage = m_pages.find(pageNumber);
     if (mapPage == m_pages.end())
@@ -55,7 +55,7 @@ int Memory::getPage(long pageNumber, MemoryPage * page)
         std::cerr << "No page " << pageNumber << " found." << std::endl;
         return ERR_NO_PAGE;
     }
-    page = mapPage->second;
+    *page = mapPage->second;
     return SUCCESS;
 }
 
@@ -76,7 +76,7 @@ int Memory::get(long address, long * result)
         return ERR_ADDRESS;
     calculatePageNumberOffset(address, pageNumber, offset);
 
-    int rc = getPage(pageNumber, page);
+    int rc = getPage(pageNumber, &page);
     if (rc != SUCCESS)
         return rc;
     return page->get(offset, result);
@@ -130,6 +130,7 @@ int Memory::get(long address, int mode, long * result)
 // get will return ERR_ADDRESS on invalid address
 int Memory::put(long address, long value)
 {
+    std::cerr << "Putting " << value << " at " << address << std::endl;
     long pageNumber;
     int offset;
     MemoryPage * page = NULL;
@@ -137,8 +138,10 @@ int Memory::put(long address, long value)
         return ERR_ADDRESS;
 
     calculatePageNumberOffset(address, pageNumber, offset);
+    std::cerr << "address " << address << " is pageNumber " << pageNumber << " offset " << offset << std::endl;
     
-    int rc = getPage(pageNumber, page);
+    int rc = getPage(pageNumber, &page);
+    
     if (rc != SUCCESS)
     {
         std::cerr << "Creating memory page " << pageNumber << std::endl;

@@ -14,7 +14,7 @@ private:
     std::map<long, MemoryPage *> m_pages; // Map of memory pages.  
     int get(long address, long * result);
     void calculatePageNumberOffset(long address, long & pageNumber, int & offset);
-    int getPage(long pageNumber, MemoryPage * page);
+    int getPage(long pageNumber, MemoryPage ** page);
     MemoryPage * createBlankPage();
     int storePage(long pageNumber, MemoryPage * page);
 public:
