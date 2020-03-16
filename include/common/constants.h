@@ -20,5 +20,6 @@
 
 #define MEM_MODE_POSITION 0
 #define MEM_MODE_IMMEDIATE 1
+#define MEM_MODE_RELATIVE 2
 
 #endif
