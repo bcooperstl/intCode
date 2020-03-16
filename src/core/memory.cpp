@@ -9,6 +9,7 @@
 Memory::Memory(long page_size)
 {
     m_page_size = page_size;
+    m_relative_base = 0;
 }
 
 Memory::Memory(const Memory & other)
@@ -112,6 +113,32 @@ int Memory::getPositionMode(long address, long * result)
 
 // get will return SUCCESS on success.
 // get will return ERR_ADDRESS on invalid address
+int Memory::getRelativeMode(long address, long * result)
+{
+    int res;
+    long position;
+    if (address < 0)
+        return ERR_ADDRESS;
+    
+    // first get the position stored in memory at address
+    res = get(address, &position);
+    if (res != SUCCESS)
+        return res;
+    
+    // now add the relative_base to that position;
+    position+=m_relative_base;
+    
+    // now check to ensrue position is in ram
+    if (position < 0)
+        return ERR_ADDRESS;
+    
+    // return the value at position
+    return get(position, result);
+}
+
+
+// get will return SUCCESS on success.
+// get will return ERR_ADDRESS on invalid address
 int Memory::get(long address, int mode, long * result)
 {
     switch (mode)
@@ -120,6 +147,8 @@ int Memory::get(long address, int mode, long * result)
             return getPositionMode(address, result);
         case MEM_MODE_IMMEDIATE:
             return getImmediateMode(address, result);
+        case MEM_MODE_RELATIVE:
+            return getRelativeMode(address, result);
         default:
             std::cerr << "Invalid memory mode " << mode << std::endl;
             return ERR_INVALID_MEM_MODE;
@@ -162,6 +191,16 @@ int Memory::put(long address, long value)
 int Memory::getPageSize()
 {
     return m_page_size;
+}
+
+long Memory::getRelativeBase()
+{
+    return m_relative_base;
+}
+
+void Memory::setRelativeBase(long relative_base)
+{
+    m_relative_base = relative_base;
 }
 
 void Memory::reset()

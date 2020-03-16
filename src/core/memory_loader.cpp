@@ -24,7 +24,7 @@ int MemoryLoader::Load(Memory * m, std::istream * in)
     m->reset();
     while (std::getline(*in, line, INFILE_DELIM))
     {
-        int value = atoi(line.c_str());
+        long value = strtol(line.c_str(), NULL, 10);
 #ifdef DEBUG_MEMORY
         std::cerr << "Loading " << value << " from input [" << line << "] to position " << counter << std::endl;
 #endif

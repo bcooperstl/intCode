@@ -1,4 +1,7 @@
-CPPFLAGS=-g -Iinclude/core -Iinclude/common -Iinclude/operations -Iinclude/programs
+DEBUG=
+#DEBUG+= -DDEBUG_MEMORY
+#DEBUG+= -DDEBUG_OPERATIONS
+CPPFLAGS=-g ${DEBUG} -Iinclude/core -Iinclude/common -Iinclude/operations -Iinclude/programs
 
 .DEFAULT_GOAL := all
 
@@ -65,6 +68,11 @@ build/operations/equals.o: src/operations/equals.cpp  \
 	include/operations/equals.h  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/operations/equals.o -c src/operations/equals.cpp
+
+build/operations/adjust_relative_base.o: src/operations/adjust_relative_base.cpp  \
+	include/operations/adjust_relative_base.h  \
+	include/operations/operation.h
+	g++ ${CPPFLAGS} -o build/operations/adjust_relative_base.o -c src/operations/adjust_relative_base.cpp
 
 build/operations/operations_manager.o: src/operations/operations_manager.cpp  \
 	include/operations/operations_manager.h  \
@@ -168,6 +176,12 @@ build/test/test_day5_part2_examples.o: src/test/test_day5_part2_examples.cpp  \
     include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day5_part2_examples.o -c src/test/test_day5_part2_examples.cpp
     
+build/test/test_day9_examples.o: src/test/test_day9_examples.cpp  \
+	include/core/memory_loader.h  \
+	include/core/memory.h  \
+    include/programs/program_runner.h
+	g++ ${CPPFLAGS} -o build/test/test_day9_examples.o -c src/test/test_day9_examples.cpp
+    
 bin/lib/libcore.a: build/core/memory_page.o  \
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
@@ -183,8 +197,9 @@ bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/jump_if_false.o  \
 	build/operations/less_than.o  \
 	build/operations/equals.o  \
+	build/operations/adjust_relative_base.o  \
 	build/operations/operations_manager.o
-	ar rcs bin/lib/liboperations.a build/operations/operation.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/jump_if_true.o build/operations/jump_if_false.o build/operations/less_than.o build/operations/equals.o build/operations/operations_manager.o
+	ar rcs bin/lib/liboperations.a build/operations/operation.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/jump_if_true.o build/operations/jump_if_false.o build/operations/less_than.o build/operations/equals.o build/operations/adjust_relative_base.o build/operations/operations_manager.o
 
 bin/programs/day2_part1: build/programs/day2_part1.o  \
 	bin/lib/liboperations.a \
@@ -274,6 +289,12 @@ bin/test/test_day5_part2_examples: build/test/test_day5_part2_examples.o  \
 	build/programs/program_runner.o
 	g++ ${CPPFLAGS} -o bin/test/test_day5_part2_examples build/test/test_day5_part2_examples.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
 
+bin/test/test_day9_examples: build/test/test_day9_examples.o  \
+	bin/lib/liboperations.a  \
+	bin/lib/libcore.a \
+	build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/test/test_day9_examples build/test/test_day9_examples.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+
 clean:
 	rm -f build/core/memory_page.o  \
 	build/core/memory.o  \
@@ -289,6 +310,7 @@ clean:
 	build/operations/jump_if_false.o  \
 	build/operations/less_than.o  \
 	build/operations/equals.o  \
+	build/operations/adjust_relative_base.o  \
 	build/programs/program_runner.o  \
 	build/programs/program_manager.o  \
 	build/programs/day2_part1.o  \
@@ -303,6 +325,7 @@ clean:
 	build/test/test_operation_input_output.o  \
 	build/test/test_day2_examples.o  \
 	build/test/test_day5_examples.o  \
+	build/test/test_day9_examples.o  \
 	bin/lib/libcore.a  \
 	bin/lib/liboperations.a  \
 	bin/programs/day2_part1 \
@@ -317,7 +340,8 @@ clean:
 	bin/test/test_operation_input_output \
 	bin/test/test_day2_examples \
 	bin/test/test_day5_examples \
-	bin/test/test_day5_part2_examples
+	bin/test/test_day5_part2_examples \
+	bin/test/test_day9_examples
 
 all: build/core/memory_page.o  \
 	build/core/memory.o  \
@@ -333,6 +357,7 @@ all: build/core/memory_page.o  \
 	build/operations/jump_if_false.o  \
 	build/operations/less_than.o  \
 	build/operations/equals.o  \
+	build/operations/adjust_relative_base.o  \
 	build/programs/program_runner.o  \
 	build/programs/program_manager.o  \
 	build/programs/day2_part1.o  \
@@ -360,4 +385,5 @@ all: build/core/memory_page.o  \
 	bin/test/test_operation_input_output \
 	bin/test/test_day2_examples \
 	bin/test/test_day5_examples \
-	bin/test/test_day5_part2_examples
+	bin/test/test_day5_part2_examples \
+	bin/test/test_day9_examples

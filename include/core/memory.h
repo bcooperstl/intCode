@@ -11,6 +11,7 @@ class Memory
 {
 private:
     int m_page_size;
+    int m_relative_base;
     std::map<long, MemoryPage *> m_pages; // Map of memory pages.  
     int get(long address, long * result);
     void calculatePageNumberOffset(long address, long & pageNumber, int & offset);
@@ -23,9 +24,12 @@ public:
     ~Memory();
     int getImmediateMode(long address, long * result);
     int getPositionMode(long address, long * result);
+    int getRelativeMode(long address, long * result);
     int get(long address, int mode, long * result);
     int put(long address, long value);
     int getPageSize();
+    long getRelativeBase();
+    void setRelativeBase(long relativeBase);
     void reset();
     void dump(std::ostream & out);
 };
