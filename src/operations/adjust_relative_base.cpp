@@ -26,7 +26,7 @@ int AdjustRelativeBase::performOperation(Memory * m, long ip, int opcode, long *
         return res;
     }
     
-    m->setRelativeBase(val);
+    m->setRelativeBase(m->getRelativeBase()+val);
     
     *new_ip = ip+IP_INCREMENT;
 
