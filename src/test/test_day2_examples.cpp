@@ -35,14 +35,14 @@ void runTest(std::string test, std::string res)
         exit(1);
     }
     
-    if (testMem->getMaxUsedAddress() != resMem->getMaxUsedAddress())
-    {
-        std::cerr << "Test failed - max used address was " << testMem->getMaxUsedAddress() << "  expected " << resMem->getMaxUsedAddress() << std::endl;
-        exit(1);
-    }
+//    if (testMem->getMaxUsedAddress() != resMem->getMaxUsedAddress())
+//    {
+//        std::cerr << "Test failed - max used address was " << testMem->getMaxUsedAddress() << "  expected " << resMem->getMaxUsedAddress() << std::endl;
+//        exit(1);
+//    }
     
-    int testVal, resVal, i;
-    for (i=0; i<testMem->getMaxUsedAddress(); i++)
+    long testVal, resVal, i;
+    for (i=0; i<testMem->getPageSize(); i++)
     {
         testMem->getImmediateMode(i, &testVal);
         resMem->getImmediateMode(i, &resVal);

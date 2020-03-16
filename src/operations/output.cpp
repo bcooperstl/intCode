@@ -18,7 +18,7 @@ Output::~Output()
 
 int Output::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
-    int val, res;
+    long val, res;
     res = m->get(ip+1, getMemoryModeForParameter(opcode, 1), &val);
     if (res != SUCCESS)
     {

@@ -18,7 +18,7 @@ JumpIfFalse::~JumpIfFalse()
 
 int JumpIfFalse::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
-    int compare_val, new_ip_val, res;
+    long compare_val, new_ip_val, res;
     res = m->get(ip+1, getMemoryModeForParameter(opcode, 1), &compare_val);
     if (res != SUCCESS)
     {

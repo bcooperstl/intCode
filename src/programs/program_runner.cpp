@@ -43,9 +43,9 @@ int ProgramRunner::run()
     bool input_wait = false;
     int res = SUCCESS;
     int ret_code = SUCCESS;
-    while((!halt_reached) && m_ip <= m_memory->getSize())
+    while (!halt_reached)
     {
-        int opcode;
+        long opcode;
         long new_ip=0;
         res = m_memory->getImmediateMode(m_ip, &opcode);
 

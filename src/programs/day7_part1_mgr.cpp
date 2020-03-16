@@ -36,7 +36,7 @@ bool isValid(int a, int b, int c, int d, int e)
     return true;
 }
 
-int runPermutation(Memory * baseMem, int a, int b, int c, int d, int e, int * finalOutput)
+int runPermutation(Memory * baseMem, int a, int b, int c, int d, int e, long * finalOutput)
 {
     InputterOutputter inA, aToB, bToC, cToD, dToE, outE;
     Memory memA(*baseMem), memB(*baseMem), memC(*baseMem), memD(*baseMem), memE(*baseMem);
@@ -87,7 +87,8 @@ int permute(Memory * baseMem, int * maxPower)
 {
     *maxPower=0;
     int maxA, maxB, maxC, maxD, maxE;
-    int power, rc;
+    long power;
+    int rc;
     
     for (int a=0; a<=4; a++)
     {

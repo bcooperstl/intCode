@@ -35,7 +35,7 @@ bool isValid(int a, int b, int c, int d, int e)
     return true;
 }
 
-int runAmplifier(Memory * baseMem, int phase, int signal, int *ampOutput)
+int runAmplifier(Memory * baseMem, int phase, int signal, long *ampOutput)
 {
     InputterOutputter in, out;
     in.add(phase);
@@ -61,7 +61,8 @@ int runAmplifier(Memory * baseMem, int phase, int signal, int *ampOutput)
 
 int runPermutation(Memory * baseMem, int a, int b, int c, int d, int e, int * finalOutput)
 {
-    int rc, aRes, bRes, cRes, dRes, eRes;
+    int rc;
+    long aRes, bRes, cRes, dRes, eRes;
     rc=runAmplifier(baseMem, a, FIRST_SIGNAL, &aRes);
     if (rc != SUCCESS)
         return rc;

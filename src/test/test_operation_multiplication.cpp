@@ -19,7 +19,7 @@ void testMultiplication()
     std::cout << "Running " << multiplication->getName() << " with opCode " << multiplication->getOpcode() << std::endl;
     int res = multiplication->performOperation(mem, 0, multiplication->getOpcode(), &new_ip, NULL, NULL);
     std::cout << "performOperation Result is " << res << std::endl;
-    int actual_res=0;
+    long actual_res=0;
     mem->getImmediateMode(res_position, &actual_res);
     if (expected_res == actual_res)
     {

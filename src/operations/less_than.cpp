@@ -18,7 +18,7 @@ LessThan::~LessThan()
 
 int LessThan::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
-    int val1, val2, destAddr, destVal, res;
+    long val1, val2, destAddr, destVal, res;
 
     res = m->get(ip+1, getMemoryModeForParameter(opcode, 1), &val1);
     if (res != SUCCESS)

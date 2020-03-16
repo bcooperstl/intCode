@@ -36,7 +36,7 @@ int main (int argc, char * argv[])
         exit(1);
     }
     
-    int pos0;
+    long pos0;
     mem->getImmediateMode(0, &pos0);
     std::cout << "********* Position 0 is " << pos0 << std::endl;
     
