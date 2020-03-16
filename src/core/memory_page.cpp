@@ -85,15 +85,13 @@ void MemoryPage::dumpPage(std::ostream & out, int base)
 {
     out << "MemoryPage usage: min_offset " << m_min_used_offset << " to max offset " << m_max_used_offset << std::endl;
     bool first = true;
+    long page_base = base * m_size;
     for (int i=m_min_used_offset; i<=m_max_used_offset; i++)
     {
         if (i%16 == 0 || first)
         {
-            if (!first)
-            {
-                out << std::endl;
-            }
-            out << base*m_size+i << '-' << base*m_size+((i/16+1)*16-1);
+            first = false;
+            out << std::endl << page_base+i << '-' << page_base+i+15;
         }
         out << "  " << m_ram[i];
     }
