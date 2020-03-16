@@ -18,7 +18,7 @@ Input::~Input()
 
 int Input::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
-    int addr, val, res;
+    long addr, val, res;
     res = m->getImmediateMode(ip+1, &addr);
     if (res != SUCCESS)
     {

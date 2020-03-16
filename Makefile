@@ -2,6 +2,11 @@ CPPFLAGS=-g -Iinclude/core -Iinclude/common -Iinclude/operations -Iinclude/progr
 
 .DEFAULT_GOAL := all
 
+build/core/memory_page.o: src/core/memory_page.cpp  \
+	include/core/memory_page.h \
+	include/common/constants.h
+	g++ ${CPPFLAGS} -o build/core/memory_page.o -c src/core/memory_page.cpp
+
 build/core/memory.o: src/core/memory.cpp  \
 	include/core/memory.h \
 	include/common/constants.h
@@ -163,10 +168,11 @@ build/test/test_day5_part2_examples.o: src/test/test_day5_part2_examples.cpp  \
     include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day5_part2_examples.o -c src/test/test_day5_part2_examples.cpp
     
-bin/lib/libcore.a: build/core/memory.o  \
+bin/lib/libcore.a: build/core/memory_page.o  \
+	build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o
-	ar rcs bin/lib/libcore.a build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o
+	ar rcs bin/lib/libcore.a build/core/memory_page.o build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o
 
 bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/addition.o  \
@@ -269,7 +275,8 @@ bin/test/test_day5_part2_examples: build/test/test_day5_part2_examples.o  \
 	g++ ${CPPFLAGS} -o bin/test/test_day5_part2_examples build/test/test_day5_part2_examples.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
 
 clean:
-	rm -f build/core/memory.o  \
+	rm -f build/core/memory_page.o  \
+	build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o  \
 	build/operations/operation.o  \
@@ -312,7 +319,8 @@ clean:
 	bin/test/test_day5_examples \
 	bin/test/test_day5_part2_examples
 
-all: build/core/memory.o  \
+all: build/core/memory_page.o  \
+	build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o  \
 	build/operations/operation.o  \

@@ -20,18 +20,18 @@ int InputterOutputter::size()
     return m_values.size();
 }
 
-void InputterOutputter::add(int value)
+void InputterOutputter::add(long value)
 {
     m_values.push_back(value);
 }
 
-void InputterOutputter::add(std::vector<int> values)
+void InputterOutputter::add(std::vector<long> values)
 {
     for (int i=0; i<values.size(); i++)
         m_values.push_back(values[i]);
 }
 
-int InputterOutputter::getNext(int * result)
+int InputterOutputter::getNext(long * result)
 {
     if (m_get_position >= size())
     {
@@ -42,7 +42,7 @@ int InputterOutputter::getNext(int * result)
     return SUCCESS;
 }
 
-int InputterOutputter::getPosition(int position, int * result)
+int InputterOutputter::getPosition(int position, long * result)
 {
     if ((position < 0) || (position >= size()))
     {
@@ -53,7 +53,7 @@ int InputterOutputter::getPosition(int position, int * result)
     return SUCCESS;
 }
 
-int InputterOutputter::replace(int value, int position)
+int InputterOutputter::replace(long value, int position)
 {
     if ((position < 0) || (position >= size()))
     {

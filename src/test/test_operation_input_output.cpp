@@ -65,7 +65,7 @@ void testInputOutputMemory()
     res = output.performOperation(&mem, 2, output.getOpcode(), &new_ip, NULL, &outputter);
     std::cout << "performOperation Result is " << res << std::endl;
 
-    int val;
+    long val;
     res = outputter.getNext(&val);
     std::cout << "outputter getNext Result is " << res << std::endl;
     

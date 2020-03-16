@@ -38,7 +38,7 @@ bool isValid(int a, int b, int c, int d, int e)
     return true;
 }
 
-int runPermutation(Memory * baseMem, int a, int b, int c, int d, int e, int * finalOutput)
+int runPermutation(Memory * baseMem, int a, int b, int c, int d, int e, long * finalOutput)
 {
     InputterOutputter eToA, aToB, bToC, cToD, dToE;
     Memory memA(*baseMem), memB(*baseMem), memC(*baseMem), memD(*baseMem), memE(*baseMem);
@@ -85,11 +85,12 @@ int runPermutation(Memory * baseMem, int a, int b, int c, int d, int e, int * fi
     return rc;
 }
 
-int permute(Memory * baseMem, int * maxPower)
+int permute(Memory * baseMem, long * maxPower)
 {
     *maxPower=0;
     int maxA, maxB, maxC, maxD, maxE;
-    int power, rc;
+    long power;
+    int rc;
     
     for (int a=MIN_PHASE; a<=MAX_PHASE; a++)
     {
@@ -131,7 +132,7 @@ int permute(Memory * baseMem, int * maxPower)
 
 int main (int argc, char * argv[])
 {
-    int maxPower = 0;
+    long maxPower = 0;
     if (argc != 2)
     {
         std::cerr << "Usage: " << argv[0] << " infile" << std::endl;

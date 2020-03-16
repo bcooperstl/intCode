@@ -1,56 +1,101 @@
 #include <cstring>
 #include <iostream>
+#include <map>
 
 #include "memory.h"
+#include "memory_page.h"
 #include "constants.h"
 
-Memory::Memory(long size)
+Memory::Memory(long page_size)
 {
-    m_size = size;
-    m_ram = new int[m_size];
-    m_max_used_address = 0;
-    bzero(m_ram, sizeof(int)*m_size);
+    m_page_size = page_size;
 }
 
 Memory::Memory(const Memory & other)
 {
-    m_size = other.m_size;
-    m_ram = new int[m_size];
-    memcpy(m_ram, other.m_ram, sizeof(int)*m_size);
-    m_max_used_address=other.m_max_used_address;
+    m_page_size = other.m_page_size;
+    for (std::map<long, MemoryPage *>::const_iterator iter=other.m_pages.begin(); iter!=other.m_pages.end(); ++iter)
+    {
+        m_pages.insert(std::pair<long, MemoryPage *>(iter->first, new MemoryPage(*iter->second)));
+    }
 }
 
 Memory::~Memory()
 {
-    if (m_ram != NULL)
+    for (std::map<long, MemoryPage *>::iterator iter=m_pages.begin(); iter!=m_pages.end(); ++iter)
     {
-        delete m_ram;
+        delete iter->second;
     }
+    m_pages.clear();
 }
 
-// get will return SUCCESS on success.
-// get will return ERR_ADDRESS on invalid address
-int Memory::get(long address, int * result)
+MemoryPage * Memory::createBlankPage()
 {
-    if (address < 0 || address > m_size)
-        return ERR_ADDRESS;
-    *result = m_ram[address];
+    MemoryPage * page = new MemoryPage();
+    return page;
+}
+
+int Memory::storePage(long pageNumber, MemoryPage * page)
+{
+    std::map<long, MemoryPage *>::iterator mapPage = m_pages.find(pageNumber);
+    if (mapPage != m_pages.end())
+    {
+        std::cerr << "Attempting to store duplicate page " << pageNumber << std::endl;
+        return ERR_DUP_PAGE;
+    }
+    m_pages.insert(std::pair<long, MemoryPage *>(pageNumber, page));
     return SUCCESS;
 }
 
+int Memory::getPage(long pageNumber, MemoryPage ** page)
+{
+    std::map<long, MemoryPage *>::iterator mapPage = m_pages.find(pageNumber);
+    if (mapPage == m_pages.end())
+    {
+        std::cerr << "No page " << pageNumber << " found." << std::endl;
+        return ERR_NO_PAGE;
+    }
+    *page = mapPage->second;
+    return SUCCESS;
+}
+
+void Memory::calculatePageNumberOffset(long address, long & pageNumber, int & offset)
+{
+    pageNumber = address / m_page_size;
+    offset = address % m_page_size;
+}
+
 // get will return SUCCESS on success.
 // get will return ERR_ADDRESS on invalid address
-int Memory::getImmediateMode(long address, int * result)
+int Memory::get(long address, long * result)
+{
+    long pageNumber;
+    int offset;
+    MemoryPage * page = NULL;
+    if (address < 0)
+        return ERR_ADDRESS;
+    calculatePageNumberOffset(address, pageNumber, offset);
+
+    int rc = getPage(pageNumber, &page);
+    if (rc != SUCCESS)
+        return rc;
+    return page->get(offset, result);
+}
+
+// get will return SUCCESS on success.
+// get will return ERR_ADDRESS on invalid address
+int Memory::getImmediateMode(long address, long * result)
 {
     return get(address, result);
 }
 
 // get will return SUCCESS on success.
 // get will return ERR_ADDRESS on invalid address
-int Memory::getPositionMode(long address, int * result)
+int Memory::getPositionMode(long address, long * result)
 {
-    int res, position;
-    if (address < 0 || address > m_size)
+    int res;
+    long position;
+    if (address < 0)
         return ERR_ADDRESS;
     // first get the position stored in memory at address
     res = get(address, &position);
@@ -58,7 +103,7 @@ int Memory::getPositionMode(long address, int * result)
         return res;
     
     // now check to ensrue position is in ram
-    if (position < 0 || position > m_size)
+    if (position < 0)
         return ERR_ADDRESS;
     
     // return the value at position
@@ -67,7 +112,7 @@ int Memory::getPositionMode(long address, int * result)
 
 // get will return SUCCESS on success.
 // get will return ERR_ADDRESS on invalid address
-int Memory::get(long address, int mode, int * result)
+int Memory::get(long address, int mode, long * result)
 {
     switch (mode)
     {
@@ -83,51 +128,56 @@ int Memory::get(long address, int mode, int * result)
 
 // get will return SUCCESS on success.
 // get will return ERR_ADDRESS on invalid address
-int Memory::put(long address, int value)
+int Memory::put(long address, long value)
 {
-    if (address < 0 || address > m_size)
+#ifdef DEBUG_MEMORY
+    std::cerr << "Putting " << value << " at " << address << std::endl;
+#endif
+    long pageNumber;
+    int offset;
+    MemoryPage * page = NULL;
+    if (address < 0)
         return ERR_ADDRESS;
-    m_ram[address] = value;
-    if (address > m_max_used_address)
-        m_max_used_address = address;
-    return SUCCESS;
+
+    calculatePageNumberOffset(address, pageNumber, offset);
+#ifdef DEBUG_MEMORY
+    std::cerr << "address " << address << " is pageNumber " << pageNumber << " offset " << offset << std::endl;
+#endif
+    int rc = getPage(pageNumber, &page);
+    
+    if (rc != SUCCESS)
+    {
+#ifdef DEBUG_MEMORY
+        std::cerr << "Creating memory page " << pageNumber << std::endl;
+#endif
+        page = createBlankPage();
+        rc = storePage(pageNumber, page);
+        if (rc != SUCCESS)
+            return rc;
+    }
+    
+    return page->put(offset, value);
 }
 
-long Memory::getSize()
+int Memory::getPageSize()
 {
-    return m_size;
-}
-
-long Memory::getMaxUsedAddress()
-{
-    return m_max_used_address;
+    return m_page_size;
 }
 
 void Memory::reset()
 {
-    if (m_ram != NULL)
+    for (std::map<long, MemoryPage *>::iterator iter=m_pages.begin(); iter!=m_pages.end(); ++iter)
     {
-        delete m_ram;
+        delete iter->second;
     }
-    m_ram = new int[m_size];
-    m_max_used_address = 0;
-    bzero(m_ram, sizeof(int)*m_size);    
+    m_pages.clear();
 }
 
 void Memory::dump(std::ostream & out)
 {
-    out << "Memory usage: max address " << m_max_used_address << " of size " << m_size << "(0-" << m_size-1 << ")" << std::endl;
-    for (int i=0; i<=m_max_used_address; i++)
+    out << "Dumping all of memory" << std::endl;
+    for (std::map<long, MemoryPage *>::iterator iter=m_pages.begin(); iter!=m_pages.end(); ++iter)
     {
-        if (i%16 == 0)
-        {
-            if (i != 0)
-            {
-                out << std::endl;
-            }
-            out << i << '-' << i+15;
-        }
-        out << "  " << m_ram[i];
+        iter->second->dumpPage(out, iter->first);
     }
-    out << std::endl;
 }
