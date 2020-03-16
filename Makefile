@@ -173,6 +173,12 @@ build/test/test_day5_part2_examples.o: src/test/test_day5_part2_examples.cpp  \
     include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day5_part2_examples.o -c src/test/test_day5_part2_examples.cpp
     
+build/test/test_day9_examples.o: src/test/test_day9_examples.cpp  \
+	include/core/memory_loader.h  \
+	include/core/memory.h  \
+    include/programs/program_runner.h
+	g++ ${CPPFLAGS} -o build/test/test_day9_examples.o -c src/test/test_day9_examples.cpp
+    
 bin/lib/libcore.a: build/core/memory_page.o  \
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
@@ -280,6 +286,12 @@ bin/test/test_day5_part2_examples: build/test/test_day5_part2_examples.o  \
 	build/programs/program_runner.o
 	g++ ${CPPFLAGS} -o bin/test/test_day5_part2_examples build/test/test_day5_part2_examples.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
 
+bin/test/test_day9_examples: build/test/test_day9_examples.o  \
+	bin/lib/liboperations.a  \
+	bin/lib/libcore.a \
+	build/programs/program_runner.o
+	g++ ${CPPFLAGS} -o bin/test/test_day9_examples build/test/test_day9_examples.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+
 clean:
 	rm -f build/core/memory_page.o  \
 	build/core/memory.o  \
@@ -310,6 +322,7 @@ clean:
 	build/test/test_operation_input_output.o  \
 	build/test/test_day2_examples.o  \
 	build/test/test_day5_examples.o  \
+	build/test/test_day9_examples.o  \
 	bin/lib/libcore.a  \
 	bin/lib/liboperations.a  \
 	bin/programs/day2_part1 \
@@ -324,7 +337,8 @@ clean:
 	bin/test/test_operation_input_output \
 	bin/test/test_day2_examples \
 	bin/test/test_day5_examples \
-	bin/test/test_day5_part2_examples
+	bin/test/test_day5_part2_examples \
+	bin/test/test_day9_examples
 
 all: build/core/memory_page.o  \
 	build/core/memory.o  \
@@ -368,4 +382,5 @@ all: build/core/memory_page.o  \
 	bin/test/test_operation_input_output \
 	bin/test/test_day2_examples \
 	bin/test/test_day5_examples \
-	bin/test/test_day5_part2_examples
+	bin/test/test_day5_part2_examples \
+	bin/test/test_day9_examples
