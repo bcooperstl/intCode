@@ -25,14 +25,19 @@ int AdjustRelativeBase::performOperation(Memory * m, long ip, int opcode, long *
         std::cerr << "Error " << res << " received while retreving val from position " << ip+1 << std::endl;
         return res;
     }
+
+#ifdef DEBUG_OPERATIONS
+    std::cerr << getName() << ": at instruction pointer " << ip << " with opcode " << opcode << std::endl;
+    std::cerr << "   parm 1 - memory mode " << getMemoryModeForParameter(opcode, 1) << " got a value of " << val << " for relative base offset" << std::endl;
+#endif
     
     m->setRelativeBase(m->getRelativeBase()+val);
     
     *new_ip = ip+IP_INCREMENT;
 
 #ifdef DEBUG_OPERATIONS
-    std::cerr << "ip of " << ip << " resulted in relative base being adjusted by " << val << " to " << m->getRelativeBase() << std::endl;
-    std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
+    std::cerr << "   relative base was adjusted by " << val << " to " << m->getRelativeBase() << std::endl;
+    std::cerr << "   next instruction pointer incremented by " << IP_INCREMENT << " to " << *new_ip << std::endl;
 #endif
 
     return SUCCESS;

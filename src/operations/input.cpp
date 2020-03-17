@@ -26,6 +26,11 @@ int Input::performOperation(Memory * m, long ip, int opcode, long * new_ip, Inpu
         return res;
     }
 
+#ifdef DEBUG_OPERATIONS
+    std::cerr << getName() << ": at instruction pointer " << ip << " with opcode " << opcode << std::endl;
+    std::cerr << "   parm 1 - memory mode " << getMemoryModeForParameter(opcode, 1) << " got a value of " << addr << " for address" << std::endl;
+#endif
+
     if (inputs!=NULL)
     {
         if (inputs->hasAvailableElements())
@@ -55,8 +60,8 @@ int Input::performOperation(Memory * m, long ip, int opcode, long * new_ip, Inpu
     *new_ip = ip+IP_INCREMENT;
 
 #ifdef DEBUG_OPERATIONS
-    std::cerr << "ip of " << ip << " resulted in parm of " << addr << ". Stored input value " << val << std::endl;
-    std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
+    std::cerr << "   received input value of " << val << std::endl;
+    std::cerr << "   next instruction pointer incremented by " << IP_INCREMENT << " to " << *new_ip << std::endl;
 #endif
 
     return SUCCESS;
