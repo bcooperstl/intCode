@@ -43,7 +43,7 @@ int JumpIfFalse::performOperation(Memory * m, long ip, int opcode, long * new_ip
     {
         *new_ip=new_ip_val;
 #ifdef DEBUG_OPERATIONS
-        std::cerr << "   comparison resulted in zero value of " << compare_val << ".  ";
+        std::cerr << "   comparison resulted in zero value of " << compare_val << "." << std::endl;
         std::cerr << "   next instruction pointer set to " << *new_ip << std::endl;
 #endif
     }
@@ -51,7 +51,7 @@ int JumpIfFalse::performOperation(Memory * m, long ip, int opcode, long * new_ip
     {
         *new_ip = ip+IP_INCREMENT;
 #ifdef DEBUG_OPERATIONS
-        std::cerr << "   comparison resulted in non-zero value of " << compare_val << ".  ";
+        std::cerr << "   comparison resulted in non-zero value of " << compare_val << "." << std::endl;
         std::cerr << "   next instruction pointer incremented by " << IP_INCREMENT << " to " << *new_ip << std::endl;
 #endif
     }
