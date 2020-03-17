@@ -26,6 +26,11 @@ int Output::performOperation(Memory * m, long ip, int opcode, long * new_ip, Inp
         return res;
     }
     
+#ifdef DEBUG_OPERATIONS
+    std::cerr << getName() << ": at instruction pointer " << ip << " with opcode " << opcode << std::endl;
+    std::cerr << "   parm 1 - memory mode " << getMemoryModeForParameter(opcode, 1) << " got a value of " << val << " for val" << std::endl;
+#endif
+
     if (outputs == NULL)
     {
         std::cout << "***Output: " << val << std::endl;
@@ -38,8 +43,8 @@ int Output::performOperation(Memory * m, long ip, int opcode, long * new_ip, Inp
     *new_ip = ip+IP_INCREMENT;
 
 #ifdef DEBUG_OPERATIONS
-    std::cerr << "ip of " << ip << " resulted in output value " << val << std::endl;
-    std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
+    std::cerr << "   outputted output value of " << val << std::endl;
+    std::cerr << "   next instruction pointer incremented by " << IP_INCREMENT << " to " << *new_ip << std::endl;
 #endif
 
     return SUCCESS;

@@ -38,6 +38,14 @@ int Addition::performOperation(Memory * m, long ip, int opcode, long * new_ip, I
         return res;
     }
     sum = val1+val2;
+    
+#ifdef DEBUG_OPERATIONS
+    std::cerr << getName() << ": at instruction pointer " << ip << " with opcode " << opcode << std::endl;
+    std::cerr << "   parm 1 - memory mode " << getMemoryModeForParameter(opcode, 1) << " got a value of " << val1 << " for val1" << std::endl;
+    std::cerr << "   parm 2 - memory mode " << getMemoryModeForParameter(opcode, 2) << " got a value of " << val2 << " for val2" << std::endl;
+    std::cerr << "   parm 3 - memory mode " << getMemoryModeForParameter(opcode, 3) << " got a value of " << addrDest << " for destination address" << std::endl;
+#endif
+
     res = m->put((long)addrDest, sum);
     if (res != SUCCESS)
     {
@@ -46,11 +54,10 @@ int Addition::performOperation(Memory * m, long ip, int opcode, long * new_ip, I
     }
     
     *new_ip = ip+IP_INCREMENT;
-    
+
 #ifdef DEBUG_OPERATIONS
-    std::cerr << "ip of " << ip << " resulted in parms of " << val1 << ", " << val2 << ", and " << addrDest << ".  ";
-    std::cerr << val1 << "+" << val2 << "=" << sum << std::endl;
-    std::cerr << "  new ip incremented " << ip << " by " << IP_INCREMENT << " to " << *new_ip << std::endl;
+    std::cerr << "   " << val1 << "+" << val2 << "=" << sum << std::endl;
+    std::cerr << "   next instruction pointer incremented by " << IP_INCREMENT << " to " << *new_ip << std::endl;
 #endif
     
     return SUCCESS;
