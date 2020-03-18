@@ -19,7 +19,7 @@ Input::~Input()
 int Input::performOperation(Memory * m, long ip, int opcode, long * new_ip, InputterOutputter * inputs, InputterOutputter * outputs)
 {
     long addr, val, res;
-    res = m->getImmediateMode(ip+1, &addr);
+    res = m->getForWrite(ip+1, getMemoryModeForParameter(opcode, 1), &addr);
     if (res != SUCCESS)
     {
         std::cerr << "Error " << res << " received while retreving addr from position " << ip+1 << std::endl;

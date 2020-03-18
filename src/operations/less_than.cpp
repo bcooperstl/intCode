@@ -34,7 +34,7 @@ int LessThan::performOperation(Memory * m, long ip, int opcode, long * new_ip, I
         return res;
     }
 
-    res = m->getImmediateMode(ip+3, &destAddr);
+    res = m->getForWrite(ip+3, getMemoryModeForParameter(opcode, 3), &destAddr);
     if (res != SUCCESS)
     {
         std::cerr << "Error " << res << " received while retreving destAddr from position " << ip+3 << std::endl;
