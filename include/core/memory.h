@@ -26,6 +26,7 @@ public:
     int getPositionMode(long address, long * result);
     int getRelativeMode(long address, long * result);
     int get(long address, int mode, long * result);
+    int getForWrite(long address, int mode, long * result);
     int put(long address, long value);
     int getPageSize();
     long getRelativeBase();

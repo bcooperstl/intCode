@@ -124,7 +124,7 @@ int Memory::getRelativeMode(long address, long * result)
     res = get(address, &position);
     if (res != SUCCESS)
         return res;
-    
+        
     // now add the relative_base to that position;
     position+=m_relative_base;
     
@@ -149,6 +149,26 @@ int Memory::get(long address, int mode, long * result)
             return getImmediateMode(address, result);
         case MEM_MODE_RELATIVE:
             return getRelativeMode(address, result);
+        default:
+            std::cerr << "Invalid memory mode " << mode << std::endl;
+            return ERR_INVALID_MEM_MODE;
+    }
+}
+
+// get will return SUCCESS on success.
+// get will return ERR_ADDRESS on invalid address
+int Memory::getForWrite(long address, int mode, long * result)
+{
+    int ret;
+    switch (mode)
+    {
+        case MEM_MODE_POSITION:
+        case MEM_MODE_IMMEDIATE:
+            return getImmediateMode(address, result);
+        case MEM_MODE_RELATIVE:
+            ret = getImmediateMode(address, result);
+            *result+=m_relative_base;
+            return ret;
         default:
             std::cerr << "Invalid memory mode " << mode << std::endl;
             return ERR_INVALID_MEM_MODE;

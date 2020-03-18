@@ -31,7 +31,7 @@ int Addition::performOperation(Memory * m, long ip, int opcode, long * new_ip, I
         std::cerr << "Error " << res << " received while retreving val2 from position " << ip+2 << std::endl;
         return res;
     }
-    res = m->getImmediateMode(ip+3, &addrDest);
+    res = m->getForWrite(ip+3, getMemoryModeForParameter(opcode, 3), &addrDest);
     if (res != SUCCESS)
     {
         std::cerr << "Error " << res << " received while retreving addrDest from position " << ip+3 << std::endl;
