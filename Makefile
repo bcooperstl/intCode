@@ -1,6 +1,7 @@
 DEBUG=
 #DEBUG+= -DDEBUG_MEMORY
 #DEBUG+= -DDEBUG_OPERATIONS
+#DEBUG+= -DDEBUG_OPERATIONS_MEMORY
 CPPFLAGS=-g ${DEBUG} -Iinclude/core -Iinclude/common -Iinclude/operations -Iinclude/programs
 
 .DEFAULT_GOAL := all
