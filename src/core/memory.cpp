@@ -124,13 +124,9 @@ int Memory::getRelativeMode(long address, long * result)
     res = get(address, &position);
     if (res != SUCCESS)
         return res;
-    
-    std::cerr << "Read Position value " << position << " from address " << address << std::endl;
-    
-    
+        
     // now add the relative_base to that position;
     position+=m_relative_base;
-    std::cerr << "Added relative base " << m_relative_base << " to get final position is " << position << std::endl;
     
     // now check to ensrue position is in ram
     if (position < 0)
