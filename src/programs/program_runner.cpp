@@ -67,6 +67,9 @@ int ProgramRunner::run()
         }
         else if (operation != NULL)
         {
+#ifdef DEBUG_OPERATIONS_MEMORY
+            m_memory->dump(std::cerr);
+#endif
             res = operation->performOperation(m_memory, m_ip, opcode, &new_ip, m_inputs, m_outputs);
             if (res == INPUT_WAIT) // if waiting for input, break out of this program
             {
