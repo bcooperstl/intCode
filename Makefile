@@ -143,6 +143,15 @@ build/programs/day9_part2.o: src/programs/day9_part2.cpp  \
     include/programs/program_manager.h
 	g++ ${CPPFLAGS} -o build/programs/day9_part2.o -c src/programs/day9_part2.cpp
 
+build/programs/day11_panel.o: src/programs/day11_panel.cpp  \
+    include/programs/day11_panel.h
+	g++ ${CPPFLAGS} -o build/programs/day11_panel.o -c src/programs/day11_panel.cpp
+
+build/programs/day11_side.o: src/programs/day11_side.cpp  \
+    include/programs/day11_panel.h \
+    include/programs/day11_side.h
+	g++ ${CPPFLAGS} -o build/programs/day11_side.o -c src/programs/day11_side.cpp
+
 build/test/test_memoryloader.o: src/test/test_memoryloader.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h
@@ -350,6 +359,8 @@ clean:
 	build/programs/day7_part2.o  \
 	build/programs/day9_part1.o  \
 	build/programs/day9_part2.o  \
+	build/programs/day11_panel.o  \
+	build/programs/day11_side.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -401,6 +412,8 @@ all: build/core/memory_page.o  \
 	build/programs/day7_part2.o  \
 	build/programs/day9_part1.o  \
 	build/programs/day9_part2.o  \
+	build/programs/day11_panel.o  \
+	build/programs/day11_side.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \

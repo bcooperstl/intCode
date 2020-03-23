@@ -72,3 +72,44 @@ int Side::getPaintedCount()
     }
     return count;
 }
+
+void Side::paint(PanelColor color)
+{
+    m_panels[m_x_position][m_y_position].paint(color);
+}
+
+ShipDirection Side::getNextDirection(ShipDirection ship, TurnDirection turn)
+{
+    switch (turn)
+    {
+        case left:
+        switch (ship)
+        {
+            case north:
+                return west;
+            case west:
+                return south;
+            case south:
+                return east;
+            case east:
+                return north;
+        }
+        case right:
+        {
+            case north:
+                return east;
+            case west:
+                return north;
+            case south:
+                return west;
+            case east:
+                return south;
+        }
+    }
+    return north; // should never get here
+}
+
+void Side::turnAndMove(TurnDirection direction)
+{
+    
+}

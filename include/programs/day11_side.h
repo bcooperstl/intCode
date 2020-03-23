@@ -3,7 +3,8 @@
 
 #include <iostream>
 
-enum ShipDirection {left='<', up='^', right='>', down='v'};
+enum ShipDirection {west='<', north='^', east='>', south='v'};
+enum TurnDirection {left='L', right='R'};
 
 class Side
 {
@@ -17,10 +18,13 @@ private:
     void deleteSide(int size, Panel ** side);
     int getOffset(int pos);
     void expand();
+    ShipDirection getNextDirection(ShipDirection ship, TurnDirection turn);
 public:
     Side(int size, int startX, int startY, ShipDirection direction);
     ~Side();
     int getPaintedCount();
+    void paint(PanelColor color);
+    void turnAndMove(TurnDirection direction);
     void dump(std::ostream & out);
 };
 
