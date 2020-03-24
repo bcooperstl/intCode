@@ -10,12 +10,12 @@
 
 static const int HALT_OPCODE=99;
 
-ProgramRunner::ProgramRunner(Memory * memory, std::string name)
+ProgramRunner::ProgramRunner(Memory * memory, std::string name):Runner(name)
 {
     init(memory, name);
 }
 
-ProgramRunner::ProgramRunner(Memory * memory)
+ProgramRunner::ProgramRunner(Memory * memory):Runner()
 {
     std::stringstream nameStream;
     nameStream << "noName" << memory;
@@ -102,14 +102,4 @@ void ProgramRunner::setInputs(InputterOutputter * inputs)
 void ProgramRunner::setOutputs(InputterOutputter * outputs)
 {
     m_outputs = outputs;
-}
-
-bool ProgramRunner::isTerminated()
-{
-    return m_terminated;
-}
-
-std::string ProgramRunner::getName()
-{
-    return m_name;
 }
