@@ -43,7 +43,7 @@ int main (int argc, char * argv[])
 
     // give the programs to the manager and let them run
     ProgramManager manager;
-    manager.addProgramRunner(&program);
+    manager.addRunner(&program);
     
     rc=manager.runPrograms();
     if (rc != SUCCESS)

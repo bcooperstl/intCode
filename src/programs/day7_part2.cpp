@@ -68,11 +68,11 @@ int runPermutation(Memory * baseMem, int a, int b, int c, int d, int e, long * f
 
     // give the programs to the manager and let them run
     ProgramManager manager;
-    manager.addProgramRunner(&progA);
-    manager.addProgramRunner(&progB);
-    manager.addProgramRunner(&progC);
-    manager.addProgramRunner(&progD);
-    manager.addProgramRunner(&progE);
+    manager.addRunner(&progA);
+    manager.addRunner(&progB);
+    manager.addRunner(&progC);
+    manager.addRunner(&progD);
+    manager.addRunner(&progE);
     
     rc=manager.runPrograms();
     if (rc != SUCCESS)

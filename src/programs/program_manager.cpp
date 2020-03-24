@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "program_manager.h"
-#include "program_runner.h"
+#include "runner.h"
 
 ProgramManager::ProgramManager()
 {
@@ -14,7 +14,7 @@ ProgramManager::~ProgramManager()
     m_programs.clear();
 }
 
-void ProgramManager::addProgramRunner(ProgramRunner * program)
+void ProgramManager::addRunner(Runner * program)
 {
     m_programs.push_back(program);
 }
@@ -36,7 +36,7 @@ int ProgramManager::runPrograms()
     int current_program_index = 0, rc;
     while (current_program_index < m_programs.size())
     {
-        ProgramRunner * current_program = m_programs[current_program_index];
+        Runner * current_program = m_programs[current_program_index];
         std::cerr << "Running program " << current_program_index << " = " << current_program->getName() << std::endl;
         // don't run this program if it is terminated
         if (current_program->isTerminated())
