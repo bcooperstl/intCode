@@ -1,6 +1,7 @@
 #ifndef __DAY_11_SIDE_H__
 #define __DAY_11_SIDE_H__
 
+#include "day11_panel.h"
 #include <iostream>
 
 enum ShipDirection {west='<', north='^', east='>', south='v'};
@@ -26,6 +27,7 @@ public:
     void paint(PanelColor color);
     void turnAndMove(TurnDirection direction);
     void dump(std::ostream & out);
+    PanelColor getCurrentPanelColor();
 };
 
 #endif

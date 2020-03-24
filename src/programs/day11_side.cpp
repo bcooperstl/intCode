@@ -169,3 +169,10 @@ void Side::dump(std::ostream & out)
         out << std::endl;
     }
 }
+
+PanelColor Side::getCurrentPanelColor()
+{
+    int shipX=getOffset(m_x_position);
+    int shipY=getOffset(m_y_position);
+    return m_panels[shipX][shipY].getColor();
+}
