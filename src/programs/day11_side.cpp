@@ -17,9 +17,14 @@ Side::~Side()
     deleteSide(m_size, m_panels);
 }
 
-int Side::getOffset(int pos)
+int Side::getOffsetX(int pos)
 {
     return m_size+pos;
+}
+
+int Side::getOffsetY(int pos)
+{
+    return m_size-pos;
 }
 
 void Side::expand()
@@ -55,9 +60,9 @@ void Side::deleteSide(int size, Panel ** side)
     int alloc_size = size*2+1;
     for (int i=0; i<alloc_size; i++)
     {
-        delete side[i];
+        delete [] side[i];
     }
-    delete side;
+    delete [] side;
 }
 
 int Side::getPaintedCount()
@@ -77,8 +82,8 @@ int Side::getPaintedCount()
 
 void Side::paint(PanelColor color)
 {
-    std::cout << "Printing (" << m_x_position << "," << m_y_position << ") to the color " << color << std::endl;
-    m_panels[m_x_position][m_y_position].paint(color);
+    std::cerr << "Painting (" << m_x_position << "," << m_y_position << ") to the color " << color << std::endl;
+    m_panels[getOffsetX(m_x_position)][getOffsetY(m_y_position)].paint(color);
 }
 
 ShipDirection Side::getNextDirection(ShipDirection ship, TurnDirection turn)
@@ -98,6 +103,7 @@ ShipDirection Side::getNextDirection(ShipDirection ship, TurnDirection turn)
                 return north;
         }
         case right:
+        switch(ship)
         {
             case north:
                 return east;
@@ -115,7 +121,7 @@ ShipDirection Side::getNextDirection(ShipDirection ship, TurnDirection turn)
 void Side::turnAndMove(TurnDirection direction)
 {
     ShipDirection new_direction = getNextDirection(m_current_direction, direction);
-    std::cout << "Turning " << direction << " from " << m_current_direction << " to " << new_direction << std::endl;
+    std::cerr << "Turning " << (char)direction << " from " << (char)m_current_direction << " to " << (char)new_direction << std::endl;
     int new_x=m_x_position;
     int new_y=m_y_position;
     int min_val=m_size*-1;
@@ -135,12 +141,12 @@ void Side::turnAndMove(TurnDirection direction)
             new_x=new_x-1;
             break;
     }
-    std::cout << "Moving from (" << m_x_position << "," << m_y_position << ") to (" << new_x << "," << new_y << ")" << std::endl;
+    std::cerr << "Moving from (" << m_x_position << "," << m_y_position << ") to (" << new_x << "," << new_y << ")" << std::endl;
     if (new_x<min_val || new_x > max_val || new_y < min_val || new_y > max_val)
     {
         int old_size=m_size;
         expand();
-        std::cout << "Grid expanded from " << old_size << " to " << m_size << std::endl;
+        std::cerr << "Grid expanded from " << old_size << " to " << m_size << std::endl;
     }
     m_current_direction=new_direction;
     m_x_position=new_x;
@@ -150,8 +156,8 @@ void Side::turnAndMove(TurnDirection direction)
 void Side::dump(std::ostream & out)
 {
     int count=m_size*2+1;
-    int shipX=getOffset(m_x_position);
-    int shipY=getOffset(m_y_position);
+    int shipX=getOffsetX(m_x_position);
+    int shipY=getOffsetY(m_y_position);
     out << "Grid size is " << m_size << std::endl;
     for (int y=0; y<count; y++) // iterate over rows first
     {
@@ -159,11 +165,11 @@ void Side::dump(std::ostream & out)
         {
             if (x==shipX && y==shipY)
             {
-                out << m_current_direction;
+                out << (char)m_current_direction;
             }
             else
             {
-                out << m_panels[x][y].getColor();
+                out << (char)m_panels[x][y].getOutput();
             }
         }
         out << std::endl;
@@ -172,7 +178,7 @@ void Side::dump(std::ostream & out)
 
 PanelColor Side::getCurrentPanelColor()
 {
-    int shipX=getOffset(m_x_position);
-    int shipY=getOffset(m_y_position);
+    int shipX=getOffsetX(m_x_position);
+    int shipY=getOffsetY(m_y_position);
     return m_panels[shipX][shipY].getColor();
 }

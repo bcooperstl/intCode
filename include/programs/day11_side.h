@@ -17,7 +17,8 @@ private:
     ShipDirection m_current_direction;
     Panel ** allocateSide(int size);
     void deleteSide(int size, Panel ** side);
-    int getOffset(int pos);
+    int getOffsetX(int pos);
+    int getOffsetY(int pos);
     void expand();
     ShipDirection getNextDirection(ShipDirection ship, TurnDirection turn);
 public:

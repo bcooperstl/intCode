@@ -20,6 +20,7 @@ Day11Part1Runner::~Day11Part1Runner()
 
 int Day11Part1Runner::run()
 {
+    m_side->dump(std::cerr);
     long colorValue, directionValue;
     int rc1, rc2;
     if (!m_first_iteration)
@@ -69,6 +70,7 @@ int Day11Part1Runner::run()
     m_first_iteration=false;
     
     PanelColor currentColor = m_side->getCurrentPanelColor();
+    std::cerr << "Current color of is " << m_side->getCurrentPanelColor() << std::endl;
     if (currentColor==black)
     {
         m_outputs->add(0);
