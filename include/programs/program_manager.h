@@ -8,11 +8,11 @@
 class ProgramManager
 {
 private:
-    std::vector<ProgramRunner *> m_programs;
+    std::vector<Runner *> m_programs;
 public:
     ProgramManager();
     ~ProgramManager();
-    void addProgramRunner(ProgramRunner * runner);
+    void addRunner(Runner * runner);
     int runPrograms();
     bool isAllTerminated();
 };

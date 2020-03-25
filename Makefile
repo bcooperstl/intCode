@@ -80,6 +80,11 @@ build/operations/operations_manager.o: src/operations/operations_manager.cpp  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/operations/operations_manager.o -c src/operations/operations_manager.cpp
 
+build/programs/runner.o: src/programs/runner.cpp \
+	include/programs/runner.h \
+	include/common/constants.h
+	g++ ${CPPFLAGS} -o build/programs/runner.o -c src/programs/runner.cpp
+
 build/programs/program_runner.o: src/programs/program_runner.cpp \
 	include/core/memory.h \
 	include/common/constants.h \
@@ -142,6 +147,27 @@ build/programs/day9_part2.o: src/programs/day9_part2.cpp  \
     include/programs/program_runner.h \
     include/programs/program_manager.h
 	g++ ${CPPFLAGS} -o build/programs/day9_part2.o -c src/programs/day9_part2.cpp
+
+build/programs/day11_panel.o: src/programs/day11_panel.cpp  \
+    include/programs/day11_panel.h
+	g++ ${CPPFLAGS} -o build/programs/day11_panel.o -c src/programs/day11_panel.cpp
+
+build/programs/day11_side.o: src/programs/day11_side.cpp  \
+    include/programs/day11_panel.h \
+    include/programs/day11_side.h
+	g++ ${CPPFLAGS} -o build/programs/day11_side.o -c src/programs/day11_side.cpp
+
+build/programs/day11_part1_runner.o: src/programs/day11_part1_runner.cpp  \
+    include/programs/day11_part1_runner.h \
+    include/programs/day11_panel.h \
+    include/programs/day11_side.h
+	g++ ${CPPFLAGS} -o build/programs/day11_part1_runner.o -c src/programs/day11_part1_runner.cpp
+
+build/programs/day11_part1.o: src/programs/day11_part1.cpp  \
+    include/programs/day11_part1_runner.h \
+    include/programs/day11_panel.h \
+    include/programs/day11_side.h
+	g++ ${CPPFLAGS} -o build/programs/day11_part1.o -c src/programs/day11_part1.cpp
 
 build/test/test_memoryloader.o: src/test/test_memoryloader.cpp  \
 	include/core/memory_loader.h  \
@@ -216,59 +242,67 @@ bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/operations_manager.o
 	ar rcs bin/lib/liboperations.a build/operations/operation.o build/operations/addition.o build/operations/multiplication.o build/operations/input.o build/operations/output.o build/operations/jump_if_true.o build/operations/jump_if_false.o build/operations/less_than.o build/operations/equals.o build/operations/adjust_relative_base.o build/operations/operations_manager.o
 
+bin/lib/libprograms.a : build/programs/runner.o  \
+	build/programs/program_runner.o  \
+	build/programs/program_manager.o
+	ar rcs bin/lib/libprograms.a build/programs/runner.o build/programs/program_runner.o build/programs/program_manager.o
+
 bin/programs/day2_part1: build/programs/day2_part1.o  \
-	bin/lib/liboperations.a \
-	build/core/memory_loader.o  \
-	build/core/memory.o  \
-	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/programs/day2_part1 build/programs/day2_part1.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day2_part1 build/programs/day2_part1.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day2_part2: build/programs/day2_part2.o  \
-	bin/lib/liboperations.a  \
-	build/core/memory_loader.o  \
-	build/core/memory.o  \
-	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/programs/day2_part2 build/programs/day2_part2.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day2_part2 build/programs/day2_part2.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day5_part1: build/programs/day5_part1.o  \
-	bin/lib/liboperations.a  \
-	bin/lib/libcore.a  \
-	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/programs/day5_part1 build/programs/day5_part1.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day5_part1 build/programs/day5_part1.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day7_part1: build/programs/day7_part1.o  \
-	bin/lib/liboperations.a  \
-	bin/lib/libcore.a  \
-	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/programs/day7_part1 build/programs/day7_part1.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day7_part1 build/programs/day7_part1.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day7_part1_mgr: build/programs/day7_part1_mgr.o  \
-	bin/lib/liboperations.a  \
-	bin/lib/libcore.a  \
-	build/programs/program_runner.o  \
-	build/programs/program_manager.o
-	g++ ${CPPFLAGS} -o bin/programs/day7_part1_mgr build/programs/day7_part1_mgr.o build/programs/program_runner.o build/programs/program_manager.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day7_part1_mgr build/programs/day7_part1_mgr.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day7_part2: build/programs/day7_part2.o  \
-	bin/lib/liboperations.a  \
-	bin/lib/libcore.a  \
-	build/programs/program_runner.o  \
-	build/programs/program_manager.o
-	g++ ${CPPFLAGS} -o bin/programs/day7_part2 build/programs/day7_part2.o build/programs/program_runner.o build/programs/program_manager.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day7_part2 build/programs/day7_part2.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day9_part1: build/programs/day9_part1.o  \
-	bin/lib/liboperations.a  \
-	bin/lib/libcore.a  \
-	build/programs/program_runner.o  \
-	build/programs/program_manager.o
-	g++ ${CPPFLAGS} -o bin/programs/day9_part1 build/programs/day9_part1.o build/programs/program_runner.o build/programs/program_manager.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day9_part1 build/programs/day9_part1.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day9_part2: build/programs/day9_part2.o  \
-	bin/lib/liboperations.a  \
-	bin/lib/libcore.a  \
-	build/programs/program_runner.o  \
-	build/programs/program_manager.o
-	g++ ${CPPFLAGS} -o bin/programs/day9_part2 build/programs/day9_part2.o build/programs/program_runner.o build/programs/program_manager.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day9_part2 build/programs/day9_part2.o -Lbin/lib -lprograms -loperations -lcore
+
+bin/programs/day11_part1: build/programs/day11_part1.o  \
+	build/programs/day11_part1_runner.o  \
+	build/programs/day11_side.o  \
+	build/programs/day11_panel.o  \
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day11_part1 build/programs/day11_part1.o build/programs/day11_part1_runner.o build/programs/day11_side.o build/programs/day11_panel.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_memoryloader: build/test/test_memoryloader.o  \
 	build/core/memory_loader.o  \
@@ -298,31 +332,28 @@ bin/test/test_operation_input_output: build/test/test_operation_input_output.o  
 	g++ ${CPPFLAGS} -o bin/test/test_operation_input_output build/test/test_operation_input_output.o -Lbin/lib -loperations -lcore
 
 bin/test/test_day2_examples: build/test/test_day2_examples.o  \
-	bin/lib/liboperations.a \
-	build/core/memory_loader.o  \
-	build/core/memory.o  \
-	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/test/test_day2_examples build/test/test_day2_examples.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/test/test_day2_examples build/test/test_day2_examples.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_day5_examples: build/test/test_day5_examples.o  \
-	bin/lib/liboperations.a  \
-	build/core/memory_loader.o  \
-	build/core/memory.o  \
-	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/test/test_day5_examples build/test/test_day5_examples.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/test/test_day5_examples build/test/test_day5_examples.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_day5_part2_examples: build/test/test_day5_part2_examples.o  \
-	bin/lib/liboperations.a  \
-	build/core/memory_loader.o  \
-	build/core/memory.o  \
-	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/test/test_day5_part2_examples build/test/test_day5_part2_examples.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/test/test_day5_part2_examples build/test/test_day5_part2_examples.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_day9_examples: build/test/test_day9_examples.o  \
-	bin/lib/liboperations.a  \
 	bin/lib/libcore.a \
-	build/programs/program_runner.o
-	g++ ${CPPFLAGS} -o bin/test/test_day9_examples build/test/test_day9_examples.o build/programs/program_runner.o -Lbin/lib -loperations -lcore
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/test/test_day9_examples build/test/test_day9_examples.o -Lbin/lib -lprograms -loperations -lcore
 
 clean:
 	rm -f build/core/memory_page.o  \
@@ -340,6 +371,7 @@ clean:
 	build/operations/less_than.o  \
 	build/operations/equals.o  \
 	build/operations/adjust_relative_base.o  \
+	build/programs/runner.o  \
 	build/programs/program_runner.o  \
 	build/programs/program_manager.o  \
 	build/programs/day2_part1.o  \
@@ -350,6 +382,10 @@ clean:
 	build/programs/day7_part2.o  \
 	build/programs/day9_part1.o  \
 	build/programs/day9_part2.o  \
+	build/programs/day11_panel.o  \
+	build/programs/day11_side.o  \
+	build/programs/day11_part1_runner.o  \
+	build/programs/day11_part1.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -359,6 +395,7 @@ clean:
 	build/test/test_day9_examples.o  \
 	bin/lib/libcore.a  \
 	bin/lib/liboperations.a  \
+	bin/lib/libprograms.a  \
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/programs/day5_part1 \
@@ -367,6 +404,7 @@ clean:
 	bin/programs/day7_part2 \
 	bin/programs/day9_part1 \
 	bin/programs/day9_part2 \
+	bin/programs/day11_part1 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
@@ -391,6 +429,7 @@ all: build/core/memory_page.o  \
 	build/operations/less_than.o  \
 	build/operations/equals.o  \
 	build/operations/adjust_relative_base.o  \
+	build/programs/runner.o  \
 	build/programs/program_runner.o  \
 	build/programs/program_manager.o  \
 	build/programs/day2_part1.o  \
@@ -401,6 +440,10 @@ all: build/core/memory_page.o  \
 	build/programs/day7_part2.o  \
 	build/programs/day9_part1.o  \
 	build/programs/day9_part2.o  \
+	build/programs/day11_panel.o  \
+	build/programs/day11_side.o  \
+	build/programs/day11_part1_runner.o  \
+	build/programs/day11_part1.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -409,6 +452,7 @@ all: build/core/memory_page.o  \
 	build/test/test_day5_examples.o  \
 	bin/lib/libcore.a  \
 	bin/lib/liboperations.a  \
+	bin/lib/libprograms.a  \
 	bin/programs/day2_part1 \
 	bin/programs/day2_part2 \
 	bin/programs/day5_part1 \
@@ -417,6 +461,7 @@ all: build/core/memory_page.o  \
 	bin/programs/day7_part2 \
 	bin/programs/day9_part1 \
 	bin/programs/day9_part2 \
+	bin/programs/day11_part1 \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
 	bin/test/test_operation_input_output \

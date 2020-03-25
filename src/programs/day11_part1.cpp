@@ -7,14 +7,17 @@
 #include "memory.h"
 #include "program_runner.h"
 #include "program_manager.h"
+#include "day11_part1_runner.h"
 #include "inputter_outputter.h"
 
-#define INPUT 1
+#define START_SIZE 2
+#define START_X 0
+#define START_Y 0
+#define START_DIRECTION north
 
 int main (int argc, char * argv[])
 {
-    int maxPower = 0;
-    long finalOutput;
+    Side side(START_SIZE, START_X, START_Y, START_DIRECTION);
     if (argc != 2)
     {
         std::cerr << "Usage: " << argv[0] << " infile" << std::endl;
@@ -30,35 +33,32 @@ int main (int argc, char * argv[])
         exit(1);
     }
     
-    InputterOutputter inputter, outputter;
-    ProgramRunner program(baseMem);
-
+    InputterOutputter toIntcode, fromIntcode; // toIncode will be intcode's input and the day1runner's output. fromIntcode will be the opposite.
+    ProgramRunner intcode(baseMem, "Intcode Robot");
+    Day11Part1Runner myLogic("Day11Logic", &fromIntcode, &toIntcode, &side);
     
-    // link the inputs and outputs to the respective programs
-    program.setInputs(&inputter);
-    program.setOutputs(&outputter);
+    intcode.setInputs(&toIntcode);
+    intcode.setOutputs(&fromIntcode);
 
-    // set the one input value
-    inputter.add(INPUT);
 
     // give the programs to the manager and let them run
     ProgramManager manager;
-    manager.addRunner(&program);
-    
+    manager.addRunner(&myLogic);
+    manager.addRunner(&intcode);
+
     rc=manager.runPrograms();
+    side.dump(std::cout);
     if (rc != SUCCESS)
     {
         std::cerr << "Programs failed with error " << rc << std::endl;
         return rc;
     }
     
-    rc = outputter.getNext(&finalOutput);
-    
     delete baseMem;
     
     if (rc == SUCCESS)
     {
-        std::cout << "***** Final output value is " << finalOutput << std::endl;
+        std::cout << "***** Total number of painted panels is " << side.getPaintedCount() << std::endl;
     }
     else
     {
