@@ -41,25 +41,27 @@ int ProgramManager::runPrograms()
         // don't run this program if it is terminated
         if (current_program->isTerminated())
         {
-            std::cerr << "  Skipping - program is already terminated" << std::endl;
-            continue;
-        }
-        rc = current_program->run();
-        if (rc == SUCCESS)
-        {
-            if (current_program->isTerminated())
-            {
-                std::cerr << "   Program ran to completion" << std::endl;
-            }
-        }
-        else if (rc == INPUT_WAIT)
-        {
-            std::cerr << "   Program is awaiting input" << std::endl;
+            std::cerr << "  Skipping - program " << current_program->getName() << " is already terminated" << std::endl;
         }
         else
         {
-            std::cerr << "   Error " << rc << " received. " << std::endl;
-            break;
+            rc = current_program->run();
+            if (rc == SUCCESS)
+            {
+                if (current_program->isTerminated())
+                {
+                    std::cerr << "   Program " << current_program->getName() << " ran to completion" << std::endl;
+                }
+            }
+            else if (rc == INPUT_WAIT)
+            {
+                std::cerr << "   Program " << current_program->getName() << " is awaiting input" << std::endl;
+            }
+            else
+            {
+                std::cerr << "   Error " << rc << " received. " << std::endl;
+                break;
+            }
         }
         current_program_index++;
         if (current_program_index == m_programs.size())
