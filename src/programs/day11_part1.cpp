@@ -34,7 +34,7 @@ int main (int argc, char * argv[])
     }
     
     InputterOutputter toIntcode, fromIntcode; // toIncode will be intcode's input and the day1runner's output. fromIntcode will be the opposite.
-    ProgramRunner intcode(baseMem);
+    ProgramRunner intcode(baseMem, "Intcode Robot");
     Day11Part1Runner myLogic("Day11Logic", &fromIntcode, &toIntcode, &side);
     
     intcode.setInputs(&toIntcode);
@@ -58,7 +58,7 @@ int main (int argc, char * argv[])
     
     if (rc == SUCCESS)
     {
-        std::cout << "***** Total number of painted panels i " << side.getPaintedCount() << std::endl;
+        std::cout << "***** Total number of painted panels is " << side.getPaintedCount() << std::endl;
     }
     else
     {
