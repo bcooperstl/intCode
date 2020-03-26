@@ -7,16 +7,17 @@
 #include "day11_side.h"
 #include "inputter_outputter.h"
 
-class Day11Part1Runner : public Runner
+class Day11Runner : public Runner
 {
 private:
     InputterOutputter * m_inputs;
     InputterOutputter * m_outputs;
     Side * m_side;
     bool m_first_iteration;
+    int m_iteration_count;
 public:
-    Day11Part1Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Side * side);
-    ~Day11Part1Runner();
+    Day11Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Side * side);
+    ~Day11Runner();
     int run();
 };
 

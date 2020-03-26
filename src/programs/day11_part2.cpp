@@ -23,6 +23,8 @@ int main (int argc, char * argv[])
         std::cerr << "Usage: " << argv[0] << " infile" << std::endl;
         return 1;
     }
+    
+    side.paint(white);
 
     Memory * baseMem = new Memory();
     int rc = MemoryLoader::LoadFromFile(baseMem, argv[1]);
@@ -47,7 +49,6 @@ int main (int argc, char * argv[])
     manager.addRunner(&intcode);
 
     rc=manager.runPrograms();
-    side.dump(std::cout);
     if (rc != SUCCESS)
     {
         std::cerr << "Programs failed with error " << rc << std::endl;
@@ -58,7 +59,8 @@ int main (int argc, char * argv[])
     
     if (rc == SUCCESS)
     {
-        std::cout << "***** Total number of painted panels is " << side.getPaintedCount() << std::endl;
+        std::cout << "***** Final output is:" << std::endl;
+        side.dump(std::cout);
     }
     else
     {
