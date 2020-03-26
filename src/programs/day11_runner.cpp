@@ -3,24 +3,30 @@
 #include <sstream>
 
 #include "constants.h"
-#include "day11_part1_runner.h"
+#include "day11_runner.h"
 #include "runner.h"
 
-Day11Part1Runner::Day11Part1Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Side * side):Runner(name)
+Day11Runner::Day11Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Side * side):Runner(name)
 {
     m_inputs = inputs;
     m_outputs = outputs;
     m_side=side;
     m_first_iteration=true;
+    m_iteration_count=0;
 }
 
-Day11Part1Runner::~Day11Part1Runner()
+Day11Runner::~Day11Runner()
 {
 }
 
-int Day11Part1Runner::run()
+int Day11Runner::run()
 {
-    m_side->dump(std::cerr);
+    if (m_iteration_count%1000==0)
+    {
+        std::cout << "Iteration " << m_iteration_count << std::endl;
+        m_side->dump(std::cout);
+    }
+    m_iteration_count++;
     long colorValue, directionValue;
     int rc1, rc2;
     if (!m_first_iteration)
