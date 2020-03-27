@@ -26,6 +26,17 @@ build/core/inputter_outputter.o: src/core/inputter_outputter.cpp \
 	include/common/constants.h
 	g++ ${CPPFLAGS} -o build/core/inputter_outputter.o -c src/core/inputter_outputter.cpp
 
+build/core/tile.o: src/core/tile.cpp \
+	include/core/tile.h \
+	include/common/constants.h
+	g++ ${CPPFLAGS} -o build/core/tile.o -c src/core/tile.cpp
+
+build/core/screen.o: src/core/screen.cpp \
+	include/core/screen.h \
+	include/core/tile.h \
+	include/common/constants.h
+	g++ ${CPPFLAGS} -o build/core/screen.o -c src/core/screen.cpp
+
 build/operations/operation.o: src/operations/operation.cpp  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/operations/operation.o -c src/operations/operation.cpp
@@ -232,8 +243,10 @@ build/test/test_day9_examples.o: src/test/test_day9_examples.cpp  \
 bin/lib/libcore.a: build/core/memory_page.o  \
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
-	build/core/inputter_outputter.o
-	ar rcs bin/lib/libcore.a build/core/memory_page.o build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o
+	build/core/inputter_outputter.o  \
+	build/core/tile.o  \
+	build/core/screen.o
+	ar rcs bin/lib/libcore.a build/core/memory_page.o build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o build/core/tile.o build/core/screen.o
 
 bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/addition.o  \
@@ -375,6 +388,8 @@ clean:
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o  \
+	build/core/tile.o  \
+	build/core/screen.o  \
 	build/operations/operation.o  \
 	build/operations/operations_manager.o  \
 	build/operations/addition.o  \
@@ -435,6 +450,8 @@ all: build/core/memory_page.o  \
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o  \
+	build/core/tile.o  \
+	build/core/screen.o  \
 	build/operations/operation.o  \
 	build/operations/operations_manager.o  \
 	build/operations/addition.o  \
