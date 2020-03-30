@@ -3,20 +3,20 @@
 #include <sstream>
 
 #include "constants.h"
-#include "day13_runner.h"
+#include "day13_part1_runner.h"
 #include "runner.h"
 
-Day13Runner::Day13Runner(std::string name, InputterOutputter * inputs, Screen * screen):Runner(name)
+Day13Part1Runner::Day13Part1Runner(std::string name, InputterOutputter * inputs, Screen * screen):Runner(name)
 {
     m_inputs = inputs;
     m_screen = screen;
 }
 
-Day13Runner::~Day13Runner()
+Day13Part1Runner::~Day13Part1Runner()
 {
 }
 
-int Day13Runner::run()
+int Day13Part1Runner::run()
 {
     long row, col, tileId;
     int rc1, rc2, rc3;
@@ -39,7 +39,7 @@ int Day13Runner::run()
     return INPUT_WAIT;
 }
 
-char Day13Runner::getTileValue(int input)
+char Day13Part1Runner::getTileValue(int input)
 {
     switch (input)
     {
@@ -50,7 +50,7 @@ char Day13Runner::getTileValue(int input)
         case 2:
             return 'x';
         case 3:
-            return '|';
+            return '_';
         case 4:
             return 'o';
     }

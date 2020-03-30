@@ -194,13 +194,21 @@ build/programs/day11_part2.o: src/programs/day11_part2.cpp  \
     include/programs/day11_side.h
 	g++ ${CPPFLAGS} -o build/programs/day11_part2.o -c src/programs/day11_part2.cpp
 
-build/programs/day13_runner.o: src/programs/day13_runner.cpp  \
-    include/programs/day13_runner.h
-	g++ ${CPPFLAGS} -o build/programs/day13_runner.o -c src/programs/day13_runner.cpp
+build/programs/day13_part1_runner.o: src/programs/day13_part1_runner.cpp  \
+    include/programs/day13_part1_runner.h
+	g++ ${CPPFLAGS} -o build/programs/day13_part1_runner.o -c src/programs/day13_part1_runner.cpp
 
 build/programs/day13_part1.o: src/programs/day13_part1.cpp  \
-    include/programs/day13_runner.h
+    include/programs/day13_part1_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day13_part1.o -c src/programs/day13_part1.cpp
+
+build/programs/day13_part2_runner.o: src/programs/day13_part2_runner.cpp  \
+    include/programs/day13_part2_runner.h
+	g++ ${CPPFLAGS} -o build/programs/day13_part2_runner.o -c src/programs/day13_part2_runner.cpp
+
+build/programs/day13_part2.o: src/programs/day13_part2.cpp  \
+    include/programs/day13_part2_runner.h
+	g++ ${CPPFLAGS} -o build/programs/day13_part2.o -c src/programs/day13_part2.cpp
 
 build/test/test_memoryloader.o: src/test/test_memoryloader.cpp  \
 	include/core/memory_loader.h  \
@@ -351,11 +359,18 @@ bin/programs/day11_part2: build/programs/day11_part2.o  \
 	g++ ${CPPFLAGS} -o bin/programs/day11_part2 build/programs/day11_part2.o build/programs/day11_runner.o build/programs/day11_side.o build/programs/day11_panel.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day13_part1: build/programs/day13_part1.o  \
-	build/programs/day13_runner.o  \
+	build/programs/day13_part1_runner.o  \
 	bin/lib/libcore.a \
     bin/lib/liboperations.a \
 	bin/lib/libprograms.a
-	g++ ${CPPFLAGS} -o bin/programs/day13_part1 build/programs/day13_part1.o build/programs/day13_runner.o -Lbin/lib -lprograms -loperations -lcore
+	g++ ${CPPFLAGS} -o bin/programs/day13_part1 build/programs/day13_part1.o build/programs/day13_part1_runner.o -Lbin/lib -lprograms -loperations -lcore
+
+bin/programs/day13_part2: build/programs/day13_part2.o  \
+	build/programs/day13_part2_runner.o  \
+	bin/lib/libcore.a \
+    bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day13_part2 build/programs/day13_part2.o build/programs/day13_part2_runner.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_memoryloader: build/test/test_memoryloader.o  \
 	build/core/memory_loader.o  \
@@ -444,8 +459,10 @@ clean:
 	build/programs/day11_runner.o  \
 	build/programs/day11_part1.o  \
 	build/programs/day11_part2.o  \
-	build/programs/day13_runner.o  \
+	build/programs/day13_part1_runner.o  \
 	build/programs/day13_part1.o  \
+	build/programs/day13_part2_runner.o  \
+	build/programs/day13_part2.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -467,6 +484,7 @@ clean:
 	bin/programs/day11_part1 \
 	bin/programs/day11_part2 \
 	bin/programs/day13_part1 \
+	bin/programs/day13_part2 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
@@ -511,8 +529,10 @@ all: build/core/memory_page.o  \
 	build/programs/day11_runner.o  \
 	build/programs/day11_part1.o  \
 	build/programs/day11_part2.o  \
-	build/programs/day13_runner.o  \
+	build/programs/day13_part1_runner.o  \
 	build/programs/day13_part1.o  \
+	build/programs/day13_part2_runner.o  \
+	build/programs/day13_part2.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -533,6 +553,7 @@ all: build/core/memory_page.o  \
 	bin/programs/day11_part1 \
 	bin/programs/day11_part2 \
 	bin/programs/day13_part1 \
+	bin/programs/day13_part2 \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
 	bin/test/test_operation_input_output \
