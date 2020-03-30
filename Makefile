@@ -37,6 +37,14 @@ build/core/screen.o: src/core/screen.cpp \
 	include/common/constants.h
 	g++ ${CPPFLAGS} -o build/core/screen.o -c src/core/screen.cpp
 
+build/core/segment_display.o: src/core/segment_display.cpp \
+	include/core/segment_display.h
+	g++ ${CPPFLAGS} -o build/core/segment_display.o -c src/core/segment_display.cpp
+
+build/core/joystick.o: src/core/joystick.cpp \
+	include/core/joystick.h
+	g++ ${CPPFLAGS} -o build/core/joystick.o -c src/core/joystick.cpp
+
 build/operations/operation.o: src/operations/operation.cpp  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/operations/operation.o -c src/operations/operation.cpp
@@ -253,8 +261,10 @@ bin/lib/libcore.a: build/core/memory_page.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o  \
 	build/core/tile.o  \
-	build/core/screen.o
-	ar rcs bin/lib/libcore.a build/core/memory_page.o build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o build/core/tile.o build/core/screen.o
+	build/core/screen.o  \
+	build/core/segment_display.o  \
+	build/core/joystick.o
+	ar rcs bin/lib/libcore.a build/core/memory_page.o build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o build/core/tile.o build/core/screen.o build/core/segment_display.o build/core/joystick.o
 
 bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/addition.o  \
@@ -405,6 +415,8 @@ clean:
 	build/core/inputter_outputter.o  \
 	build/core/tile.o  \
 	build/core/screen.o  \
+	build/core/segment_display.o  \
+	build/core/joystick.o  \
 	build/operations/operation.o  \
 	build/operations/operations_manager.o  \
 	build/operations/addition.o  \
@@ -470,6 +482,8 @@ all: build/core/memory_page.o  \
 	build/core/inputter_outputter.o  \
 	build/core/tile.o  \
 	build/core/screen.o  \
+	build/core/segment_display.o  \
+	build/core/joystick.o  \
 	build/operations/operation.o  \
 	build/operations/operations_manager.o  \
 	build/operations/addition.o  \
