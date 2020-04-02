@@ -210,6 +210,15 @@ build/programs/day13_part2.o: src/programs/day13_part2.cpp  \
     include/programs/day13_part2_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day13_part2.o -c src/programs/day13_part2.cpp
 
+build/programs/day15_point.o: src/programs/day15_point.cpp  \
+    include/programs/day15_point.h
+	g++ ${CPPFLAGS} -o build/programs/day15_point.o -c src/programs/day15_point.cpp
+
+build/programs/day15_area.o: src/programs/day15_area.cpp  \
+    include/programs/day15_area.h \
+    include/programs/day15_point.h
+	g++ ${CPPFLAGS} -o build/programs/day15_area.o -c src/programs/day15_area.cpp
+
 build/test/test_memoryloader.o: src/test/test_memoryloader.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h
@@ -463,6 +472,8 @@ clean:
 	build/programs/day13_part1.o  \
 	build/programs/day13_part2_runner.o  \
 	build/programs/day13_part2.o  \
+	build/programs/day15_point.o  \
+	build/programs/day15_area.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -533,6 +544,8 @@ all: build/core/memory_page.o  \
 	build/programs/day13_part1.o  \
 	build/programs/day13_part2_runner.o  \
 	build/programs/day13_part2.o  \
+	build/programs/day15_point.o  \
+	build/programs/day15_area.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
