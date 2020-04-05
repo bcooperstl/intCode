@@ -3,6 +3,8 @@
 
 #define DIRECTION_COUNT 4
 
+#include <vector>
+
 enum Contents {Wall=0, WalkingArea=1, OxygenSensor=2};
 enum Direction {North=1, South=2, West=3, East=4};
 
@@ -13,16 +15,21 @@ private:
     int m_y;
     Point * m_from;
     Contents m_contents;
-    bool m_explored_directions[DIRECTION_COUNT];
+    bool m_explored_neighbors;
+    std::vector<Direction> m_path_to_here;
 public:
-    Point(int x, int y, Point * from);
+    Point(int x, int y);
+    Point(int x, int y, Point * from, Direction direction_from_from);
     ~Point();
     int getX();
     int getY();
+    bool isExploredNeighbors();
     Contents getContents();
     void setContents(Contents contents);
     Point * getFrom();
     void display(std::ostream & out);
+    std::vector<Direction> getPathToHere();
+    std::vector<Direction> getPathToHome();
 };
 
 #endif

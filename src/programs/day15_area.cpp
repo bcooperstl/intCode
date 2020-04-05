@@ -52,6 +52,23 @@ void Area::addPoint(Point * point)
         m_max_y=point->getY();
 }
 
+Point * Area::getNextPointToExplore()
+{
+    if (m_points_to_explore.size() > 0)
+        return m_points_to_explore[0];
+    return NULL;
+}
+
+void Area::removeExploredPoint(Point * point)
+{
+    for (std::vector<Point *>::iterator it = m_points_to_explore.begin() ; it != m_points_to_explore.end(); ++it)
+    {
+        if (*it==point)
+            it=m_points_to_explore.erase(it);
+        
+    }
+}
+
 void Area::display(std::ostream & out, int droidX, int droidY)
 {
     for (int y=m_min_y; y<=m_max_y; y++)

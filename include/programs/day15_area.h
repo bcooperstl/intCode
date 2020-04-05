@@ -22,6 +22,8 @@ public:
     Point * getPoint(int x, int y);
     void addPoint(Point * point);
     void display(std::ostream & out, int droidX, int droidY);
+    Point * getNextPointToExplore();
+    void removeExploredPoint(Point * point);
 };
 
 #endif
