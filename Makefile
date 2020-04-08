@@ -118,126 +118,138 @@ build/programs/program_manager.o: src/programs/program_manager.cpp \
 build/programs/day2_part1.o: src/programs/day2_part1.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h
+	include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day2_part1.o -c src/programs/day2_part1.cpp
 
 build/programs/day2_part2.o: src/programs/day2_part2.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h
+	include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day2_part2.o -c src/programs/day2_part2.cpp
 
 build/programs/day5_part1.o: src/programs/day5_part1.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h
+	include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day5_part1.o -c src/programs/day5_part1.cpp
 
 build/programs/day7_part1.o: src/programs/day7_part1.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h
+	include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day7_part1.o -c src/programs/day7_part1.cpp
 
 build/programs/day7_part1_mgr.o: src/programs/day7_part1_mgr.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h \
-    include/programs/program_manager.h
+	include/programs/program_runner.h \
+	include/programs/program_manager.h
 	g++ ${CPPFLAGS} -o build/programs/day7_part1_mgr.o -c src/programs/day7_part1_mgr.cpp
 
 build/programs/day7_part2.o: src/programs/day7_part2.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h \
-    include/programs/program_manager.h
+	include/programs/program_runner.h \
+	include/programs/program_manager.h
 	g++ ${CPPFLAGS} -o build/programs/day7_part2.o -c src/programs/day7_part2.cpp
 
 build/programs/day9_part1.o: src/programs/day9_part1.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h \
-    include/programs/program_manager.h
+	include/programs/program_runner.h \
+	include/programs/program_manager.h
 	g++ ${CPPFLAGS} -o build/programs/day9_part1.o -c src/programs/day9_part1.cpp
 
 build/programs/day9_part2.o: src/programs/day9_part2.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h \
-    include/programs/program_manager.h
+	include/programs/program_runner.h \
+	include/programs/program_manager.h
 	g++ ${CPPFLAGS} -o build/programs/day9_part2.o -c src/programs/day9_part2.cpp
 
 build/programs/day11_panel.o: src/programs/day11_panel.cpp  \
-    include/programs/day11_panel.h
+	include/programs/day11_panel.h
 	g++ ${CPPFLAGS} -o build/programs/day11_panel.o -c src/programs/day11_panel.cpp
 
 build/programs/day11_side.o: src/programs/day11_side.cpp  \
-    include/programs/day11_panel.h \
-    include/programs/day11_side.h
+	include/programs/day11_panel.h \
+	include/programs/day11_side.h
 	g++ ${CPPFLAGS} -o build/programs/day11_side.o -c src/programs/day11_side.cpp
 
 build/programs/day11_runner.o: src/programs/day11_runner.cpp  \
-    include/programs/day11_runner.h \
-    include/programs/day11_panel.h \
-    include/programs/day11_side.h
+	include/programs/day11_runner.h \
+	include/programs/day11_panel.h \
+	include/programs/day11_side.h
 	g++ ${CPPFLAGS} -o build/programs/day11_runner.o -c src/programs/day11_runner.cpp
 
 build/programs/day11_part1.o: src/programs/day11_part1.cpp  \
-    include/programs/day11_runner.h \
-    include/programs/day11_panel.h \
-    include/programs/day11_side.h
+	include/programs/day11_runner.h \
+	include/programs/day11_panel.h \
+	include/programs/day11_side.h
 	g++ ${CPPFLAGS} -o build/programs/day11_part1.o -c src/programs/day11_part1.cpp
 
 build/programs/day11_part2.o: src/programs/day11_part2.cpp  \
-    include/programs/day11_runner.h \
-    include/programs/day11_panel.h \
-    include/programs/day11_side.h
+	include/programs/day11_runner.h \
+	include/programs/day11_panel.h \
+	include/programs/day11_side.h
 	g++ ${CPPFLAGS} -o build/programs/day11_part2.o -c src/programs/day11_part2.cpp
 
 build/programs/day13_part1_runner.o: src/programs/day13_part1_runner.cpp  \
-    include/programs/day13_part1_runner.h
+	include/programs/day13_part1_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day13_part1_runner.o -c src/programs/day13_part1_runner.cpp
 
 build/programs/day13_part1.o: src/programs/day13_part1.cpp  \
-    include/programs/day13_part1_runner.h
+	include/programs/day13_part1_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day13_part1.o -c src/programs/day13_part1.cpp
 
 build/programs/day13_part2_runner.o: src/programs/day13_part2_runner.cpp  \
-    include/programs/day13_part2_runner.h
+	include/programs/day13_part2_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day13_part2_runner.o -c src/programs/day13_part2_runner.cpp
 
 build/programs/day13_part2.o: src/programs/day13_part2.cpp  \
-    include/programs/day13_part2_runner.h
+	include/programs/day13_part2_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day13_part2.o -c src/programs/day13_part2.cpp
 
 build/programs/day15_point.o: src/programs/day15_point.cpp  \
-    include/programs/day15_point.h
+	include/programs/day15_point.h
 	g++ ${CPPFLAGS} -o build/programs/day15_point.o -c src/programs/day15_point.cpp
 
 build/programs/day15_area.o: src/programs/day15_area.cpp  \
-    include/programs/day15_area.h \
-    include/programs/day15_point.h
+	include/programs/day15_area.h \
+	include/programs/day15_point.h
 	g++ ${CPPFLAGS} -o build/programs/day15_area.o -c src/programs/day15_area.cpp
+
+build/programs/day15_part1_runner.o: src/programs/day15_part1_runner.cpp  \
+	include/programs/day15_part1_runner.h \
+	include/programs/day15_area.h \
+	include/programs/day15_point.h
+	g++ ${CPPFLAGS} -o build/programs/day15_part1_runner.o -c src/programs/day15_part1_runner.cpp
+
+build/programs/day15_part1.o: src/programs/day15_part1.cpp  \
+	include/programs/day15_part1_runner.h \
+	include/programs/day15_area.h \
+	include/programs/day15_point.h
+	g++ ${CPPFLAGS} -o build/programs/day15_part1.o -c src/programs/day15_part1.cpp
 
 build/test/test_memoryloader.o: src/test/test_memoryloader.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h
 	g++ ${CPPFLAGS} -o build/test/test_memoryloader.o -c src/test/test_memoryloader.cpp
-    
+	
 build/test/test_operation_addition.o: src/test/test_operation_addition.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
 	include/operations/addition.h  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/test/test_operation_addition.o -c src/test/test_operation_addition.cpp
-    
+	
 build/test/test_operation_multiplication.o: src/test/test_operation_multiplication.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
 	include/operations/multiplication.h  \
 	include/operations/operation.h
 	g++ ${CPPFLAGS} -o build/test/test_operation_multiplication.o -c src/test/test_operation_multiplication.cpp
-    
+	
 build/test/test_operation_input_output.o: src/test/test_operation_input_output.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
@@ -252,27 +264,27 @@ build/test/test_day2_examples.o: src/test/test_day2_examples.cpp  \
 	include/operations/addition.h  \
 	include/operations/multiplication.h  \
 	include/operations/operation.h \
-    include/programs/program_runner.h
+	include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day2_examples.o -c src/test/test_day2_examples.cpp
-    
+	
 build/test/test_day5_examples.o: src/test/test_day5_examples.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h
+	include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day5_examples.o -c src/test/test_day5_examples.cpp
-    
+	
 build/test/test_day5_part2_examples.o: src/test/test_day5_part2_examples.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h
+	include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day5_part2_examples.o -c src/test/test_day5_part2_examples.cpp
-    
+	
 build/test/test_day9_examples.o: src/test/test_day9_examples.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h  \
-    include/programs/program_runner.h
+	include/programs/program_runner.h
 	g++ ${CPPFLAGS} -o build/test/test_day9_examples.o -c src/test/test_day9_examples.cpp
-    
+	
 bin/lib/libcore.a: build/core/memory_page.o  \
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
@@ -303,49 +315,49 @@ bin/lib/libprograms.a : build/programs/runner.o  \
 
 bin/programs/day2_part1: build/programs/day2_part1.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day2_part1 build/programs/day2_part1.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day2_part2: build/programs/day2_part2.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day2_part2 build/programs/day2_part2.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day5_part1: build/programs/day5_part1.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day5_part1 build/programs/day5_part1.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day7_part1: build/programs/day7_part1.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day7_part1 build/programs/day7_part1.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day7_part1_mgr: build/programs/day7_part1_mgr.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day7_part1_mgr build/programs/day7_part1_mgr.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day7_part2: build/programs/day7_part2.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day7_part2 build/programs/day7_part2.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day9_part1: build/programs/day9_part1.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day9_part1 build/programs/day9_part1.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day9_part2: build/programs/day9_part2.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day9_part2 build/programs/day9_part2.o -Lbin/lib -lprograms -loperations -lcore
 
@@ -354,7 +366,7 @@ bin/programs/day11_part1: build/programs/day11_part1.o  \
 	build/programs/day11_side.o  \
 	build/programs/day11_panel.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day11_part1 build/programs/day11_part1.o build/programs/day11_runner.o build/programs/day11_side.o build/programs/day11_panel.o -Lbin/lib -lprograms -loperations -lcore
 
@@ -363,23 +375,32 @@ bin/programs/day11_part2: build/programs/day11_part2.o  \
 	build/programs/day11_side.o  \
 	build/programs/day11_panel.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day11_part2 build/programs/day11_part2.o build/programs/day11_runner.o build/programs/day11_side.o build/programs/day11_panel.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day13_part1: build/programs/day13_part1.o  \
 	build/programs/day13_part1_runner.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day13_part1 build/programs/day13_part1.o build/programs/day13_part1_runner.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day13_part2: build/programs/day13_part2.o  \
 	build/programs/day13_part2_runner.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day13_part2 build/programs/day13_part2.o build/programs/day13_part2_runner.o -Lbin/lib -lprograms -loperations -lcore
+
+bin/programs/day15_part1: build/programs/day15_part1.o  \
+	build/programs/day15_point.o  \
+	build/programs/day15_area.o  \
+	build/programs/day15_part1_runner.o  \
+	bin/lib/libcore.a \
+	bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day15_part1 build/programs/day15_part1.o build/programs/day15_point.o build/programs/day15_area.o build/programs/day15_part1_runner.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_memoryloader: build/test/test_memoryloader.o  \
 	build/core/memory_loader.o  \
@@ -410,25 +431,25 @@ bin/test/test_operation_input_output: build/test/test_operation_input_output.o  
 
 bin/test/test_day2_examples: build/test/test_day2_examples.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/test/test_day2_examples build/test/test_day2_examples.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_day5_examples: build/test/test_day5_examples.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/test/test_day5_examples build/test/test_day5_examples.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_day5_part2_examples: build/test/test_day5_part2_examples.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/test/test_day5_part2_examples build/test/test_day5_part2_examples.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_day9_examples: build/test/test_day9_examples.o  \
 	bin/lib/libcore.a \
-    bin/lib/liboperations.a \
+	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/test/test_day9_examples build/test/test_day9_examples.o -Lbin/lib -lprograms -loperations -lcore
 
@@ -474,12 +495,15 @@ clean:
 	build/programs/day13_part2.o  \
 	build/programs/day15_point.o  \
 	build/programs/day15_area.o  \
+	build/programs/day15_part1_runner.o  \
+	build/programs/day15_part1.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
 	build/test/test_operation_input_output.o  \
 	build/test/test_day2_examples.o  \
 	build/test/test_day5_examples.o  \
+	build/test/test_day5_part2_examples.o  \
 	build/test/test_day9_examples.o  \
 	bin/lib/libcore.a  \
 	bin/lib/liboperations.a  \
@@ -496,6 +520,7 @@ clean:
 	bin/programs/day11_part2 \
 	bin/programs/day13_part1 \
 	bin/programs/day13_part2 \
+	bin/programs/day15_part1 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
@@ -546,6 +571,8 @@ all: build/core/memory_page.o  \
 	build/programs/day13_part2.o  \
 	build/programs/day15_point.o  \
 	build/programs/day15_area.o  \
+	build/programs/day15_part1_runner.o  \
+	build/programs/day15_part1.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -567,6 +594,7 @@ all: build/core/memory_page.o  \
 	bin/programs/day11_part2 \
 	bin/programs/day13_part1 \
 	bin/programs/day13_part2 \
+	bin/programs/day15_part1 \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
 	bin/test/test_operation_input_output \

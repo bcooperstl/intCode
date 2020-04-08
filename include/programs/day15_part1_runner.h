@@ -8,7 +8,7 @@
 #include "day15_area.h"
 #include "inputter_outputter.h"
 
-class Day15Runner : public Runner
+class Day15Part1Runner : public Runner
 {
 private:
     InputterOutputter * m_inputs;
@@ -20,10 +20,9 @@ private:
     int m_iteration_count;
     std::vector<Direction> m_move_queue;
     std::vector<Direction> m_check_queue;
-    Direction m_
 public:
-    Day15Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Area * area);
-    ~Day15Runner();
+    Day15Part1Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Area * area);
+    ~Day15Part1Runner();
     int getDroidX();
     int getDroidY();
     int run();
