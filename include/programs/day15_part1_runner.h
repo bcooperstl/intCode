@@ -20,6 +20,13 @@ private:
     int m_iteration_count;
     std::vector<Direction> m_move_queue;
     std::vector<Direction> m_check_queue;
+    int m_move_outputs;
+    int m_check_backup_outputs;
+    Point * m_current_checking_point;
+    bool m_last_checked;
+    Direction m_last_checked_direction;
+    void handleLastCheckedResult(int res);
+    void setUpNextCheck(Point * checkingPoint);
 public:
     Day15Part1Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Area * area);
     ~Day15Part1Runner();
