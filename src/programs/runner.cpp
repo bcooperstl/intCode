@@ -20,6 +20,7 @@ Runner::Runner()
 void Runner::init(std::string name)
 {
     m_terminated = false;
+    m_service = false;
     m_name = name;
 }
 
@@ -30,6 +31,16 @@ Runner::~Runner()
 bool Runner::isTerminated()
 {
     return m_terminated;
+}
+
+bool Runner::isService()
+{
+    return m_service;
+}
+
+void Runner::setService(bool service)
+{
+    m_service = service;
 }
 
 std::string Runner::getName()
