@@ -2,14 +2,14 @@
 
 #include "day15_point.h"
 
-Point::Point(int x, int y)
+Point::Point(int x, int y, Point * from)
 {
     m_x=x;
     m_y=y;
-    m_explored_neighbors=false;
+    m_from=from;
 }
 
-Point::Point(int x, int y, Point * from, Direction direction_from_from):Point(x,y)
+Point::Point(int x, int y, Point * from, Direction direction_from_from):Point(x,y,from)
 {
     m_path_to_here.insert(std::end(m_path_to_here), std::begin(from->getPathToHere()), std::end(from->getPathToHere()));
     m_path_to_here.push_back(direction_from_from);
@@ -17,11 +17,6 @@ Point::Point(int x, int y, Point * from, Direction direction_from_from):Point(x,
 
 Point::~Point()
 {
-}
-
-bool Point::isExploredNeighbors()
-{
-    return m_explored_neighbors;
 }
 
 Contents Point::getContents()

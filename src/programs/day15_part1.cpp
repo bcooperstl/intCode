@@ -13,6 +13,9 @@
 int main (int argc, char * argv[])
 {
     Area area;
+    Point * startPoint = new Point(0,0, NULL);
+    startPoint->setContents(WalkingArea);
+    area.addPoint(startPoint);
     if (argc != 2)
     {
         std::cerr << "Usage: " << argv[0] << " infile" << std::endl;

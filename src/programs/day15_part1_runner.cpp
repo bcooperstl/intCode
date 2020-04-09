@@ -98,6 +98,12 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
     
     if (!m_last_checked) // setting up for first check - north
     {
+        // Move to this point
+        std::vector<Direction> path_to_point = checkingPoint->getPathToHere();
+        m_move_queue.insert(m_move_queue.end(), path_to_point.begin(), path_to_point.end());
+        m_move_outputs+=path_to_point.size();
+        std::cerr << "Moving " << path_to_point.size() << " steps to (" << checkingPoint->getX() << "," << checkingPoint->getY() << ")" << std::endl;
+
         int northX=m_droid_x;
         int northY=m_droid_y+1;
         Point * northPoint=m_area->getPoint(northX, northY);
@@ -173,6 +179,12 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
     }
     else
     {
+        // good to go home
+        std::vector<Direction> path_to_point = checkingPoint->getPathToHome();
+        m_move_queue.insert(m_move_queue.end(), path_to_point.begin(), path_to_point.end());
+        m_move_outputs+=path_to_point.size();
+        std::cerr << "Moving " << path_to_point.size() << " steps to (0,0)" << std::endl;
+        m_area->removeExploredPoint(m_current_checking_point);
         m_current_checking_point=NULL;
         m_last_checked=false;
     }
@@ -180,6 +192,8 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
 
 int Day15Part1Runner::run()
 {
+    int i;
+    std::cin >> i;
     m_area->display(std::cout, m_droid_x, m_droid_y);
     if (m_move_outputs > 0)
     {
@@ -240,7 +254,13 @@ int Day15Part1Runner::run()
         setUpNextCheck(m_current_checking_point);
     }
     
-    if (m_move_queue.empty() && m_check_queue.empty())
+    if (m_move_queue.empty() && !m_last_checked)
+    {
+        Point * nextPoint = m_area->getNextPointToExplore();
+        setUpNextCheck(m_current_checking_point);
+    }
+    
+    if (m_move_queue.empty() && m_area->getNextPointToExplore() == NULL)
     {
         m_terminated=true;
     }
