@@ -11,7 +11,8 @@ Point::Point(int x, int y, Point * from)
 
 Point::Point(int x, int y, Point * from, Direction direction_from_from):Point(x,y,from)
 {
-    m_path_to_here.insert(std::end(m_path_to_here), std::begin(from->getPathToHere()), std::end(from->getPathToHere()));
+    std::vector<Direction> fromDirection=from->getPathToHere();
+    m_path_to_here.insert(m_path_to_here.end(), fromDirection.begin(), fromDirection.end());
     m_path_to_here.push_back(direction_from_from);
 }
 
