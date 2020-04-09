@@ -71,8 +71,37 @@ void Area::removeExploredPoint(Point * point)
 
 void Area::display(std::ostream & out, int droidX, int droidY)
 {
-    for (int y=m_min_y; y<=m_max_y; y++)
+    out << "  ";
+    for (int x=m_min_x; x<=m_max_x; x++)
     {
+        if (x==0)
+        {
+            out << "0";
+        }
+        else if (x%10==0)
+        {
+            out << "|";
+        }
+        else
+        {
+            out << " ";
+        }
+    }
+    out << std::endl;
+    for (int y=m_max_y; y>=m_min_y; y--)
+    {
+        if (y==0)
+        {
+            out << "0 ";
+        }
+        else if (y%10==0)
+        {
+            out << "- ";
+        }
+        else
+        {
+            out << "  ";
+        }
         for (int x=m_min_x; x<=m_max_x; x++)
         {
             Point * pt = getPoint(x, y);
