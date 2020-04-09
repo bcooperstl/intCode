@@ -61,11 +61,13 @@ Point * Area::getNextPointToExplore()
 
 void Area::removeExploredPoint(Point * point)
 {
-    for (std::vector<Point *>::iterator it = m_points_to_explore.begin() ; it != m_points_to_explore.end(); ++it)
+    std::vector<Point *>::iterator it = m_points_to_explore.begin();
+    while (it != m_points_to_explore.end())
     {
         if (*it==point)
             it=m_points_to_explore.erase(it);
-        
+        else
+            ++it;
     }
 }
 
