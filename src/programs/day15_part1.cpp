@@ -52,6 +52,9 @@ int main (int argc, char * argv[])
         return rc;
     }
     
+    std::cout << "Final map:" << std::endl;
+    area.display(std::cout,0,0);
+    
     delete baseMem;
     
     return 0;

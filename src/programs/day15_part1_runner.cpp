@@ -87,7 +87,7 @@ void Day15Part1Runner::handleLastCheckedResult(int res)
     {
         std::cerr << "Setting a move backward (" << backupDirection << ") to return the droid to (" << m_droid_x << "," << m_droid_y << ")" << std::endl;
         m_check_backup_outputs=1;
-        std::cerr << "Adding " << backupDirection << " to intCode inputs" << std::endl;
+        //std::cerr << "Adding " << backupDirection << " to intCode inputs" << std::endl;
         m_outputs->add(backupDirection);
     }
 }
@@ -104,7 +104,7 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
         std::cerr << "Moving " << path_to_point.size() << " steps to (" << checkingPoint->getX() << "," << checkingPoint->getY() << ")" << std::endl;
         for (int i=0; i<path_to_point.size(); i++)
         {
-            std::cerr << "Adding " << path_to_point[i] << " to intCode inputs" << std::endl;
+            //std::cerr << "Adding " << path_to_point[i] << " to intCode inputs" << std::endl;
             m_outputs->add(path_to_point[i]);
         }
         m_move_outputs+=path_to_point.size();
@@ -186,7 +186,7 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
         m_current_checking_point=checkingPoint;
         m_last_checked=true;
         m_last_checked_direction=moveDirection;
-        std::cerr << "Adding " << moveDirection << " to intCode inputs" << std::endl;
+        //std::cerr << "Adding " << moveDirection << " to intCode inputs" << std::endl;
         m_outputs->add(moveDirection);
     }
     else
@@ -196,13 +196,13 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
         std::cerr << "Returning " << path_to_point.size() << " steps to (0,0)" << std::endl;
         for (int i=0; i<path_to_point.size(); i++)
         {
-            std::cerr << "Adding " << path_to_point[i] << " to intCode inputs" << std::endl;
+            //std::cerr << "Adding " << path_to_point[i] << " to intCode inputs" << std::endl;
             m_outputs->add(path_to_point[i]);
         }
         m_move_outputs+=path_to_point.size();
         m_droid_x=0;
         m_droid_y=0;
-        m_area->removeExploredPoint(m_current_checking_point);
+        m_area->removeExploredPoint(checkingPoint);
         m_current_checking_point=NULL;
         m_last_checked=false;
     }
@@ -210,9 +210,10 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
 
 int Day15Part1Runner::run()
 {
-    int i;
-    m_area->display(std::cout, m_droid_x, m_droid_y);
-    std::cin >> i;
+    //int i;
+    //if (m_iteration_count++%100==0)
+    //    m_area->display(std::cout, m_droid_x, m_droid_y);
+    //std::cin >> i;
     
     if (m_check_backup_outputs == 1)
     {
@@ -222,7 +223,7 @@ int Day15Part1Runner::run()
         long tmp;
         int rc;
         rc=m_inputs->getNext(&tmp);
-        std::cerr << "Received " << tmp << " from intcode outputs" << std::endl;
+        //std::cerr << "Received " << tmp << " from intcode outputs" << std::endl;
         if (rc!=SUCCESS)
         {
             std::cerr << "**** Error on back up - retriveal error " << rc << std::endl;
@@ -245,7 +246,7 @@ int Day15Part1Runner::run()
             long tmp;
             int rc;
             rc=m_inputs->getNext(&tmp);
-            std::cerr << "Received " << tmp << " from intcode outputs" << std::endl;
+            //std::cerr << "Received " << tmp << " from intcode outputs" << std::endl;
             if (rc!=SUCCESS)
             {
                 std::cerr << "**** Error on iteration " << i << " - retriveal error " << rc << std::endl;
@@ -267,7 +268,7 @@ int Day15Part1Runner::run()
         long res;
         int rc;
         rc=m_inputs->getNext(&res);
-        std::cerr << "Received " << res << " from intcode outputs" << std::endl;
+        //std::cerr << "Received " << res << " from intcode outputs" << std::endl;
         if (rc!=SUCCESS)
         {
             std::cerr << "**** Error on last checked - retriveal error " << rc << std::endl;
@@ -280,7 +281,8 @@ int Day15Part1Runner::run()
     if (m_move_outputs==0 && !m_last_checked)
     {
         Point * nextPoint = m_area->getNextPointToExplore();
-        setUpNextCheck(nextPoint);
+        if (nextPoint)
+            setUpNextCheck(nextPoint);
     }
     
     if (m_move_outputs==0 && m_area->getNextPointToExplore() == NULL)
