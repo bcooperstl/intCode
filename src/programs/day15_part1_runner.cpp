@@ -63,20 +63,26 @@ void Day15Part1Runner::handleLastCheckedResult(int res)
     switch (res)
     {
         case 0: // wall - no need to move. Just need to record the wall
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Wall detected at (" << moveX << "," << moveY << ")." << std::endl;
+#endif
             newPoint = new Point(moveX, moveY, m_current_checking_point, m_last_checked_direction);
             newPoint->setContents(Wall);
             m_area->addPoint(newPoint);
             break;
         case 1: // walking area - need to record this point as well as schedule a backtrack
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Open space detected (" << moveX << "," << moveY << ")." << std::endl;
+#endif
             newPoint = new Point(moveX, moveY, m_current_checking_point, m_last_checked_direction);
             newPoint->setContents(WalkingArea);
             m_area->addPoint(newPoint);
             backItUp=true;
             break;
         case 2: // oxygen - need to record this point as well as schedule a backtrack
+#ifdef DEBUG_PROGRAMS
             std::cerr << "**Oxygen Sensor detected (" << moveX << "," << moveY << ")." << std::endl;
+#endif
             newPoint = new Point(moveX, moveY, m_current_checking_point, m_last_checked_direction);
             newPoint->setContents(OxygenSensor);
             m_area->addPoint(newPoint);
@@ -85,9 +91,11 @@ void Day15Part1Runner::handleLastCheckedResult(int res)
     }
     if (backItUp)
     {
+#ifdef DEBUG_PROGRAMS
         std::cerr << "Setting a move backward (" << backupDirection << ") to return the droid to (" << m_droid_x << "," << m_droid_y << ")" << std::endl;
+        std::cerr << "Adding " << backupDirection << " to intCode inputs" << std::endl;
+#endif
         m_check_backup_outputs=1;
-        //std::cerr << "Adding " << backupDirection << " to intCode inputs" << std::endl;
         m_outputs->add(backupDirection);
     }
 }
@@ -101,10 +109,14 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
     {
         // Move to this point
         std::vector<Direction> path_to_point = checkingPoint->getPathToHere();
+#ifdef DEBUG_PROGRAMS
         std::cerr << "Moving " << path_to_point.size() << " steps to (" << checkingPoint->getX() << "," << checkingPoint->getY() << ")" << std::endl;
+#endif
         for (int i=0; i<path_to_point.size(); i++)
         {
-            //std::cerr << "Adding " << path_to_point[i] << " to intCode inputs" << std::endl;
+#ifdef DEBUG_PROGRAMS
+            std::cerr << "Adding " << path_to_point[i] << " to intCode inputs" << std::endl;
+#endif
             m_outputs->add(path_to_point[i]);
         }
         m_move_outputs+=path_to_point.size();
@@ -117,11 +129,15 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
         m_last_checked_direction=North;
         if (northPoint != NULL)
         {
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Not checking north - point (" << northX << "," << northY << ") already explored" << std::endl;
+#endif
         }
         else
         {
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Need to check north point at (" << northX << "," << northY << ")" << std::endl;
+#endif
             shouldScheduleMove=true;
             moveDirection=North;
         }
@@ -135,11 +151,15 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
         m_last_checked_direction=South;
         if (southPoint != NULL)
         {
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Not checking south - point (" << southX << "," << southY << ") already explored" << std::endl;
+#endif
         }
         else
         {
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Need to check south point at (" << southX << "," << southY << ")" << std::endl;
+#endif
             shouldScheduleMove=true;
             moveDirection=South;
         }
@@ -153,11 +173,15 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
         m_last_checked_direction=East;
         if (eastPoint != NULL)
         {
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Not checking east - point (" << eastX << "," << eastY << ") already explored" << std::endl;
+#endif
         }
         else
         {
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Need to check east point at (" << eastX << "," << eastY << ")" << std::endl;
+#endif
             shouldScheduleMove=true;
             moveDirection=East;
         }
@@ -171,11 +195,15 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
         m_last_checked_direction=West;
         if (westPoint != NULL)
         {
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Not checking west - point (" << westX << "," << westY << ") already explored" << std::endl;
+#endif
         }
         else
         {
+#ifdef DEBUG_PROGRAMS
             std::cerr << "Need to check west point at (" << westX << "," << westY << ")" << std::endl;
+#endif
             shouldScheduleMove=true;
             moveDirection=West;
         }
@@ -186,17 +214,23 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
         m_current_checking_point=checkingPoint;
         m_last_checked=true;
         m_last_checked_direction=moveDirection;
-        //std::cerr << "Adding " << moveDirection << " to intCode inputs" << std::endl;
+#ifdef DEBUG_PROGRAMS
+        std::cerr << "Adding " << moveDirection << " to intCode inputs" << std::endl;
+#endif
         m_outputs->add(moveDirection);
     }
     else
     {
         // good to go home
         std::vector<Direction> path_to_point = checkingPoint->getPathToHome();
+#ifdef DEBUG_PROGRAMS
         std::cerr << "Returning " << path_to_point.size() << " steps to (0,0)" << std::endl;
+#endif
         for (int i=0; i<path_to_point.size(); i++)
         {
-            //std::cerr << "Adding " << path_to_point[i] << " to intCode inputs" << std::endl;
+#ifdef DEBUG_PROGRAMS
+            std::cerr << "Adding " << path_to_point[i] << " to intCode inputs" << std::endl;
+#endif
             m_outputs->add(path_to_point[i]);
         }
         m_move_outputs+=path_to_point.size();
@@ -210,20 +244,24 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
 
 int Day15Part1Runner::run()
 {
-    //int i;
-    //if (m_iteration_count++%100==0)
-    //    m_area->display(std::cout, m_droid_x, m_droid_y);
-    //std::cin >> i;
+#ifdef DEBUG_PROGRAMS
+    if (m_iteration_count++%100==0)
+        m_area->display(std::cout, m_droid_x, m_droid_y);
+#endif
     
     if (m_check_backup_outputs == 1)
     {
         // There was a command to move the droid back after a successful check. This should return 1 or 2
+#ifdef DEBUG_PROGRAMS
         std::cerr << "Pulling out the output for going back one space" << std::endl;
+#endif
         
         long tmp;
         int rc;
         rc=m_inputs->getNext(&tmp);
-        //std::cerr << "Received " << tmp << " from intcode outputs" << std::endl;
+#ifdef DEBUG_PROGRAMS
+        std::cerr << "Received " << tmp << " from intcode outputs" << std::endl;
+#endif
         if (rc!=SUCCESS)
         {
             std::cerr << "**** Error on back up - retriveal error " << rc << std::endl;
@@ -240,13 +278,17 @@ int Day15Part1Runner::run()
     if (m_move_outputs > 0)
     {
         // the last set of commands were a list of moves to the droid. Need to get all of their outputs.
+#ifdef DEBUG_PROGRAMS
         std::cerr << "Going through " << m_move_outputs << " move out steps first" << std::endl;
+#endif
         for (int i=0; i<m_move_outputs; i++)
         {
             long tmp;
             int rc;
             rc=m_inputs->getNext(&tmp);
-            //std::cerr << "Received " << tmp << " from intcode outputs" << std::endl;
+#ifdef DEBUG_PROGRAMS
+            std::cerr << "Received " << tmp << " from intcode outputs" << std::endl;
+#endif
             if (rc!=SUCCESS)
             {
                 std::cerr << "**** Error on iteration " << i << " - retriveal error " << rc << std::endl;
@@ -258,9 +300,10 @@ int Day15Part1Runner::run()
                 exit(1);
             }
         }
+#ifdef DEBUG_PROGRAMS
         std::cerr << "Droid has consumed " << m_move_outputs << " steps" << std::endl;
+#endif
         m_move_outputs=0;
-        //m_area->display(std::cout, m_droid_x, m_droid_y);
     }
     
     if (m_last_checked==true)
@@ -268,7 +311,9 @@ int Day15Part1Runner::run()
         long res;
         int rc;
         rc=m_inputs->getNext(&res);
-        //std::cerr << "Received " << res << " from intcode outputs" << std::endl;
+#ifdef DEBUG_PROGRAMS
+        std::cerr << "Received " << res << " from intcode outputs" << std::endl;
+#endif
         if (rc!=SUCCESS)
         {
             std::cerr << "**** Error on last checked - retriveal error " << rc << std::endl;
