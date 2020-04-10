@@ -193,7 +193,7 @@ int Area::getMaximumDistanceToOxygen()
     int max=-1;
     for (int i=0; i<m_points.size(); i++)
     {
-        if (m_points[i]->getOxygenDistance()>max)
+        if (m_points[i]->getContents()!=Wall && m_points[i]->getOxygenDistance()>max)
             max=m_points[i]->getOxygenDistance();
     }
     return max;
