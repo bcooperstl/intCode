@@ -7,7 +7,7 @@
 #include "memory.h"
 #include "program_runner.h"
 #include "program_manager.h"
-#include "day15_part1_runner.h"
+#include "day15_runner.h"
 #include "inputter_outputter.h"
 
 int main (int argc, char * argv[])
@@ -34,7 +34,7 @@ int main (int argc, char * argv[])
     InputterOutputter toIntcode, fromIntcode; // toIncode will be intcode's input and the day1runner's output. fromIntcode will be the opposite.
     ProgramRunner intcode(baseMem, "Droid Mover");
     intcode.setService(true);
-    Day15Part1Runner myLogic("Day15Logic", &fromIntcode, &toIntcode, &area);
+    Day15Runner myLogic("Day15Logic", &fromIntcode, &toIntcode, &area);
     
     intcode.setInputs(&toIntcode);
     intcode.setOutputs(&fromIntcode);
