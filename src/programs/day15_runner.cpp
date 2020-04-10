@@ -3,10 +3,10 @@
 #include <sstream>
 
 #include "constants.h"
-#include "day15_part1_runner.h"
+#include "day15_runner.h"
 #include "runner.h"
 
-Day15Part1Runner::Day15Part1Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Area * area):Runner(name)
+Day15Runner::Day15Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Area * area):Runner(name)
 {
     m_inputs = inputs;
     m_outputs = outputs;
@@ -20,21 +20,21 @@ Day15Part1Runner::Day15Part1Runner(std::string name, InputterOutputter * inputs,
     m_last_checked=false;
 }
 
-Day15Part1Runner::~Day15Part1Runner()
+Day15Runner::~Day15Runner()
 {
 }
 
-int Day15Part1Runner::getDroidX()
+int Day15Runner::getDroidX()
 {
     return m_droid_x;
 }
 
-int Day15Part1Runner::getDroidY()
+int Day15Runner::getDroidY()
 {
     return m_droid_y;
 }
 
-void Day15Part1Runner::handleLastCheckedResult(int res)
+void Day15Runner::handleLastCheckedResult(int res)
 {
     int moveX=m_droid_x;
     int moveY=m_droid_y;
@@ -100,7 +100,7 @@ void Day15Part1Runner::handleLastCheckedResult(int res)
     }
 }
 
-void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
+void Day15Runner::setUpNextCheck(Point * checkingPoint)
 {
     bool shouldScheduleMove=false;
     Direction moveDirection;
@@ -242,7 +242,7 @@ void Day15Part1Runner::setUpNextCheck(Point * checkingPoint)
     }
 }
 
-int Day15Part1Runner::run()
+int Day15Runner::run()
 {
 #ifdef DEBUG_PROGRAMS
     if (m_iteration_count++%100==0)

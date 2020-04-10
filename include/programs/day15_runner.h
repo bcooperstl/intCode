@@ -8,7 +8,7 @@
 #include "day15_area.h"
 #include "inputter_outputter.h"
 
-class Day15Part1Runner : public Runner
+class Day15Runner : public Runner
 {
 private:
     InputterOutputter * m_inputs;
@@ -26,8 +26,8 @@ private:
     void handleLastCheckedResult(int res);
     void setUpNextCheck(Point * checkingPoint);
 public:
-    Day15Part1Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Area * area);
-    ~Day15Part1Runner();
+    Day15Runner(std::string name, InputterOutputter * inputs, InputterOutputter * outputs, Area * area);
+    ~Day15Runner();
     int getDroidX();
     int getDroidY();
     int run();

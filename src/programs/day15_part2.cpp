@@ -58,7 +58,9 @@ int main (int argc, char * argv[])
     area.pairPoints();
     area.setDistanceToOxygenSensor();
     
-    std::cout << "*****Distance to Oxygen Sensor is " << startPoint->getOxygenDistance() << std::endl;
+    int max=area.getMaximumDistanceToOxygen();
+    
+    std::cout << "*****Maximum distance from Oxygen Sensor is " << max << std::endl;
     
     delete baseMem;
     
