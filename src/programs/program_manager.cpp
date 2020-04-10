@@ -23,7 +23,7 @@ bool ProgramManager::isAllTerminated()
 {
     for (int i=0; i<m_programs.size(); i++)
     {
-        if (!m_programs[i]->isTerminated())
+        if ((!m_programs[i]->isService()) && (!m_programs[i]->isTerminated())) // only care about non-serivces
         {
             return false;
         }
