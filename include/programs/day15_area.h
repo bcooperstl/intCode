@@ -16,6 +16,8 @@ private:
     Point * m_start_location;
     std::vector<Point *> m_points;
     std::vector<Point *> m_points_to_explore;
+    void setNorthSouthPair (Point * north, Point * south);
+    void setEastWestPair (Point * east, Point * west);
 public:
     Area();
     ~Area();
@@ -24,6 +26,8 @@ public:
     void display(std::ostream & out, int droidX, int droidY);
     Point * getNextPointToExplore();
     void removeExploredPoint(Point * point);
+    void pairPoints();
+    void setDistanceToOxygenSensor();
 };
 
 #endif

@@ -55,6 +55,11 @@ int main (int argc, char * argv[])
     std::cout << "Final map:" << std::endl;
     area.display(std::cout,0,0);
     
+    area.pairPoints();
+    area.setDistanceToOxygenSensor();
+    
+    std::cout << "*****Distance to Oxygen Sensor is " << startPoint->getOxygenDistance() << std::endl;
+    
     delete baseMem;
     
     return 0;

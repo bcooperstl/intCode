@@ -7,6 +7,10 @@ Point::Point(int x, int y, Point * from)
     m_x=x;
     m_y=y;
     m_from=from;
+    for (int i=0; i<DIRECTION_COUNT; i++)
+    {
+        m_neighbors[i]=NULL;
+    }
 }
 
 Point::Point(int x, int y, Point * from, Direction direction_from_from):Point(x,y,from)
@@ -38,6 +42,50 @@ int Point::getX()
 int Point::getY()
 {
     return m_y;
+}
+
+Point * Point::getNeighbor(Direction direction)
+{
+    return m_neighbors[direction-1];
+}
+
+void Point::setNeighbor(Direction direction, Point * neighbor)
+{
+    m_neighbors[direction-1]=neighbor;
+}
+
+bool Point::isNorthOfOther(Point * other)
+{
+    if (m_x == other->getX())
+    {
+        if (m_y == (other->getY() + 1))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Point::isEastOfOther(Point * other)
+{
+    if (m_y == other->getY())
+    {
+        if (m_x == (other->getX() + 1))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+int Point::getOxygenDistance()
+{
+    return m_oxygen_distance;
+}
+
+void Point::setOxygenDistance(int distance)
+{
+    m_oxygen_distance = distance;
 }
 
 void Point::display(std::ostream & out)

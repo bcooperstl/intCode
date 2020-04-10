@@ -16,6 +16,8 @@ private:
     Point * m_from;
     Contents m_contents;
     std::vector<Direction> m_path_to_here;
+    int m_oxygen_distance;
+    Point * m_neighbors[DIRECTION_COUNT];
 public:
     Point(int x, int y, Point * from);
     Point(int x, int y, Point * from, Direction direction_from_from);
@@ -28,6 +30,12 @@ public:
     void display(std::ostream & out);
     std::vector<Direction> getPathToHere();
     std::vector<Direction> getPathToHome();
+    int getOxygenDistance();
+    void setOxygenDistance(int distance);
+    Point * getNeighbor(Direction direction);
+    void setNeighbor(Direction direction, Point * neighbor);
+    bool isNorthOfOther(Point * other);
+    bool isEastOfOther(Point * other);
 };
 
 #endif
