@@ -28,6 +28,7 @@ public:
     void removeExploredPoint(Point * point);
     void pairPoints();
     void setDistanceToOxygenSensor();
+    int getMaximumDistanceToOxygen();
 };
 
 #endif

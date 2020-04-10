@@ -188,6 +188,17 @@ void Area::setDistanceToOxygenSensor()
     }
 }
 
+int Area::getMaximumDistanceToOxygen()
+{
+    int max=-1;
+    for (int i=0; i<m_points.size(); i++)
+    {
+        if (m_points[i]->getOxygenDistance()>max)
+            max=m_points[i]->getOxygenDistance();
+    }
+    return max;
+}
+
 void Area::display(std::ostream & out, int droidX, int droidY)
 {
     out << "  ";
