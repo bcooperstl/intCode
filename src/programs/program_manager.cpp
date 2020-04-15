@@ -37,11 +37,15 @@ int ProgramManager::runPrograms()
     while (current_program_index < m_programs.size())
     {
         Runner * current_program = m_programs[current_program_index];
+#ifdef DEBUG_PROGRAMS
         std::cerr << "Running program " << current_program_index << " = " << current_program->getName() << std::endl;
+#endif
         // don't run this program if it is terminated
         if (current_program->isTerminated())
         {
+#ifdef DEBUG_PROGRAMS
             std::cerr << "  Skipping - program " << current_program->getName() << " is already terminated" << std::endl;
+#endif
         }
         else
         {
@@ -55,7 +59,9 @@ int ProgramManager::runPrograms()
             }
             else if (rc == INPUT_WAIT)
             {
+#ifdef DEBUG_PROGRAMS
                 std::cerr << "   Program " << current_program->getName() << " is awaiting input" << std::endl;
+#endif
             }
             else
             {
