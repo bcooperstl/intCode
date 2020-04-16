@@ -3,6 +3,7 @@ DEBUG=
 #DEBUG+= -DDEBUG_OPERATIONS
 #DEBUG+= -DDEBUG_OPERATIONS_MEMORY
 #DEBUG+= -DDEBUG_PROGRAMS
+#DEBUG+= -DDEBUG_SCREEN
 CPPFLAGS=-g ${DEBUG} -Iinclude/core -Iinclude/common -Iinclude/operations -Iinclude/programs
 
 .DEFAULT_GOAL := all
@@ -246,6 +247,14 @@ build/programs/day17_part1.o: src/programs/day17_part1.cpp  \
 	include/programs/day17_part1_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day17_part1.o -c src/programs/day17_part1.cpp
 
+build/programs/day17_part2_runner.o: src/programs/day17_part2_runner.cpp  \
+	include/programs/day17_part2_runner.h
+	g++ ${CPPFLAGS} -o build/programs/day17_part2_runner.o -c src/programs/day17_part2_runner.cpp
+
+build/programs/day17_part2.o: src/programs/day17_part2.cpp  \
+	include/programs/day17_part2_runner.h
+	g++ ${CPPFLAGS} -o build/programs/day17_part2.o -c src/programs/day17_part2.cpp
+
 build/test/test_memoryloader.o: src/test/test_memoryloader.cpp  \
 	include/core/memory_loader.h  \
 	include/core/memory.h
@@ -433,6 +442,13 @@ bin/programs/day17_part1: build/programs/day17_part1.o  \
 	bin/lib/libprograms.a
 	g++ ${CPPFLAGS} -o bin/programs/day17_part1 build/programs/day17_part1.o build/programs/day17_part1_runner.o -Lbin/lib -lprograms -loperations -lcore
 
+bin/programs/day17_part2: build/programs/day17_part2.o  \
+	build/programs/day17_part2_runner.o  \
+	bin/lib/libcore.a \
+	bin/lib/liboperations.a \
+	bin/lib/libprograms.a
+	g++ ${CPPFLAGS} -o bin/programs/day17_part2 build/programs/day17_part2.o build/programs/day17_part2_runner.o -Lbin/lib -lprograms -loperations -lcore
+
 bin/test/test_memoryloader: build/test/test_memoryloader.o  \
 	build/core/memory_loader.o  \
 	build/core/memory.o
@@ -531,6 +547,8 @@ clean:
 	build/programs/day15_part2.o  \
 	build/programs/day17_part1_runner.o  \
 	build/programs/day17_part1.o  \
+	build/programs/day17_part2_runner.o  \
+	build/programs/day17_part2.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -557,6 +575,7 @@ clean:
 	bin/programs/day15_part1 \
 	bin/programs/day15_part2 \
 	bin/programs/day17_part1 \
+	bin/programs/day17_part2 \
 	bin/test/test_memoryloader \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
@@ -612,6 +631,8 @@ all: build/core/memory_page.o  \
 	build/programs/day15_part2.o  \
 	build/programs/day17_part1_runner.o  \
 	build/programs/day17_part1.o  \
+	build/programs/day17_part2_runner.o  \
+	build/programs/day17_part2.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
 	build/test/test_operation_multiplication.o  \
@@ -636,6 +657,7 @@ all: build/core/memory_page.o  \
 	bin/programs/day15_part1 \
 	bin/programs/day15_part2 \
 	bin/programs/day17_part1 \
+	bin/programs/day17_part2 \
 	bin/test/test_operation_addition \
 	bin/test/test_operation_multiplication \
 	bin/test/test_operation_input_output \
