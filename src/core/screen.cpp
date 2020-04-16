@@ -25,35 +25,49 @@ Screen::~Screen()
 
 void Screen::setRows(int num_rows)
 {
+#ifdef DEBUG_SCREEN
     std::cerr << "Setting rows to " << num_rows << std::endl;
+#endif
     m_rows = num_rows;
     m_tiles.resize(num_rows);
     setCols(m_cols);
+#ifdef DEBUG_SCREEN
     std::cerr << "Done setting rows" << std::endl;
+#endif
 }
 
 void Screen::setCols(int num_cols)
 {
+#ifdef DEBUG_SCREEN
     std::cerr << "Setting cols to " << num_cols << std::endl;
+#endif
     m_cols = num_cols;
     for (int i=0; i<m_rows; i++)
     {
         m_tiles[i].resize(num_cols);
     }
+#ifdef DEBUG_SCREEN
     std::cerr << "Done setting cols" << std::endl;
+#endif
 }
 
 void Screen::set(int row, int col, Tile tile)
 {
+#ifdef DEBUG_SCREEN
     std::cerr << "Settings " << row << "," << col << " to " << tile.getValue() << " with size " << m_rows << "," << m_cols << std::endl;
+#endif
     if (row >= m_rows)
     {
+#ifdef DEBUG_SCREEN
         std::cerr << "need to increment rows" << std::endl;
+#endif
         setRows(row+1);
     }
     if (col >= m_cols)
     {
+#ifdef DEBUG_SCREEN
         std::cerr << "Need to increment cols" << std::endl;
+#endif
         setCols(col+1);
     }
     m_tiles[row][col]=tile;
