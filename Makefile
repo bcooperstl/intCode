@@ -238,12 +238,12 @@ build/programs/day15_part2.o: src/programs/day15_part2.cpp  \
 	include/programs/day15_point.h
 	g++ ${CPPFLAGS} -o build/programs/day15_part2.o -c src/programs/day15_part2.cpp
 
-build/programs/day17_part1_runner.o: src/programs/day17_part1_runner.cpp  \
-	include/programs/day17_part1_runner.h
-	g++ ${CPPFLAGS} -o build/programs/day17_part1_runner.o -c src/programs/day17_part1_runner.cpp
+build/programs/day17_runner.o: src/programs/day17_runner.cpp  \
+	include/programs/day17_runner.h
+	g++ ${CPPFLAGS} -o build/programs/day17_runner.o -c src/programs/day17_runner.cpp
 
 build/programs/day17_part1.o: src/programs/day17_part1.cpp  \
-	include/programs/day17_part1_runner.h
+	include/programs/day17_runner.h
 	g++ ${CPPFLAGS} -o build/programs/day17_part1.o -c src/programs/day17_part1.cpp
 
 build/test/test_memoryloader.o: src/test/test_memoryloader.cpp  \
@@ -427,11 +427,11 @@ bin/programs/day15_part2: build/programs/day15_part2.o  \
 	g++ ${CPPFLAGS} -o bin/programs/day15_part2 build/programs/day15_part2.o build/programs/day15_point.o build/programs/day15_area.o build/programs/day15_runner.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/programs/day17_part1: build/programs/day17_part1.o  \
-	build/programs/day17_part1_runner.o  \
+	build/programs/day17_runner.o  \
 	bin/lib/libcore.a \
 	bin/lib/liboperations.a \
 	bin/lib/libprograms.a
-	g++ ${CPPFLAGS} -o bin/programs/day17_part1 build/programs/day17_part1.o build/programs/day17_part1_runner.o -Lbin/lib -lprograms -loperations -lcore
+	g++ ${CPPFLAGS} -o bin/programs/day17_part1 build/programs/day17_part1.o build/programs/day17_runner.o -Lbin/lib -lprograms -loperations -lcore
 
 bin/test/test_memoryloader: build/test/test_memoryloader.o  \
 	build/core/memory_loader.o  \
@@ -529,7 +529,7 @@ clean:
 	build/programs/day15_runner.o  \
 	build/programs/day15_part1.o  \
 	build/programs/day15_part2.o  \
-	build/programs/day17_part1_runner.o  \
+	build/programs/day17_runner.o  \
 	build/programs/day17_part1.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
@@ -610,7 +610,7 @@ all: build/core/memory_page.o  \
 	build/programs/day15_runner.o  \
 	build/programs/day15_part1.o  \
 	build/programs/day15_part2.o  \
-	build/programs/day17_part1_runner.o  \
+	build/programs/day17_runner.o  \
 	build/programs/day17_part1.o  \
 	build/test/test_memoryloader.o  \
 	build/test/test_operation_addition.o  \
