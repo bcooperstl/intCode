@@ -1,5 +1,5 @@
-#ifndef __DAY17_RUNNER_H__
-#define __DAY17_RUNNER_H__
+#ifndef __DAY17_PART1_RUNNER_H__
+#define __DAY17_PART1_RUNNER_H__
 
 #include <string>
 
@@ -7,7 +7,7 @@
 #include "screen.h"
 #include "inputter_outputter.h"
 
-class Day17Runner : public Runner
+class Day17Part1Runner : public Runner
 {
 private:
     InputterOutputter * m_inputs;
@@ -16,8 +16,8 @@ private:
     int m_col;
     int m_max_col;
 public:
-    Day17Runner(std::string name, InputterOutputter * inputs,  Screen * screen);
-    ~Day17Runner();
+    Day17Part1Runner(std::string name, InputterOutputter * inputs,  Screen * screen);
+    ~Day17Part1Runner();
     int run();
     int getRow();
     int getCol();

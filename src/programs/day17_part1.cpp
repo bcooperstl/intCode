@@ -7,7 +7,7 @@
 #include "memory.h"
 #include "program_runner.h"
 #include "program_manager.h"
-#include "day17_runner.h"
+#include "day17_part1_runner.h"
 #include "inputter_outputter.h"
 
 int main (int argc, char * argv[])
@@ -30,7 +30,7 @@ int main (int argc, char * argv[])
     
     InputterOutputter toIntcode, fromIntcode; // toIncode will be intcode's input and the day1runner's output. fromIntcode will be the opposite.
     ProgramRunner intcode(baseMem, "Intcode Scaffold Robot");
-    Day17Runner myLogic("Day17Logic", &fromIntcode, &screen);
+    Day17Part1Runner myLogic("Day17Logic", &fromIntcode, &screen);
     std::cerr << "screen rows is " << screen.getNumRows() << std::endl;
     std::cerr << "rows is " << myLogic.getRow() << std::endl;
     

@@ -3,10 +3,10 @@
 #include <sstream>
 
 #include "constants.h"
-#include "day17_runner.h"
+#include "day17_part1_runner.h"
 #include "runner.h"
 
-Day17Runner::Day17Runner(std::string name, InputterOutputter * inputs, Screen * screen):Runner(name)
+Day17Part1Runner::Day17Part1Runner(std::string name, InputterOutputter * inputs, Screen * screen):Runner(name)
 {
     m_inputs = inputs;
     m_screen = screen;
@@ -15,11 +15,11 @@ Day17Runner::Day17Runner(std::string name, InputterOutputter * inputs, Screen * 
     m_max_col = 0;
 }
 
-Day17Runner::~Day17Runner()
+Day17Part1Runner::~Day17Part1Runner()
 {
 }
 
-int Day17Runner::run()
+int Day17Part1Runner::run()
 {
     long value;
     int rc;
@@ -48,7 +48,7 @@ int Day17Runner::run()
     return INPUT_WAIT;
 }
 
-int Day17Runner::getRow()
+int Day17Part1Runner::getRow()
 {
     if (m_col==0)
         return m_row-1;
@@ -56,7 +56,7 @@ int Day17Runner::getRow()
         return m_row;
 }
 
-int Day17Runner::getCol()
+int Day17Part1Runner::getCol()
 {
     return m_max_col;
 }
