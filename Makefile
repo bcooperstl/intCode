@@ -28,6 +28,11 @@ build/core/inputter_outputter.o: src/core/inputter_outputter.cpp \
 	include/common/constants.h
 	g++ ${CPPFLAGS} -o build/core/inputter_outputter.o -c src/core/inputter_outputter.cpp
 
+build/core/ascii_inputter_outputter.o: src/core/ascii_inputter_outputter.cpp \
+	include/core/ascii_inputter_outputter.h \
+	include/common/constants.h
+	g++ ${CPPFLAGS} -o build/core/ascii_inputter_outputter.o -c src/core/ascii_inputter_outputter.cpp
+
 build/core/tile.o: src/core/tile.cpp \
 	include/core/tile.h \
 	include/common/constants.h
@@ -319,11 +324,12 @@ bin/lib/libcore.a: build/core/memory_page.o  \
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o  \
+	build/core/ascii_inputter_outputter.o  \
 	build/core/tile.o  \
 	build/core/screen.o  \
 	build/core/segment_display.o  \
 	build/core/joystick.o
-	ar rcs bin/lib/libcore.a build/core/memory_page.o build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o build/core/tile.o build/core/screen.o build/core/segment_display.o build/core/joystick.o
+	ar rcs bin/lib/libcore.a build/core/memory_page.o build/core/memory.o build/core/memory_loader.o build/core/inputter_outputter.o build/core/ascii_inputter_outputter.o build/core/tile.o build/core/screen.o build/core/segment_display.o build/core/joystick.o
 
 bin/lib/liboperations.a: build/operations/operation.o  \
 	build/operations/addition.o  \
@@ -523,6 +529,7 @@ clean:
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o  \
+	build/core/ascii_inputter_outputter.o  \
 	build/core/tile.o  \
 	build/core/screen.o  \
 	build/core/segment_display.o  \
@@ -611,6 +618,7 @@ all: build/core/memory_page.o  \
 	build/core/memory.o  \
 	build/core/memory_loader.o  \
 	build/core/inputter_outputter.o  \
+	build/core/ascii_inputter_outputter.o  \
 	build/core/tile.o  \
 	build/core/screen.o  \
 	build/core/segment_display.o  \

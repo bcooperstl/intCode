@@ -5,7 +5,7 @@
 
 class InputterOutputter
 {
-private:
+protected:
     std::vector<long> m_values;
     int m_get_position;
     int size();
