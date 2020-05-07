@@ -42,12 +42,15 @@ int main (int argc, char * argv[])
         
         std::string name="Intcode NIC "+std::to_string(i); // make the name
         
+        // send the id as an input to the nic
+        toNics[i].add(i);
+        
         // create the program runner for this NIC and assign the inputs and outputs
         nics[i] = new ProgramRunner(mem[i], name);
         nics[i]->setInputs(&toNics[i]);
         nics[i]->setOutputs(&fromNics[i]);
         nics[i]->setService(true); // set these as services so that when the switch is done, they all shut down cleanly.
-        
+                
         // hook in the inputs and outputs to the switch
         networkSwitch.addNic(i, &toNics[i], &fromNics[i]);
         
@@ -64,7 +67,7 @@ int main (int argc, char * argv[])
     }
     
     // clean some stuff up
-    for (int i=0; i<=NUM_NICS; i++)
+    for (int i=0; i<NUM_NICS; i++)
     {
         delete nics[i];
         delete mem[i];
