@@ -58,6 +58,7 @@ int Day23Part1Runner::run()
             std::cout << "  Network card " << i << " sending message to dest=" << dest << " with values x=" << x << " y=" << y << std::endl;
             if (dest==255)
             {
+                std::cout << "***** " << i << " IS SENDING TO 255" << std::endl;
                 m_first_nic_to_255=i;
             }
             else
@@ -74,6 +75,12 @@ int Day23Part1Runner::run()
         }
     }
     
+    if (m_first_nic_to_255 != -1) // found the solution. shut it down
+    {
+        m_terminated=true;
+        return SUCCESS;
+    }
+
     // sent -1 to any NIC that doesn't have data
     for (int i=0; i<NUM_NICS; i++)
     {
@@ -83,13 +90,7 @@ int Day23Part1Runner::run()
             m_to_nics[i]->add(-1);
         }
     }
-    
-    if (m_first_nic_to_255 != -1) // found the solution. shut it down
-    {
-        m_terminated=true;
-        return SUCCESS;
-    }
-    
+        
     return INPUT_WAIT;
 }
 
