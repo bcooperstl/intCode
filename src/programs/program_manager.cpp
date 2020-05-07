@@ -76,6 +76,7 @@ int ProgramManager::runPrograms()
             if (isAllTerminated())
             {
                 std::cerr << "All programs have terminated" << std::endl;
+                rc = SUCCESS;
                 break;
             }
             current_program_index=0;
