@@ -13,7 +13,7 @@ Day23Part1Runner::Day23Part1Runner(std::string name):Runner(name)
         m_to_nics[i]=NULL;
         m_from_nics[i]=NULL;
     }
-    m_first_nic_to_255=-1;
+    m_first_y_to_255=-1;
 }
 
 Day23Part1Runner::~Day23Part1Runner()
@@ -58,8 +58,8 @@ int Day23Part1Runner::run()
             std::cout << "  Network card " << i << " sending message to dest=" << dest << " with values x=" << x << " y=" << y << std::endl;
             if (dest==255)
             {
-                std::cout << "***** " << i << " IS SENDING TO 255" << std::endl;
-                m_first_nic_to_255=i;
+                std::cout << "***** " << i << " IS SENDING TO 255 with x=" << x << "and y=" << y << std::endl;
+                m_first_y_to_255=y;
             }
             else
             {
@@ -75,7 +75,7 @@ int Day23Part1Runner::run()
         }
     }
     
-    if (m_first_nic_to_255 != -1) // found the solution. shut it down
+    if (m_first_y_to_255 != -1) // found the solution. shut it down
     {
         m_terminated=true;
         return SUCCESS;
@@ -100,7 +100,7 @@ void Day23Part1Runner::addNic(int number, InputterOutputter * to_nic, InputterOu
     m_from_nics[number]=from_nic;
 }
 
-int Day23Part1Runner::getFirstNicTo255()
+int Day23Part1Runner::getFirstYTo255()
 {
-    return m_first_nic_to_255;
+    return m_first_y_to_255;
 }

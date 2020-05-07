@@ -77,7 +77,7 @@ int main (int argc, char * argv[])
     
     if (rc == SUCCESS)
     {
-        std::cout << "***** The first nic to send to 255 is " << networkSwitch.getFirstNicTo255() << std::endl;
+        std::cout << "***** The first y value sent to 255 is " << networkSwitch.getFirstYTo255() << std::endl;
     }
     else
     {
