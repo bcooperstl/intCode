@@ -17,6 +17,7 @@ private:
     int m_nat_x;
     int m_nat_y;
     int m_nat_prior_sent_y;
+    bool m_first_run;
 public:
     Day23Part2Runner(std::string name);
     ~Day23Part2Runner();

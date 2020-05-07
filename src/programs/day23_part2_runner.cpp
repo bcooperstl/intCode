@@ -16,6 +16,7 @@ Day23Part2Runner::Day23Part2Runner(std::string name):Runner(name)
     m_nat_x=-1;
     m_nat_y=-1;
     m_nat_prior_sent_y=-1;
+    m_first_run=true;
 }
 
 Day23Part2Runner::~Day23Part2Runner()
@@ -91,6 +92,13 @@ int Day23Part2Runner::run()
         {
             isIdle=false;
         }
+    }
+    
+    // do not handle idle the first time through; nics have not been called yet
+    if (m_first_run==true)
+    {
+        isIdle=false;
+        m_first_run=false;
     }
     
     if (isIdle)
